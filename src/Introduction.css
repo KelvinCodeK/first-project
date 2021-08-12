@@ -1,0 +1,66 @@
+@charset 'UTF-8';
+/* Maak gebruik van media queries. Zonder is onmogelijk om op elk scherm goed uit te komen.*/ 
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: larger;
+}
+
+header li {
+  list-style: none;
+  text-align: center;
+}
+
+.intro {
+  display: none;
+  visibility: hidden;
+}
+
+header p {
+  animation-name: appear;
+  animation-duration: 2.5s;
+  animation-timing-function: ease-in;
+  margin-bottom: 2em;
+  font-size: 1.2em;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  width: 40rem;
+  justify-content: space-evenly;
+}
+
+button {
+  width: 14rem;
+  height: 5rem;
+  background: linear-gradient(210deg, #00eaff 0%, #0080ff 25%, #8000ff 50%, #e619e6 75%, #f00 100%);
+  font-size: 1.3vw;
+  font-weight: bold;
+  text-shadow: 2px 2px black;
+  color: white;
+  border-radius: 15px;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.25;
+  }
+   50% {
+    opacity: 0.5;
+   }
+   75% {
+     opacity: 0.75;
+   }
+   100% {
+    opacity: 1;
+   }
+}
+
