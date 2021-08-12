@@ -39,11 +39,12 @@ button {
   width: 14rem;
   height: 5rem;
   background: linear-gradient(210deg, #00eaff 0%, #0080ff 25%, #8000ff 50%, #e619e6 75%, #f00 100%);
-  font-size: 1.3vw;
+  font-size: 1em;
   font-weight: bold;
   text-shadow: 2px 2px black;
   color: white;
   border-radius: 15px;
+  box-shadow: 3px 3px 6px black;
 }
 
 @keyframes appear {
