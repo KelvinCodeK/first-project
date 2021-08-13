@@ -27,7 +27,14 @@ header p {
   margin-bottom: 2em;
   font-size: 1.2em;
 }
+.buttonEen, .buttonTwee {
+  background-size: 1px 150px;  
+  transition: background-position 0.65s ease-in;
+}
 
+.buttonEen:hover, .buttonTwee:hover {
+  background-position: 50px;
+}
 .buttons {
   display: flex;
   flex-direction: row;
@@ -38,7 +45,7 @@ header p {
 button {
   width: 14rem;
   height: 5rem;
-  background: linear-gradient(210deg, #00eaff 0%, #0080ff 25%, #8000ff 50%, #e619e6 75%, #f00 100%);
+  background: linear-gradient(0deg, #00eaff 0%, #0080ff 25%, #8000ff 50%, #e619e6 75%, #f00 100%);
   font-size: 1em;
   font-weight: bold;
   text-shadow: 2px 2px black;

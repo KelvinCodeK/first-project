@@ -11,8 +11,8 @@ export default class Introduction extends React.Component {
         <h1>Weather To Sell</h1>
         <p>Bepaal jouw optimale verkoopmomenten</p>
         <div className="buttons">
-        <button className="buttonEen" style={this.props.styling} onMouseOver={this.props.handler} onMouseOut={this.props.handlerOut}>hoe werkt het?</button>
-        <button style={this.props.styling2} onMouseOver={this.props.handler} onMouseOut={this.props.handlerOut}>aan de slag!</button>
+        <button className="buttonEen">hoe werkt het?</button>
+        <button className="buttonTwee">aan de slag!</button>
         </div>
         <section className="intro">
         
