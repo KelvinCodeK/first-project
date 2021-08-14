@@ -14,7 +14,7 @@ h1 {
 
 header p {
   animation-name: appear;
-  animation-duration: 2.2s;
+  animation-duration: 1.5s;
   animation-timing-function: ease-in;
   margin-bottom: 2em;
   font-size: 1.5vw;

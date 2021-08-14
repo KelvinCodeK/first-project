@@ -1,0 +1,56 @@
+.howItWorks {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+p {
+    font-size: 1.3vw;
+  }
+
+  ul {
+      list-style: none;
+      margin-top: 2em;
+      margin-bottom: 4em;
+  }
+
+  li {
+      font-size: 1.1vw;
+      padding: 5px;
+      position: relative;
+      animation-name: ul-appear;
+      animation-timing-function: ease-in;
+      animation-duration: 1.5s;
+  }
+
+  @keyframes ul-appear {
+    0% {
+        opacity: 0;
+      }
+      25% {
+        opacity: 0.25;
+      }
+       50% {
+        opacity: 0.5;
+       }
+       75% {
+         opacity: 0.75;
+       }
+       100% {
+        opacity: 1;
+       }
+  }
+  
+  li::before {
+    content: "";
+    position: absolute;
+    left: -18px;
+    top: 12px;
+    height: 7px;
+    width: 7px;
+    border: 3px solid #94f9aa;
+    border-width: 4px 4px 0 0;
+    transform: rotate(45deg);
+  }
