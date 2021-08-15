@@ -20,9 +20,25 @@ p {
       font-size: 1.1vw;
       padding: 5px;
       position: relative;
-      animation-name: ul-appear;
-      animation-timing-function: ease-in;
-      animation-duration: 1.5s;
+
+  }
+
+  li:first-child {
+    animation-name: ul-appear;
+    animation-timing-function: ease-in;
+    animation-duration: 2s;
+  }
+
+  li:nth-child(2) {
+    animation-name: ul-appear;
+    animation-timing-function: ease-in;
+    animation-duration: 4s;
+  }
+
+  li:last-child {
+    animation-name: ul-appear;
+    animation-timing-function: ease-in-out;
+    animation-duration: 6s;
   }
 
   @keyframes ul-appear {
@@ -30,13 +46,13 @@ p {
         opacity: 0;
       }
       25% {
-        opacity: 0.25;
+        opacity: 0;
       }
        50% {
-        opacity: 0.5;
+        opacity: 0;
        }
        75% {
-         opacity: 0.75;
+         opacity: 0;
        }
        100% {
         opacity: 1;

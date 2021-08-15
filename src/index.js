@@ -4,6 +4,7 @@ import './index.css';
 import './norm.css'
 import Introduction from './Introduction';
 import HowItWorks from './howItWorks';
+import Product from './product.js'
 
 // houdt de standaard structuur aan. Als dingen gebeuren zet je pas je de state aan en en stuur je de nieuwe state door met props
 // conditionele opdrachten zijn belangrijk ? :
@@ -41,6 +42,7 @@ class Stateful extends React.Component {
     <div>
     {this.state.clickHow || this.state.clickGo ? null : <Introduction onClickHow={this.onClickHow} onClickGo={this.onClickGo}/>}
     {this.state.clickHow && this.state.clickHowToGo === false ? <HowItWorks onClickHowToGo={this.onClickHowToGo}/> : null}
+    {this.state.clickGo || this.state.clickHowToGo ? <Product /> : null}
     </div>)
   }
 }

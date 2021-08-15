@@ -13,9 +13,6 @@ h1 {
 }
 
 header p {
-  animation-name: appear;
-  animation-duration: 1.5s;
-  animation-timing-function: ease-in;
   margin-bottom: 2em;
   font-size: 1.5vw;
 }
@@ -46,22 +43,4 @@ button {
   color: white;
   border-radius: 15px;
   box-shadow: 3px 3px 6px black;
-}
-
-@keyframes appear {
-  0% {
-    opacity: 0;
-  }
-  25% {
-    opacity: 0.25;
-  }
-   50% {
-    opacity: 0.5;
-   }
-   75% {
-     opacity: 0.75;
-   }
-   100% {
-    opacity: 1;
-   }
 }
