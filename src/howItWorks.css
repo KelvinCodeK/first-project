@@ -26,37 +26,37 @@ p {
   li:first-child {
     animation-name: ul-appear;
     animation-timing-function: ease-in;
-    animation-duration: 2s;
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+    opacity: 0;
+    
   }
 
   li:nth-child(2) {
     animation-name: ul-appear;
     animation-timing-function: ease-in;
-    animation-duration: 4s;
+    animation-duration: 1.5s;
+    animation-delay: 1.5s;
+    animation-fill-mode: forwards;
+    opacity: 0;
   }
 
   li:last-child {
     animation-name: ul-appear;
-    animation-timing-function: ease-in-out;
-    animation-duration: 6s;
+    animation-timing-function:ease-in;
+    animation-duration: 1.5s;
+    animation-delay: 3s;
+    animation-fill-mode: forwards;
+    opacity: 0;
   }
 
   @keyframes ul-appear {
-    0% {
-        opacity: 0;
-      }
-      25% {
-        opacity: 0;
-      }
-       50% {
-        opacity: 0;
-       }
-       75% {
-         opacity: 0;
-       }
-       100% {
-        opacity: 1;
-       }
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1; 
+    }
   }
   
   li::before {
