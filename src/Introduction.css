@@ -10,7 +10,6 @@ header {
 
 h1 {
   font-size: 3vw;
-  text-shadow: 2px 2px 1px grey;
 }
 
 header p {
@@ -37,7 +36,7 @@ header p {
 button {
   width: 14rem;
   height: 5rem;
-  background: linear-gradient(0deg, #00eaff 0%, #1e7edf 25%, #8655b8 50%, #ad30ad 75%, #e619e6 100%);
+  background: linear-gradient(0deg, var(--linearColors));
   font-size: 1.3em; 
   font-weight: bold;
   text-shadow: 2px 2px black;

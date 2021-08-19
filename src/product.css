@@ -1,0 +1,33 @@
+main {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.zoekVak {
+    height: 20vh;
+    border: 1px solid white;
+}
+
+p {
+    text-align: center;
+}
+
+.analyse {
+    height: 20vh;
+    border: 1px solid white;
+}
+.grafiek > div {
+    width: 70vw;
+    height: 40vh;
+    border: 2px solid white;
+}
+
+input {
+    width: 8em;
+    height: 1em;
+    border-width: 3px;
+    border-image: linear-gradient(210deg, var(--linearColors));
+    border-image-slice: 1;
+}
