@@ -10,6 +10,7 @@ header {
 
 h1 {
   font-size: 3vw;
+  text-shadow: 2px 2px 1px grey;
 }
 
 header p {
