@@ -7,13 +7,13 @@ export default class Introduction extends React.Component {
 
   render() {
   return (
-      <header>
+      <header class="welcome">
         <h1>Weather To Sell</h1>
         <p>Bepaal jouw optimale verkoopmomenten</p>
-        <div className="buttons">
+        <section className="buttons">
         <button className="buttonEen" onClick={this.props.onClickHow}>hoe werkt het?</button>
         <button className="buttonTwee" onClick={this.props.onClickGo}>aan de slag!</button>
-        </div>
+        </section>
       </header>
   );}
 }

@@ -32,9 +32,11 @@ class Stateful extends React.Component {
   }
   onClickGo() {
     this.setState({clickGo: true});
+    document.querySelector('body').style.border = 'none';
   }
   onClickHowToGo() {
     this.setState({clickHowToGo: true});
+    document.querySelector('body').style.border = 'none';
   }
   onKeyUp(event) {
     const invoer = event.target.value;
