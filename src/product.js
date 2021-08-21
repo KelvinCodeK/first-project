@@ -6,20 +6,20 @@ import './product.css';
 export default class Product extends React.Component {
     componentDidMount() {
         //Voeg een if toe die kijkt of Chart bestaat. Zo niet. Laadt de content dan in vanuit een local copy van alles wat in de chart Chart.js file staat.
+        // Bij CDN's zijn er meerdere versies beschikbaar. Dit is een verouderde versie omdat die van W3C komt. Daardoor is een gridLines bijv. grid geworden in de nieuwe.
         const Chart = window.Chart;
-        const januariZoekvolume = 100;
-        const chartObject = new Chart("myChart", {
+        const januariZoekvolume = 90;
+        new Chart("myChart", {
             type: 'line',
             data: {
-              labels: ['1', '2', '3', '4', '5','6','7', '8', '9', '10', '11','12'],
+              labels: ['januari', 'februari', 'maart', 'april', 'mei','juni','juli', 'augustus', 'september', 'oktober', 'november','december'],
               datasets: [{
-                label: 'Zoekvolume',
+                label: 'Zoekvolume (0% - 100%)',
                 yAxisID: 'A',
-                data: [januariZoekvolume, 96, 84, 76, 10,20,30,40,55,40,30,20],
+                data: [januariZoekvolume, 70, 60, 76, 10,20,30,40,55,40,30,20],
                 borderColor: 'black',
                 borderWidth: 3,
                 fill: false,
-                backgroundColor: '#00eaff',
               }, {
                 label: 'Temperatuur',
                 yAxisID: 'B',
@@ -27,70 +27,70 @@ export default class Product extends React.Component {
                 borderColor: 'white',
                 borderWidth: 3,
                 fill: false,
-
               }]
             },
             options: {
               legend: {
                 labels: {
-                    fontColor: "white",
-                    fontSize: 18
+                    fontColor: '#00eaff',
+                    fontSize: 16
                 }
             },
               title: {
                 display: true,
-                text: 'Chart',
+                text: 'Vergelijk online zoekvolume met temperatuur',
                 fontColor: 'white',
                 fontSize: 25
-  
               },
-              scales: {
-                xAxes: [{
-                  ticks: {
-                      fontColor: "white",
-                      fontSize: 13,
-                      stepSize: 1,
-                      beginAtZero: true
+              scales: { 
+                xAxes: [{                 
+                  ticks: {                    
+                      fontColor: "#00eaff",
+                      fontSize: 14,   
                   }
               }],
                 yAxes: 
                 [{
-                  ticks: {
-                    fontColor: "white",
-                    fontSize: 13,
-                    beginAtZero: true},
-                  id: 'A',
+                  id: 'A', 
                   type: 'linear',
-                  position: 'left',
-                  grid: {
-                    display: false,
-                    drawOnChartArea: false,
-                    drawTicks: false,
-                    drawBorder: false // only want the grid lines for one axis to show up
-                  },
-                  
-                  font: 'Arial'
-                }, {
+                  position: 'left',                              
+                  font: 'Arial',
+                  scaleLabel: {
+                    display: true,
+                    labelString: 'Zoekvolume',
+                    fontColor: 'black',
+                    fontSize: 18
+                  },  
+                  ticks: {                   
+                    fontColor: "black",
+                    fontSize: 13,                   
+                    max: 100,
+                    min: 0 },         
+                  }, 
+                  {
                   id: 'B',
                   type: 'linear',
                   position: 'right',
+                  scaleLabel: {
+                    display: true,
+                    labelString: 'Temperatuur',
+                    fontColor: 'white',
+                    fontSize: 18
+                  },
+                  gridLines: {
+                    display: false,
+                  },
                   ticks: {
-                    max: 32,
+                    max: 40,
                     min: -10,
                     fontColor: "white",
                     fontSize: 13,
-                  },
-                 
-
-                }]
-                 
+                  },                                   
+                }]                
               }
             }
           });
-          
-          console.log(chartObject.height)
-             
-    }
+        }
     render() {
         return (
             <div>
@@ -101,10 +101,10 @@ export default class Product extends React.Component {
                     <section className="zoekVak">
                         <p>Vul het product in waarover jij meer te weten wil komen</p>
                         {/* input op enter afvuren en een button om te zoeken*/}
-                        <input onKeyUp={this.props.keyUpHandler} type="text"></input>
+                        <input placeholder="zoek naar een product"onKeyUp={this.props.keyUpHandler} type="text"></input>
                     </section>
                     <section className="grafiek">
-                        <canvas id="myChart" style={{width:'100%', height: '500px'}}></canvas>
+                        <canvas id="myChart" style={{width:'100%', height: '35em'}}></canvas>
                     </section>
                     <section className="analyse">
                         <p>Uitleg</p>

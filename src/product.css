@@ -5,16 +5,23 @@ main, header {
     justify-content: center;
 }
 .grafiek {
-    height: 500px;
+    height: 35em;
 }
 
 #myChart {
     background: linear-gradient(210deg, var(--linearColors));
+    border-radius: 15px;
+    padding: 1em;
+    box-sizing: border-box;
 }
 
 .zoekVak {
-    height: 20vh;
-    border: 1px solid white;
+    height: 10em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 1em;
 }
 
 p {
@@ -27,9 +34,9 @@ p {
 }
 
 input {
-    width: 8em;
-    height: 1em;
-    border-width: 3px;
+    width: 18em;
+    height: 2em;
+    border-width: 5px;
     border-image: linear-gradient(210deg, var(--linearColors));
     border-image-slice: 1;
 }
