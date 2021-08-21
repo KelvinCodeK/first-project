@@ -7,7 +7,7 @@ export default class Introduction extends React.Component {
 
   render() {
   return (
-      <header class="welcome">
+      <header className="welcome">
         <h1>Weather To Sell</h1>
         <p>Bepaal jouw optimale verkoopmomenten</p>
         <section className="buttons">

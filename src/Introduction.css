@@ -56,4 +56,5 @@ button {
   color: white;
   border-radius: 15px;
   box-shadow: 3px 3px 6px black;
+  border: 1px solid white;
 }

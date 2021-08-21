@@ -4,6 +4,13 @@ main, header {
     align-items: center;
     justify-content: center;
 }
+.grafiek {
+    height: 500px;
+}
+
+#myChart {
+    background: linear-gradient(210deg, var(--linearColors));
+}
 
 .zoekVak {
     height: 20vh;
@@ -17,11 +24,6 @@ p {
 .analyse {
     height: 20vh;
     border: 1px solid white;
-}
-.grafiek > div {
-    width: 70vw;
-    height: 40vh;
-    border: 2px solid white;
 }
 
 input {

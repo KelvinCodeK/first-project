@@ -9,7 +9,7 @@ body {
   color: white;
   height: 100vh;
   box-sizing: border-box;
-  border: 2em solid black;
+  border: 1.5em solid black;
   border-image: linear-gradient(210deg, var(--linearColors));
   border-image-slice: 1;
 }
