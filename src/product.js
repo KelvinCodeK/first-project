@@ -7,6 +7,7 @@ export default class Product extends React.Component {
     componentDidMount() {
         //Voeg een if toe die kijkt of Chart bestaat. Zo niet. Laadt de content dan in vanuit een local copy van alles wat in de chart Chart.js file staat.
         // Bij CDN's zijn er meerdere versies beschikbaar. Dit is een verouderde versie omdat die van W3C komt. Daardoor is een gridLines bijv. grid geworden in de nieuwe.
+        // ALLES MET BETREKKING TOT DE GRAFIEK LOSKOPPELEN NAAR APARTE COMPONENT. DAN KAN JE NA EEN STATE CHANGE HEM INLADEN MET DE JUISTE PROPS.
         const Chart = window.Chart;
         const januariZoekvolume = 90;
         new Chart("myChart", {
@@ -32,20 +33,20 @@ export default class Product extends React.Component {
             options: {
               legend: {
                 labels: {
-                    fontColor: '#00eaff',
-                    fontSize: 16
+                    fontColor: 'white',
+                    fontSize: 14
                 }
             },
               title: {
                 display: true,
-                text: 'Vergelijk online zoekvolume met temperatuur',
+                text: 'Online zoekvolume voor ...',
                 fontColor: 'white',
                 fontSize: 25
               },
               scales: { 
                 xAxes: [{                 
                   ticks: {                    
-                      fontColor: "#00eaff",
+                      fontColor: "white",
                       fontSize: 14,   
                   }
               }],

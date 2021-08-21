@@ -50,7 +50,7 @@ class Stateful extends React.Component {
     <div>
     {this.state.clickHow || this.state.clickGo ? null : <Introduction onClickHow={this.onClickHow} onClickGo={this.onClickGo}/>}
     {this.state.clickHow && this.state.clickHowToGo === false ? <HowItWorks onClickHowToGo={this.onClickHowToGo}/> : null}
-    {this.state.clickGo || this.state.clickHowToGo ? <Product keyUpHandler={this.onKeyUp}/> : null}
+    {this.state.clickGo || this.state.clickHowToGo ? <Product input={this.state.input} keyUpHandler={this.onKeyUp}/> : null}
     </div>)
   }
 }
