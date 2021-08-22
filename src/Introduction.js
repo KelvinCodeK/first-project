@@ -11,8 +11,8 @@ export default class Introduction extends React.Component {
         <h1>Weather To Sell</h1>
         <p>Bepaal jouw optimale verkoopmomenten</p>
         <section className="buttons">
-        <button className="buttonEen" onClick={this.props.onClickHow}>hoe werkt het?</button>
-        <button className="buttonTwee" onClick={this.props.onClickGo}>aan de slag!</button>
+        <button className="button" onClick={this.props.onClickHow}>hoe werkt het?</button>
+        <button className="button" onClick={this.props.onClickGo}>aan de slag!</button>
         </section>
       </header>
   );}

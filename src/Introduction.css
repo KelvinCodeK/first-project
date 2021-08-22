@@ -18,20 +18,11 @@ header p {
   font-size: 1.5vw;
 }
 
-.buttonEen, .buttonTwee {
-  background-size: 1px 95px;  
-  transition: background-position 0.6s ease-in;
-}
 
-.buttonEen:hover, .buttonTwee:hover {
+.button:hover {
   background-position: 1px;
 }
 
-.buttonEen, .buttonTwee {
-  animation-name: loadBright;
-  animation-duration: 1.8s;
-  animation-timing-function: ease-out;
-}
 
 @keyframes loadBright {
   0% {background-position: initial;}
@@ -46,10 +37,12 @@ header p {
   justify-content: space-evenly;
 }
 
-button {
+.button {
   width: 14rem;
   height: 5rem;
   background: linear-gradient(0deg, var(--linearColors));
+  transition: background-position 0.6s ease-in;
+  background-size: 1px 95px;  
   font-size: 1.3em; 
   font-weight: bold;
   text-shadow: 2px 2px black;
@@ -57,4 +50,7 @@ button {
   border-radius: 15px;
   box-shadow: 3px 3px 6px black;
   border: 1px solid white;
+  animation-name: loadBright;
+  animation-duration: 1.8s;
+  animation-timing-function: ease-out;
 }

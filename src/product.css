@@ -4,16 +4,8 @@ main, header {
     align-items: center;
     justify-content: center;
 }
-.grafiek {
-    height: 35em;
-}
 
-#myChart {
-    background: linear-gradient(210deg, var(--linearColors));
-    border-radius: 15px;
-    padding: 1em;
-    box-sizing: border-box;
-}
+
 
 .zoekVak {
     height: 10em;
@@ -24,19 +16,31 @@ main, header {
     margin-bottom: 1em;
 }
 
-p {
-    text-align: center;
+.search {
+    display:flex;
+    flex-direction: row;
 }
 
-.analyse {
-    height: 20vh;
-    border: 1px solid white;
+.search > button {
+    height: 100%;
+    width: 50px;
+    border: 5px ridge #28b7c4;
+    padding: 1px;
+    background: #f0f0f0 url('./images/loupe.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    border-left: none;
+    background-color: white;
+}
+p {
+    text-align: center;
 }
 
 input {
     width: 18em;
     height: 2em;
-    border-width: 5px;
-    border-image: linear-gradient(210deg, var(--linearColors));
-    border-image-slice: 1;
+    border: 5px ridge #28b7c4;
+    padding: 1px;
+    border-right: none;
+    outline: none;
 }

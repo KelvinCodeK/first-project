@@ -1,0 +1,23 @@
+.analyse {
+    height: 1em;
+}
+
+.grafiek {
+    height: 30em;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grafiek > div {
+    width: 60em;
+    height: 30em;
+}
+
+#myChart {
+    background: linear-gradient(210deg, var(--linearColors));
+    border-radius: 15px;
+    padding: 1em;
+    box-sizing: border-box;
+}
