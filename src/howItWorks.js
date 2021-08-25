@@ -6,7 +6,7 @@ export default class HowItWorks extends React.Component {
         return (
             <div className="howItWorks">
                 <h1>Hoe het werkt</h1>
-                <p>Door online zoekvolume uit Google met weerdata te combineren krijg je inzicht in:</p>
+                <p>Door online zoekvolume uit Google met weerdata van het KNMI te combineren krijg je inzicht in:</p>
                 <ul>
                     <li>Optimale verkoopmomenten door het jaar heen</li>
                     <li>Of warme/koude dagen jouw online verkoop kunnen beïnvloeden</li>

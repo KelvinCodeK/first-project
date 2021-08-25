@@ -2,10 +2,19 @@ import React from 'react';
 import './chart.css';
 
    export default class ChartComponent extends React.Component {
+     
     componentDidMount() {
+      const response = this.props.apiResponse;
+        const responseParse = JSON.parse(response);
+        const resultArray = responseParse.default.timelineData;
+        // Loop die door alle array indices gaat en de formattedValues er uit haalt. Push naar nieuwe array en gebruik die data.
+        console.log(responseParse)
+        console.log(resultArray[0].formattedValue);
+
         const Chart = window.Chart;
         const januariZoekvolume = 90;
-        new Chart("myChart", {
+
+        this.reactChart = new Chart("myChart", {
             type: 'line',
             data: {
               labels: ['januari', 'februari', 'maart', 'april', 'mei','juni','juli', 'augustus', 'september', 'oktober', 'november','december'],
@@ -90,6 +99,23 @@ import './chart.css';
           });
           
         }
+        componentDidUpdate(prevProps) {
+          // De persoon de data zelf laten bepalen = Als de gebruiker in een tijd tussen 2020 en 2015 kiest wordt het om de 7 dagen gemeten ipv per maand. Gebruik hiervoor bij het weer gewoon gemiddelden
+          // voor die per maand en die per week
+
+                 
+        
+          
+          if (prevProps.chartUpdate !== this.props.chartUpdate) {
+           
+            this.reactChart.options.title.text = `Online zoekvolume voor ${this.props.input}`; 
+            this.reactChart.data.labels.pop();
+            this.reactChart.data.datasets.forEach((dataset) => {
+                  dataset.data.pop();
+              });
+              this.reactChart.update(); 
+          }
+        }
 
         render() {
             return (
@@ -100,7 +126,7 @@ import './chart.css';
                     </div>
                 </section>
                 <section className="analyse">
-                    <p>Uitleg</p>
+                    <p></p>
                 </section>
             </div>
             )

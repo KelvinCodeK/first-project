@@ -21,7 +21,9 @@ class Stateful extends React.Component {
       clickGo: false,
       clickHowToGo: false,
       input: '',
-      chart: false
+      chart: false,
+      chartUpdate: 0,
+      apiResponse: null
     }
     this.onClickHow = this.onClickHow.bind(this);
     this.onClickGo = this.onClickGo.bind(this);
@@ -30,16 +32,27 @@ class Stateful extends React.Component {
     this.chartClick = this.chartClick.bind(this);
   }
 
+  sendHttpRequest() {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = () => {
+          if(xhr.readyState === 4 && xhr.status === 200) {
+            console.log(xhr.responseText);
+            this.setState({apiResponse: xhr.responseText});
+        } 
+      }
+      //Synchronous. Anders kan je de http response niet oppakken in de props van het Chart component in de componentDidMount. Omdat het component dan inlaadt voordat de response binnen is.
+        xhr.open('GET', 'http://localhost:9000/testAPI', false)
+        xhr.send()
+}
+
   onClickHow() {
     this.setState({clickHow: true});
   }
   onClickGo() {
     this.setState({clickGo: true});
-    document.querySelector('body').style.border = 'none';
   }
   onClickHowToGo() {
     this.setState({clickHowToGo: true});
-    document.querySelector('body').style.border = 'none';
   }
   onKeyUp(event) {
     const invoer = event.target.value;
@@ -47,27 +60,31 @@ class Stateful extends React.Component {
 
     if( this.state.chart === false) {
     if (event.keyCode === 13) {
+      this.sendHttpRequest();
       this.setState({chart: true});
       event.target.value = '';
+      
     }
     }
     else {
 
       if (event.keyCode === 13) {
-        
-        this.forceUpdate();
-      
-      
-      
+        this.setState({chartUpdate: this.state.chartUpdate + 1});
+        event.target.value = ''; 
     }
   }
   }
   chartClick() {
-    this.setState({chart: true});
-    //Zodra het element op de DOM is ingeladen kan je het oppakken met javascript
-    document.querySelector('input').value = '';
+    if( this.state.chart === false) {
+        this.setState({chart: true});
+        //Zodra het element op de DOM is ingeladen kan je het oppakken met javascript
+        document.querySelector('input').value = '';
+      }
+      else {
+          this.setState({chartUpdate: this.state.chartUpdate + 1});
+          document.querySelector('input').value = '';
+    }
   }
-
   
 
   render(){
@@ -76,7 +93,7 @@ class Stateful extends React.Component {
     {this.state.clickHow || this.state.clickGo ? null : <Introduction onClickHow={this.onClickHow} onClickGo={this.onClickGo}/>}
     {this.state.clickHow && this.state.clickHowToGo === false ? <HowItWorks onClickHowToGo={this.onClickHowToGo}/> : null}
     {this.state.clickGo || this.state.clickHowToGo ? <Product chartClick={this.chartClick} input={this.state.input} keyUpHandler={this.onKeyUp}/> : null}
-    {this.state.chart ? <ChartComponent input={this.state.input} /> : null}
+    {this.state.chart ? <ChartComponent apiResponse={this.state.apiResponse} chartUpdate={this.state.chartUpdate} input={this.state.input} /> : null}
     </div>)
   }
 }

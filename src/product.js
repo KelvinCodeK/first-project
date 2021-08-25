@@ -16,7 +16,7 @@ export default class Product extends React.Component {
                 <main>
                     <section className="zoekVak">
                     
-                        <p>Vul het product in waarover jij meer te weten wil komen</p>
+                        <p>Vul het product óf de productcategorie in waarover jij meer te weten wil komen</p>
                         {/* input op enter afvuren en een button om te zoeken*/}
                         <div className="search">
                         <input placeholder="zoek naar een product"onKeyUp={this.props.keyUpHandler} type="text"></input>  
