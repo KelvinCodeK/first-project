@@ -41,8 +41,6 @@ class Stateful extends React.Component {
             this.setState({apiResponse: xhr.responseText});
         } 
       }
-      // Synchronous. Anders kan je de http response niet oppakken in de props van het Chart component in de componentDidMount. Omdat het component dan inlaadt voordat de response binnen is.
-      // Kan je miss een if (chart: true) {true}, else {false} van maken. 
         xhr.open('GET', 'http://localhost:9000/testAPI', true);
         xhr.send();
 }
@@ -57,11 +55,10 @@ class Stateful extends React.Component {
     this.setState({clickHowToGo: true});
   }
   onKeyUp(event) {
-    const invoer = event.target.value;
-    this.setState({input: invoer});
-
     if( this.state.chart === false) {
     if (event.keyCode === 13) {
+      const invoer = event.target.value;
+      this.setState({input: invoer});
       this.sendHttpRequest();
       this.setState({chart: true});
       event.target.value = '';
@@ -72,6 +69,8 @@ class Stateful extends React.Component {
 
       if (event.keyCode === 13) {
         this.setState({chartUpdate: this.state.chartUpdate + 1});
+        const invoer = event.target.value;
+      this.setState({input: invoer});
         event.target.value = ''; 
     }
   }

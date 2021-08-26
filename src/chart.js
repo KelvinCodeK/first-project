@@ -3,8 +3,12 @@ import './chart.css';
 
    export default class ChartComponent extends React.Component {
      
-    componentDidMount() {
-      const response = this.props.apiResponse;
+   
+        componentDidUpdate(prevProps) {
+          // De persoon de data zelf laten bepalen = Als de gebruiker in een tijd tussen 2020 en 2015 kiest wordt het om de 7 dagen gemeten ipv per maand. Gebruik hiervoor bij het weer gewoon gemiddelden
+          // voor die per maand en die per week
+          if (this.props.chartUpdate === 0) {
+          const response = this.props.apiResponse;
         const responseParse = JSON.parse(response);
         const resultArray = responseParse.default.timelineData;
         // Loop die door alle array indices gaat en de formattedValues er uit haalt. Push naar nieuwe array en gebruik die data.
@@ -97,12 +101,7 @@ import './chart.css';
               }
             }
           });
-          
         }
-        componentDidUpdate(prevProps) {
-          // De persoon de data zelf laten bepalen = Als de gebruiker in een tijd tussen 2020 en 2015 kiest wordt het om de 7 dagen gemeten ipv per maand. Gebruik hiervoor bij het weer gewoon gemiddelden
-          // voor die per maand en die per week
-
                  
         
           
