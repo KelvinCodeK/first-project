@@ -33,6 +33,7 @@ class Stateful extends React.Component {
   }
 
   sendHttpRequest() {
+    // Data range afgelopen jaar of past 90 days
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = () => {
           if(xhr.readyState === 4 && xhr.status === 200) {
@@ -40,9 +41,10 @@ class Stateful extends React.Component {
             this.setState({apiResponse: xhr.responseText});
         } 
       }
-      //Synchronous. Anders kan je de http response niet oppakken in de props van het Chart component in de componentDidMount. Omdat het component dan inlaadt voordat de response binnen is.
-        xhr.open('GET', 'http://localhost:9000/testAPI', false)
-        xhr.send()
+      // Synchronous. Anders kan je de http response niet oppakken in de props van het Chart component in de componentDidMount. Omdat het component dan inlaadt voordat de response binnen is.
+      // Kan je miss een if (chart: true) {true}, else {false} van maken. 
+        xhr.open('GET', 'http://localhost:9000/testAPI', true);
+        xhr.send();
 }
 
   onClickHow() {
