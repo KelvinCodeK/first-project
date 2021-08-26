@@ -8,6 +8,7 @@ import './chart.css';
           // De persoon de data zelf laten bepalen = Als de gebruiker in een tijd tussen 2020 en 2015 kiest wordt het om de 7 dagen gemeten ipv per maand. Gebruik hiervoor bij het weer gewoon gemiddelden
           // voor die per maand en die per week
           if (this.props.chartUpdate === 0) {
+            document.querySelector('canvas').style.display = 'initial';
           const response = this.props.apiResponse;
         const responseParse = JSON.parse(response);
         const resultArray = responseParse.default.timelineData;
@@ -17,11 +18,15 @@ import './chart.css';
 
         const Chart = window.Chart;
         const januariZoekvolume = 90;
+        const labelData = [];
+        for(let i = 0; i < 89; i++) {
+          labelData.push(i + 1)
+        }
 
         this.reactChart = new Chart("myChart", {
             type: 'line',
             data: {
-              labels: ['januari', 'februari', 'maart', 'april', 'mei','juni','juli', 'augustus', 'september', 'oktober', 'november','december'],
+              labels: labelData,
               datasets: [{
                 label: 'Zoekvolume (0% - 100%)',
                 yAxisID: 'A',
@@ -121,7 +126,7 @@ import './chart.css';
             <div>
                 <section className="grafiek">
                     <div>
-                    <canvas id="myChart" ></canvas>
+                    <canvas id="myChart" style={{display: 'none'}}></canvas>
                     </div>
                 </section>
                 <section className="analyse">

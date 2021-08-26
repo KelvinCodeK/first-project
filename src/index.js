@@ -41,9 +41,23 @@ class Stateful extends React.Component {
             this.setState({apiResponse: xhr.responseText});
         } 
       }
-        xhr.open('GET', 'http://localhost:9000/testAPI', true);
+        xhr.open('GET', 'http://localhost:9000/testAPI/trends', true);
         xhr.send();
 }
+
+sendHttpRequestWeer() {
+  // Data range afgelopen jaar of past 90 days
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = () => {
+        if(xhr.readyState === 4 && xhr.status === 200) {
+          
+      } 
+    }
+      xhr.open('GET', 'http://localhost:9000/testAPI/?url=https://www.daggegevens.knmi.nl/klimatologie/daggegevens/?stns=260&start=19700101&end=20090818&vars=VICL:PRCP', true);
+      xhr.send();
+}
+
+
 
   onClickHow() {
     this.setState({clickHow: true});
@@ -60,6 +74,7 @@ class Stateful extends React.Component {
       const invoer = event.target.value;
       this.setState({input: invoer});
       this.sendHttpRequest();
+      this.sendHttpRequestWeer();
       this.setState({chart: true});
       event.target.value = '';
       
