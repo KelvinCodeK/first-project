@@ -11,72 +11,47 @@ import './chart.css';
       }
     }
 
-    sendHttpRequestGoogle() {
-      // Data range afgelopen jaar of past 90 days
-          var xhr = new XMLHttpRequest();
-          xhr.onreadystatechange = () => {
-            if(xhr.readyState === 4 && xhr.status === 200) {
-              console.log(xhr.responseText);
-              this.setState({apiResponseGoogle: xhr.responseText});
-          } 
-        }
-          xhr.open('GET', 'http://localhost:9000/testAPI/trends', true);
-          xhr.send();
-  }
-  
-  sendHttpRequestKNMI() {
-    // Data range afgelopen jaar of past 90 days
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = () => {
-          if(xhr.readyState === 4 && xhr.status === 200) {
-            console.log(xhr.responseText);
-            this.setState({apiResponseKNMI: xhr.responseText});
-        } 
-      }
-        xhr.open('GET', 'http://localhost:9000/testAPI/?url=https://www.daggegevens.knmi.nl/klimatologie/daggegevens/?stns=260', true);
-        xhr.send();
-  }
-     
     componentDidMount() {
-
-
-
-
-      
-      this.sendHttpRequestGoogle();
-      this.sendHttpRequestKNMI();
       
     if (this.props.chartUpdate === 0) {
 
-        const thePromise = new Promise((resolve, reject) => {
+        const theFirstPromise = new Promise((resolve, reject) => {
           
-          if (this.state.apiResponseGoogle && this.state.apiResponseKNMI) {
-            resolve(this.state.apiResponseGoogle)
-          }
-  
-          else {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'http://localhost:9000/testAPI/trends', true);
+                //onload, ik stuur alleen een 200 terug vanaf de proxy server.
+                xhr.onload = () => {
+                  if(xhr.status === 200) {
+                    resolve(xhr.responseText);
+                } 
+                else{
+                  reject('failed request');
+                }
+              }
+              
+              xhr.send();   
+                
+        });
+
+        const theSecondPromise = new Promise((resolve, reject) => {
+          var xhr = new XMLHttpRequest();
+          xhr.onload = () => {
+            if(xhr.status === 200) {
+              resolve(xhr.responseText);
+          } 
+          else{
             reject('failed request');
           }
+        }
+          xhr.open('GET', 'http://localhost:9000/testAPI/?url=https://www.daggegevens.knmi.nl/klimatologie/daggegevens/?stns=260', true);
+          xhr.send();
         });
-  
-        thePromise.then(result => {
-          console.log(result);
+
+        Promise.all([theFirstPromise, theSecondPromise]).then((values) => {
+          console.log(values);
           // Google data
        
-    const responseGoogle = this.state.apiResponseGoogle;
-    const responseParseGoogle = JSON.parse(responseGoogle);
-    const resultArray = responseParseGoogle.default.timelineData;
-
-// KNMI data
-    // Loop die door alle array indices gaat en de formattedValues er uit haalt. Push naar nieuwe array en gebruik die data.
-    console.log(responseParseGoogle)
-    console.log(resultArray[0].formattedValue);
-          
-        }).catch(rej => {
-          console.log(rej);
-        });
-
-        document.querySelector('canvas').style.display = 'initial';
+    document.querySelector('canvas').style.display = 'initial';
 
 
 
@@ -170,19 +145,15 @@ import './chart.css';
           }
         }
       });
+
+
+        });    
     }
 
     }
-    
-    
-    
-    //GEBRUIK COMPONENTWILLMOUNT EERST OM DE ASYNC DATA OP TE HALEN
-    
+
     componentDidUpdate(prevProps) {
-         
-                 
-        
-          
+  
           if (prevProps.chartUpdate !== this.props.chartUpdate) {
            
             this.reactChart.options.title.text = `Online zoekvolume voor ${this.props.input}`; 
