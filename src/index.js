@@ -22,8 +22,7 @@ class Stateful extends React.Component {
       clickHowToGo: false,
       input: '',
       chart: false,
-      chartUpdate: 0,
-      apiResponse: null
+      chartUpdate: 0
     }
     this.onClickHow = this.onClickHow.bind(this);
     this.onClickGo = this.onClickGo.bind(this);
@@ -32,30 +31,7 @@ class Stateful extends React.Component {
     this.chartClick = this.chartClick.bind(this);
   }
 
-  sendHttpRequest() {
-    // Data range afgelopen jaar of past 90 days
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = () => {
-          if(xhr.readyState === 4 && xhr.status === 200) {
-            console.log(xhr.responseText);
-            this.setState({apiResponse: xhr.responseText});
-        } 
-      }
-        xhr.open('GET', 'http://localhost:9000/testAPI/trends', true);
-        xhr.send();
-}
 
-sendHttpRequestWeer() {
-  // Data range afgelopen jaar of past 90 days
-      var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = () => {
-        if(xhr.readyState === 4 && xhr.status === 200) {
-          
-      } 
-    }
-      xhr.open('GET', 'http://localhost:9000/testAPI/?url=https://www.daggegevens.knmi.nl/klimatologie/daggegevens/?stns=260&start=19700101&end=20090818&vars=VICL:PRCP', true);
-      xhr.send();
-}
 
 
 
@@ -71,12 +47,12 @@ sendHttpRequestWeer() {
   onKeyUp(event) {
     if( this.state.chart === false) {
     if (event.keyCode === 13) {
-      const invoer = event.target.value;
-      this.setState({input: invoer});
-      this.sendHttpRequest();
-      this.sendHttpRequestWeer();
+
       this.setState({chart: true});
+      const invoer = event.target.value; 
+      this.setState({input: invoer});
       event.target.value = '';
+      
       
     }
     }
@@ -109,7 +85,7 @@ sendHttpRequestWeer() {
     {this.state.clickHow || this.state.clickGo ? null : <Introduction onClickHow={this.onClickHow} onClickGo={this.onClickGo}/>}
     {this.state.clickHow && this.state.clickHowToGo === false ? <HowItWorks onClickHowToGo={this.onClickHowToGo}/> : null}
     {this.state.clickGo || this.state.clickHowToGo ? <Product chartClick={this.chartClick} input={this.state.input} keyUpHandler={this.onKeyUp}/> : null}
-    {this.state.chart ? <ChartComponent apiResponse={this.state.apiResponse} chartUpdate={this.state.chartUpdate} input={this.state.input} /> : null}
+    {this.state.chart ? <ChartComponent chartUpdate={this.state.chartUpdate} input={this.state.input} /> : null}
     </div>)
   }
 }
