@@ -16,9 +16,10 @@ import './chart.css';
     if (this.props.chartUpdate === 0) {
 
         const theFirstPromise = new Promise((resolve, reject) => {
+              const zoekwoord = this.props.input;
           
                 var xhr = new XMLHttpRequest();
-                xhr.open('GET', 'http://localhost:9000/testAPI/trends', true);
+                xhr.open('GET', `http://localhost:9000/testAPI/trends/${zoekwoord}`, true);
                 //onload, ik stuur alleen een 200 terug vanaf de proxy server.
                 xhr.onload = () => {
                   if(xhr.status === 200) {
@@ -48,35 +49,57 @@ import './chart.css';
         });
 
         Promise.all([theFirstPromise, theSecondPromise]).then((values) => {
-          console.log(values);
+          
           // Google data
-       
+          const googleData = values[0];
+          const googleParsed = JSON.parse(googleData);
+          console.log(googleParsed);
+          const googleDataArray = googleParsed.default.timelineData;
+          const timeData = [];
+          for(let i = 0; i < googleDataArray.length; i++) {
+            let timeFormat = googleDataArray[i].formattedTime;
+            timeData.push(timeFormat);
+          }
+          console.log(timeData);
+
+          const trendsData = [];
+          for(let i = 0; i < googleDataArray.length; i++) {
+            let trends = Number(googleDataArray[i].value);
+            trendsData.push(trends);
+          }
+          
+
+          // KNMI data
+          const knmiData = values[1];
+          const knmiParsed = JSON.parse(knmiData);
+          const weatherData = [];
+          for(let i = 0; i < knmiParsed.length; i++) {
+            let weather = knmiParsed[i].TG;
+            weatherData.push(Number(weather) / 10);
+          }
+          console.log(weatherData);
+          
+
     document.querySelector('canvas').style.display = 'initial';
 
-
-
     const Chart = window.Chart;
-    const januariZoekvolume = 90;
-    const labelData = [];
-    for(let i = 0; i < 89; i++) {
-      labelData.push(i + 1)
-    }
+
 
     this.reactChart = new Chart("myChart", {
         type: 'line',
         data: {
-          labels: labelData,
+          labels: timeData,
           datasets: [{
             label: 'Zoekvolume (0% - 100%)',
             yAxisID: 'A',
-            data: [januariZoekvolume, 70, 60, 76, 10,20,30,40,55,40,30,20],
+            data: trendsData,
             borderColor: 'black',
             borderWidth: 3,
             fill: false,
           }, {
             label: 'Temperatuur',
             yAxisID: 'B',
-            data: [1,2,3,4,5,6,7,-8,-5,-10,11,12],
+            data: weatherData,
             borderColor: 'white',
             borderWidth: 3,
             fill: false,
