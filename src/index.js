@@ -31,10 +31,6 @@ class Stateful extends React.Component {
     this.chartClick = this.chartClick.bind(this);
   }
 
-
-
-
-
   onClickHow() {
     this.setState({clickHow: true});
   }

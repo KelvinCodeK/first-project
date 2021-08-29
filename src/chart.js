@@ -49,6 +49,28 @@ import './chart.css';
         });
 
         Promise.all([theFirstPromise, theSecondPromise]).then((values) => {
+
+         
+
+          // jaar
+          // KNMI data
+          const knmiData = values[1];
+          const knmiParsed = JSON.parse(knmiData);
+          const weatherData = [];
+          for(let i = 0; i < knmiParsed.length; i++) {
+            let weather = knmiParsed[i].TG;
+            weatherData.push(Number(weather) / 10);
+          }
+          console.log(weatherData);
+          var arrSplice = [];
+          var averages = [];
+          for (let i = 0; weatherData.length > 0; i++) {
+            arrSplice.push(weatherData.splice(0, 7));
+            averages[i] = Math.floor(arrSplice[i].reduce((a, b) => {
+            return a + b;
+          })/7);
+          }
+          console.log(averages);
           
           // Google data
           const googleData = values[0];
@@ -68,16 +90,16 @@ import './chart.css';
             trendsData.push(trends);
           }
           
-
-          // KNMI data
-          const knmiData = values[1];
-          const knmiParsed = JSON.parse(knmiData);
-          const weatherData = [];
-          for(let i = 0; i < knmiParsed.length; i++) {
-            let weather = knmiParsed[i].TG;
-            weatherData.push(Number(weather) / 10);
-          }
-          console.log(weatherData);
+          //90 dagen
+          // // KNMI data
+          // const knmiData = values[1];
+          // const knmiParsed = JSON.parse(knmiData);
+          // const weatherData = [];
+          // for(let i = 0; i < knmiParsed.length; i++) {
+          //   let weather = knmiParsed[i].TG;
+          //   weatherData.push(Number(weather) / 10);
+          // }
+          // console.log(knmiParsed);
           
 
     document.querySelector('canvas').style.display = 'initial';
@@ -99,7 +121,7 @@ import './chart.css';
           }, {
             label: 'Temperatuur',
             yAxisID: 'B',
-            data: weatherData,
+            data: averages,
             borderColor: 'white',
             borderWidth: 3,
             fill: false,
