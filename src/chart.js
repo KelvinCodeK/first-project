@@ -19,7 +19,7 @@ import './chart.css';
               const zoekwoord = this.props.input;
           
                 var xhr = new XMLHttpRequest();
-                xhr.open('GET', `http://localhost:9000/testAPI/trends/${zoekwoord}`, true);
+                xhr.open('GET', `http://localhost:9000/testAPI/trends/${zoekwoord}/${this.props.selectOptions}/`, true);
                 //onload, ik stuur alleen een 200 terug vanaf de proxy server.
                 xhr.onload = () => {
                   if(xhr.status === 200) {
@@ -44,7 +44,7 @@ import './chart.css';
             reject('failed request');
           }
         }
-          xhr.open('GET', 'http://localhost:9000/testAPI/?url=https://www.daggegevens.knmi.nl/klimatologie/daggegevens/?stns=260', true);
+          xhr.open('GET', `http://localhost:9000/testAPI/weer/${this.props.selectOptions}/?url=https://www.daggegevens.knmi.nl/klimatologie/daggegevens/?stns=260`, true);
           xhr.send();
         });
 
@@ -52,7 +52,7 @@ import './chart.css';
 
          
 
-          // jaar
+          // 90 dagen
           // KNMI data
           const knmiData = values[1];
           const knmiParsed = JSON.parse(knmiData);
@@ -61,28 +61,31 @@ import './chart.css';
             let weather = knmiParsed[i].TG;
             weatherData.push(Number(weather) / 10);
           }
-          console.log(weatherData);
+
+         // jaar
           var arrSplice = [];
           var averages = [];
-          for (let i = 0; weatherData.length > 0; i++) {
-            arrSplice.push(weatherData.splice(0, 7));
-            averages[i] = Math.floor(arrSplice[i].reduce((a, b) => {
-            return a + b;
-          })/7);
+          if(this.props.jaarOfMaanden === true) {
+            for (let i = 0; weatherData.length > 0; i++) {
+              arrSplice.push(weatherData.splice(0, 7));
+              averages[i] = Math.floor(arrSplice[i].reduce((a, b) => {
+              return a + b;
+            })/7);
+            }
           }
-          console.log(averages);
+          
+
           
           // Google data
           const googleData = values[0];
           const googleParsed = JSON.parse(googleData);
-          console.log(googleParsed);
           const googleDataArray = googleParsed.default.timelineData;
           const timeData = [];
           for(let i = 0; i < googleDataArray.length; i++) {
             let timeFormat = googleDataArray[i].formattedTime;
             timeData.push(timeFormat);
           }
-          console.log(timeData);
+
 
           const trendsData = [];
           for(let i = 0; i < googleDataArray.length; i++) {
@@ -90,23 +93,13 @@ import './chart.css';
             trendsData.push(trends);
           }
           
-          //90 dagen
-          // // KNMI data
-          // const knmiData = values[1];
-          // const knmiParsed = JSON.parse(knmiData);
-          // const weatherData = [];
-          // for(let i = 0; i < knmiParsed.length; i++) {
-          //   let weather = knmiParsed[i].TG;
-          //   weatherData.push(Number(weather) / 10);
-          // }
-          // console.log(knmiParsed);
           
 
     document.querySelector('canvas').style.display = 'initial';
 
     const Chart = window.Chart;
 
-
+    
     this.reactChart = new Chart("myChart", {
         type: 'line',
         data: {
@@ -121,7 +114,7 @@ import './chart.css';
           }, {
             label: 'Temperatuur',
             yAxisID: 'B',
-            data: averages,
+            data: this.props.jaarOfMaandenSelect ? averages : weatherData,
             borderColor: 'white',
             borderWidth: 3,
             fill: false,

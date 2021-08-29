@@ -22,13 +22,15 @@ class Stateful extends React.Component {
       clickHowToGo: false,
       input: '',
       chart: false,
-      chartUpdate: 0
+      chartUpdate: 0,
+      jaarOfMaandenSelect: null
     }
     this.onClickHow = this.onClickHow.bind(this);
     this.onClickGo = this.onClickGo.bind(this);
     this.onClickHowToGo = this.onClickHowToGo.bind(this);
     this.onKeyUp = this.onKeyUp.bind(this);
     this.chartClick = this.chartClick.bind(this);
+    this.jaarOfMaanden = this.jaarOfMaanden.bind(this);
   }
 
   onClickHow() {
@@ -73,6 +75,15 @@ class Stateful extends React.Component {
           document.querySelector('input').value = '';
     }
   }
+
+  jaarOfMaanden(e) {
+    if(e.target.value === 'jaar') {
+      this.setState({jaarOfMaandenSelect: true});
+    }
+    else {
+      this.setState({jaarOfMaandenSelect: false});
+    }
+  }
   
 
   render(){
@@ -80,8 +91,8 @@ class Stateful extends React.Component {
     <div>
     {this.state.clickHow || this.state.clickGo ? null : <Introduction onClickHow={this.onClickHow} onClickGo={this.onClickGo}/>}
     {this.state.clickHow && this.state.clickHowToGo === false ? <HowItWorks onClickHowToGo={this.onClickHowToGo}/> : null}
-    {this.state.clickGo || this.state.clickHowToGo ? <Product chartClick={this.chartClick} input={this.state.input} keyUpHandler={this.onKeyUp}/> : null}
-    {this.state.chart ? <ChartComponent chartUpdate={this.state.chartUpdate} input={this.state.input} /> : null}
+    {this.state.clickGo || this.state.clickHowToGo ? <Product jaarOfMaanden={this.jaarOfMaanden} chartClick={this.chartClick} input={this.state.input} keyUpHandler={this.onKeyUp}/> : null}
+    {this.state.chart ? <ChartComponent selectOptions={this.state.jaarOfMaandenSelect} chartUpdate={this.state.chartUpdate} input={this.state.input} /> : null}
     </div>)
   }
 }

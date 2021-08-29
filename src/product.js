@@ -20,7 +20,12 @@ export default class Product extends React.Component {
                         {/* input op enter afvuren en een button om te zoeken*/}
                         <div className="search">
                         <input placeholder="zoek naar een product"onKeyUp={this.props.keyUpHandler} type="text"></input>  
-                        <button onClick={this.props.chartClick}></button>    
+                        <button onClick={this.props.chartClick}></button>   
+                        <label htmlFor="select">Kies een periode:</label> 
+                        <select onChange={this.props.jaarOfMaanden} name="select">
+                            <option value="jaar">jaar</option>
+                            <option value="90">90</option>
+                        </select>
                         </div>
                     </section>
                 </main>
