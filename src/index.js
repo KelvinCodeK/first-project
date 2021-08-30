@@ -23,7 +23,8 @@ class Stateful extends React.Component {
       input: '',
       chart: false,
       chartUpdate: 0,
-      jaarOfMaandenSelect: null
+      jaarOfMaandenSelect: null,
+      dates: []
     }
     this.onClickHow = this.onClickHow.bind(this);
     this.onClickGo = this.onClickGo.bind(this);
@@ -79,9 +80,53 @@ class Stateful extends React.Component {
   jaarOfMaanden(e) {
     if(e.target.value === 'jaar') {
       this.setState({jaarOfMaandenSelect: true});
+        var dateStart = new Date();
+        dateStart.setDate(dateStart.getDate() - 365);
+        var today = dateStart.getDay();
+        if(today !== 0) {
+          switch(today) {
+            case 1:
+              dateStart.setDate(dateStart.getDate() + 6);
+              break;
+              case 2:
+                dateStart.setDate(dateStart.getDate() + 5);
+              break;
+              case 3:
+                dateStart.setDate(dateStart.getDate() + 4);
+              break;
+              case 4:
+                dateStart.setDate(dateStart.getDate() + 3);
+              break;
+              case 5:
+                dateStart.setDate(dateStart.getDate() + 2);
+              break;
+              case 6:
+                dateStart.setDate(dateStart.getDate() + 1);
+              break;
+          }
+        }
+
+        const googleStartDate = dateStart.toISOString().split('T')[0];
+        console.log(googleStartDate);
+        const knmiStartDate = googleStartDate.replace(/-/g, '');
+        
+        var dateEnd = new Date();
+        dateEnd.setDate(dateEnd.getDate() - 4);
+        const googleEndDate = dateEnd.toISOString().split('T')[0];
+        const knmiEndDate = googleEndDate.replace(/-/g, '');
+        this.setState({dates: [googleStartDate, knmiStartDate, googleEndDate, knmiEndDate]});
     }
     else {
       this.setState({jaarOfMaandenSelect: false});
+      var dateStart90 = new Date();
+      dateStart90.setDate(dateStart90.getDate() - 90);
+      const googleStartDate = dateStart90.toISOString().split('T')[0];
+      const knmiStartDate = googleStartDate.replace(/-/g, '');
+      var dateEnd90 = new Date();
+      dateEnd90.setDate(dateEnd90.getDate() - 4);
+      const googleEndDate = dateEnd90.toISOString().split('T')[0];
+      const knmiEndDate = googleEndDate.replace(/-/g, '');
+      this.setState({dates: [googleStartDate, knmiStartDate, googleEndDate, knmiEndDate]});
     }
   }
   
@@ -92,7 +137,7 @@ class Stateful extends React.Component {
     {this.state.clickHow || this.state.clickGo ? null : <Introduction onClickHow={this.onClickHow} onClickGo={this.onClickGo}/>}
     {this.state.clickHow && this.state.clickHowToGo === false ? <HowItWorks onClickHowToGo={this.onClickHowToGo}/> : null}
     {this.state.clickGo || this.state.clickHowToGo ? <Product jaarOfMaanden={this.jaarOfMaanden} chartClick={this.chartClick} input={this.state.input} keyUpHandler={this.onKeyUp}/> : null}
-    {this.state.chart ? <ChartComponent selectOptions={this.state.jaarOfMaandenSelect} chartUpdate={this.state.chartUpdate} input={this.state.input} /> : null}
+    {this.state.chart ? <ChartComponent dates={this.state.dates} selectOptions={this.state.jaarOfMaandenSelect} chartUpdate={this.state.chartUpdate} input={this.state.input} /> : null}
     </div>)
   }
 }

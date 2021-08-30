@@ -5,7 +5,10 @@ main, header {
     justify-content: center;
 }
 
-
+select {
+    padding: 10px;
+    margin-right: 2em;
+}
 
 .zoekVak {
     height: 10em;

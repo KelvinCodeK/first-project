@@ -16,16 +16,17 @@ export default class Product extends React.Component {
                 <main>
                     <section className="zoekVak">
                     
-                        <p>Vul het product óf de productcategorie in waarover jij meer te weten wil komen</p>
+                        <p>Kies een periode en vul het product óf de productcategorie in waarover jij meer te weten wil komen</p>
                         {/* input op enter afvuren en een button om te zoeken*/}
                         <div className="search">
-                        <input placeholder="zoek naar een product"onKeyUp={this.props.keyUpHandler} type="text"></input>  
-                        <button onClick={this.props.chartClick}></button>   
-                        <label htmlFor="select">Kies een periode:</label> 
-                        <select onChange={this.props.jaarOfMaanden} name="select">
+                        <select onChange={this.props.jaarOfMaanden}>
+                            <option>Periode</option>
                             <option value="jaar">jaar</option>
                             <option value="90">90</option>
                         </select>
+                        
+                        <input placeholder="zoek naar een product"onKeyUp={this.props.keyUpHandler} type="text"></input>  
+                        <button onClick={this.props.chartClick}></button>  
                         </div>
                     </section>
                 </main>

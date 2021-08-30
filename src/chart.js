@@ -15,11 +15,15 @@ import './chart.css';
       
     if (this.props.chartUpdate === 0) {
 
+
+
         const theFirstPromise = new Promise((resolve, reject) => {
               const zoekwoord = this.props.input;
+              const googleStartDate = this.props.dates[0];
+              const googleEndDate = this.props.dates[2];
           
                 var xhr = new XMLHttpRequest();
-                xhr.open('GET', `http://localhost:9000/testAPI/trends/${zoekwoord}/${this.props.selectOptions}/`, true);
+                xhr.open('GET', `http://localhost:9000/testAPI/trends/${zoekwoord}/${googleStartDate}/${googleEndDate}`, true);
                 //onload, ik stuur alleen een 200 terug vanaf de proxy server.
                 xhr.onload = () => {
                   if(xhr.status === 200) {
@@ -35,6 +39,8 @@ import './chart.css';
         });
 
         const theSecondPromise = new Promise((resolve, reject) => {
+          const knmiStartDate = this.props.dates[1];
+          const knmiEndDate = this.props.dates[3];
           var xhr = new XMLHttpRequest();
           xhr.onload = () => {
             if(xhr.status === 200) {
@@ -44,7 +50,7 @@ import './chart.css';
             reject('failed request');
           }
         }
-          xhr.open('GET', `http://localhost:9000/testAPI/weer/${this.props.selectOptions}/?url=https://www.daggegevens.knmi.nl/klimatologie/daggegevens/?stns=260`, true);
+          xhr.open('GET', `http://localhost:9000/testAPI/weer/${knmiStartDate}/${knmiEndDate}/?url=https://www.daggegevens.knmi.nl/klimatologie/daggegevens/?stns=260`, true);
           xhr.send();
         });
 
@@ -63,17 +69,20 @@ import './chart.css';
           }
 
          // jaar
+          const weatherDataJaar = weatherData.slice(0, weatherData.length);
+          console.log(weatherDataJaar);
           var arrSplice = [];
           var averages = [];
-          if(this.props.jaarOfMaanden === true) {
-            for (let i = 0; weatherData.length > 0; i++) {
-              arrSplice.push(weatherData.splice(0, 7));
-              averages[i] = Math.floor(arrSplice[i].reduce((a, b) => {
+          if(this.props.selectOptions === true) {
+            for (let i = 0; weatherDataJaar.length > 0; i++) {
+              arrSplice.push(weatherDataJaar.splice(0, 7));
+              averages.push(Math.floor(arrSplice[i].reduce((a, b) => {
               return a + b;
-            })/7);
+            })/7));
+            
             }
           }
-          
+          console.log(averages);
 
           
           // Google data
@@ -114,7 +123,7 @@ import './chart.css';
           }, {
             label: 'Temperatuur',
             yAxisID: 'B',
-            data: this.props.jaarOfMaandenSelect ? averages : weatherData,
+            data: this.props.selectOptions ? averages : weatherData,
             borderColor: 'white',
             borderWidth: 3,
             fill: false,
@@ -174,7 +183,7 @@ import './chart.css';
                 display: false,
               },
               ticks: {
-                max: 40,
+                max: 30,
                 min: -10,
                 fontColor: "white",
                 fontSize: 13,
