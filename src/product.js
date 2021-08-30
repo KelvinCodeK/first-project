@@ -21,8 +21,8 @@ export default class Product extends React.Component {
                         <div className="search">
                         <select onChange={this.props.jaarOfMaanden}>
                             <option>Periode</option>
-                            <option value="jaar">jaar</option>
-                            <option value="90">90</option>
+                            <option value="jaar">Afgelopen jaar</option>
+                            <option value="90">Afgelopen drie maanden</option>
                         </select>
                         
                         <input placeholder="zoek naar een product"onKeyUp={this.props.keyUpHandler} type="text"></input>  

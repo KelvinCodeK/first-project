@@ -60,7 +60,7 @@ class Stateful extends React.Component {
       if (event.keyCode === 13) {
         this.setState({chartUpdate: this.state.chartUpdate + 1});
         const invoer = event.target.value;
-      this.setState({input: invoer});
+        this.setState({input: invoer});
         event.target.value = ''; 
     }
   }
@@ -68,11 +68,15 @@ class Stateful extends React.Component {
   chartClick() {
     if( this.state.chart === false) {
         this.setState({chart: true});
+        const invoer = document.querySelector('input').value;
+        this.setState({input: invoer});
         //Zodra het element op de DOM is ingeladen kan je het oppakken met javascript
         document.querySelector('input').value = '';
       }
       else {
           this.setState({chartUpdate: this.state.chartUpdate + 1});
+          const invoer = document.querySelector('input').value;
+          this.setState({input: invoer});
           document.querySelector('input').value = '';
     }
   }

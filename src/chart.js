@@ -192,23 +192,103 @@ import './chart.css';
           }
         }
       });
-
-
         });    
     }
-
     }
 
     componentDidUpdate(prevProps) {
   
           if (prevProps.chartUpdate !== this.props.chartUpdate) {
-           
-            this.reactChart.options.title.text = `Online zoekvolume voor ${this.props.input}`; 
-            this.reactChart.data.labels.pop();
-            this.reactChart.data.datasets.forEach((dataset) => {
-                  dataset.data.pop();
-              });
-              this.reactChart.update(); 
+            const theFirstPromise = new Promise((resolve, reject) => {
+              const zoekwoord = this.props.input;
+              const googleStartDate = this.props.dates[0];
+              const googleEndDate = this.props.dates[2];
+          
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', `http://localhost:9000/testAPI/trends/${zoekwoord}/${googleStartDate}/${googleEndDate}`, true);
+                //onload, ik stuur alleen een 200 terug vanaf de proxy server.
+                xhr.onload = () => {
+                  if(xhr.status === 200) {
+                    resolve(xhr.responseText);
+                } 
+                else{
+                  reject('failed request');
+                }
+              }
+              
+              xhr.send();   
+                
+        });
+
+        const theSecondPromise = new Promise((resolve, reject) => {
+          const knmiStartDate = this.props.dates[1];
+          const knmiEndDate = this.props.dates[3];
+          var xhr = new XMLHttpRequest();
+          xhr.onload = () => {
+            if(xhr.status === 200) {
+              resolve(xhr.responseText);
+          } 
+          else{
+            reject('failed request');
+          }
+        }
+          xhr.open('GET', `http://localhost:9000/testAPI/weer/${knmiStartDate}/${knmiEndDate}/?url=https://www.daggegevens.knmi.nl/klimatologie/daggegevens/?stns=260`, true);
+          xhr.send();
+        });
+
+        Promise.all([theFirstPromise, theSecondPromise]).then((values) => {
+
+         
+
+          // 90 dagen
+          // KNMI data
+          const knmiData = values[1];
+          const knmiParsed = JSON.parse(knmiData);
+          const weatherData = [];
+          for(let i = 0; i < knmiParsed.length; i++) {
+            let weather = knmiParsed[i].TG;
+            weatherData.push(Number(weather) / 10);
+          }
+
+         // jaar
+          const weatherDataJaar = weatherData.slice(0, weatherData.length);
+          console.log(weatherDataJaar);
+          var arrSplice = [];
+          var averages = [];
+          if(this.props.selectOptions === true) {
+            for (let i = 0; weatherDataJaar.length > 0; i++) {
+              arrSplice.push(weatherDataJaar.splice(0, 7));
+              averages.push(Math.floor(arrSplice[i].reduce((a, b) => {
+              return a + b;
+            })/7));
+            
+            }
+          }
+          console.log(averages);
+
+          
+          // Google data
+          const googleData = values[0];
+          const googleParsed = JSON.parse(googleData);
+          const googleDataArray = googleParsed.default.timelineData;
+          const timeData = [];
+          for(let i = 0; i < googleDataArray.length; i++) {
+            let timeFormat = googleDataArray[i].formattedTime;
+            timeData.push(timeFormat);
+          }
+
+
+          const trendsData = [];
+          for(let i = 0; i < googleDataArray.length; i++) {
+            let trends = Number(googleDataArray[i].value);
+            trendsData.push(trends);
+          }
+          this.reactChart.options.title.text = `Online zoekvolume voor ${this.props.input}`; 
+            this.reactChart.data.labels = timeData;
+            this.reactChart.data.datasets[0].data = trendsData;
+            this.reactChart.data.datasets[1].data = this.props.selectOptions ? averages : weatherData;
+            this.reactChart.update(); 
+        }); 
           }
         }
 
