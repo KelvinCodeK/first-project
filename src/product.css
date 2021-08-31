@@ -6,8 +6,6 @@ main, header {
 }
 
 select {
-    padding: 9px;
-    margin-right: 2em;
     outline: none;
     cursor: pointer;
     color: #28b7c4;
@@ -40,9 +38,16 @@ select > option:nth-child(1) {
     flex-direction: row;
 }
 
-.search > button {
+.inputVak {
+    position: relative;
+    height: 3em;
+}
+
+.inputVak > button {
+    position: absolute;
+    right: 0px;
     height: 100%;
-    width: 50px;
+    width: 20%;
     border: 5px ridge #28b7c4;
     padding: 1px;
     background: #f0f0f0 url('./images/loupe.png');
@@ -57,10 +62,50 @@ p {
 }
 
 input {
-    width: 18em;
-    height: 2em;
+    position: absolute;
+    left: 0px;
+    width: 80%;
+    height: 75%;
     border: 5px ridge #28b7c4;
     padding: 1px;
     border-right: none;
     outline: none;
 }
+
+@media only screen and (min-width: 250px) {
+    .search {
+        flex-direction: column;
+    }
+    select {
+        margin-bottom: 2em;
+        margin-right: 0px;
+        padding: 6px;
+    }
+    .inputVak {
+        width: 15em;
+    }
+  }
+
+  @media only screen and (min-width: 375px) {
+    
+    select {
+        margin-bottom: 2em;
+        margin-right: 0px;
+        padding: 6px;
+    }
+    .inputVak {
+        width: 20em;
+    }
+    
+  }
+
+  @media only screen and (min-width: 768px) {
+    .search {
+        flex-direction: row;
+    }
+    select {
+        margin-bottom: 0px;
+        margin-right: 2em;
+        padding: 9px;
+    }
+  }

@@ -9,9 +9,7 @@
   color: white;
 }
 
-h1 {
-  font-size: 3vw;
-}
+
 
 header p {
   margin-top: 1em;
@@ -56,9 +54,58 @@ header p {
   cursor: pointer;
 }
 
+@media only screen and (min-width: 250px) {
+  .buttons {
+    width: 19rem;
+    margin-top: 1em;
+  }
+
+  .button {
+    height: 3.5rem;
+    font-size: 0.8em;
+    width: 7rem;
+  }
+}
+
+
+@media only screen and (min-width: 375px) {
+  .buttons {
+    width: 21rem;
+  }
+  .button {
+    height: 4rem;
+    font-size: 1em;
+    width: 8rem;
+  }
+}
+
 @media only screen and (min-width: 768px) {
   h1 {
     font-size: 6vw;
   }
+  .buttons {
+    width: 40rem;
+    margin-top: intial;
+  }
 
+  .button {
+    height: 5rem;
+    font-size: 1.3em;
+    width: 14rem;
+  }
 }
+  @media only screen and (min-width: 1640px) {
+    h1 {
+      font-size: 3vw;
+    }
+    .buttons {
+      width: 40rem;
+      margin-top: intial;
+    }
+  
+    .button {
+      height: 5rem;
+      font-size: 1.3em;
+      width: 14rem;
+    }
+  }

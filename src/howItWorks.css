@@ -6,12 +6,6 @@
     flex-direction: column;
 }
 
-
-
-p {
-    font-size: 1.3vw;
-  }
-
   ul {
       list-style: none;
       margin-top: 2em;
@@ -19,11 +13,10 @@ p {
   }
 
   li {
-      font-size: 1.1vw;
-      padding: 5px;
+    padding: 5px;
       position: relative;
-
   }
+  
 
   li:first-child {
     animation-name: ul-appear;
@@ -73,6 +66,16 @@ p {
     transform: rotate(45deg);
   }
 
+  @media only screen and (min-width: 250px) {
+    .howItWorks > p {
+      padding: 0.5em;
+    }
+    p {
+      font-size: 4vw;
+    }
+    
+  }
+
   @media only screen and (min-width: 768px) {
     p {
       font-size: 3vw;
@@ -80,4 +83,19 @@ p {
     li {
       font-size: 2.5vw;
     }
+    .howItWorks > p {
+      padding: initial;
+    }
+  }
+
+  @media only screen and (min-width: 1400px) {
+    p {
+      font-size: 1.3vw;
+    }
+    li {
+      font-size: 1.1vw;
+  }
+  .howItWorks > p {
+    padding: initial;
+  }
   }

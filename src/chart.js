@@ -15,7 +15,7 @@ import './chart.css';
       
     if (this.props.chartUpdate === 0) {
 
-
+      // GOOGLE TRENDS EN KNMI BIJ INTRO HREFS VAN MAKEN NAAR DE SITES
 
         const theFirstPromise = new Promise((resolve, reject) => {
               const zoekwoord = this.props.input;
@@ -30,7 +30,7 @@ import './chart.css';
                     resolve(xhr.responseText);
                 } 
                 else{
-                  reject('failed request');
+                  reject('De server reageert niet');
                 }
               }
               
@@ -47,7 +47,7 @@ import './chart.css';
               resolve(xhr.responseText);
           } 
           else{
-            reject('failed request');
+            reject('De server reageert niet');
           }
         }
           xhr.open('GET', `http://localhost:9000/testAPI/weer/${knmiStartDate}/${knmiEndDate}/?url=https://www.daggegevens.knmi.nl/klimatologie/daggegevens/?stns=260`, true);
@@ -55,8 +55,11 @@ import './chart.css';
         });
 
         Promise.all([theFirstPromise, theSecondPromise]).then((values) => {
-
-         
+         if(values[0] === '{"default":{"timelineData":[],"averages":[]}}') {
+           window.alert('De zoekterm heeft te weinig zoekvolume. Probeer iets anders');
+           this.props.chartReset();
+         }
+         else {
 
           // 90 dagen
           // KNMI data
@@ -82,7 +85,7 @@ import './chart.css';
             
             }
           }
-          console.log(averages);
+          
 
           
           // Google data
@@ -94,7 +97,7 @@ import './chart.css';
             let timeFormat = googleDataArray[i].formattedTime;
             timeData.push(timeFormat);
           }
-
+          
 
           const trendsData = [];
           for(let i = 0; i < googleDataArray.length; i++) {
@@ -106,10 +109,13 @@ import './chart.css';
 
     document.querySelector('canvas').style.display = 'initial';
 
+    const screenWidth = window.screen.width;
+
     const Chart = window.Chart;
 
-    
-    this.reactChart = new Chart("myChart", {
+    if(screenWidth >= 768) {
+
+      this.reactChart = new Chart("myChart", {
         type: 'line',
         data: {
           labels: timeData,
@@ -192,6 +198,106 @@ import './chart.css';
           }
         }
       });
+
+    }
+
+    if(screenWidth < 768) {
+      this.reactChart = new Chart("myChart", {
+        type: 'line',
+        data: {
+          labels: timeData,
+          
+          datasets: [{
+            label: 'Zoekvolume (0% - 100%)',
+            yAxisID: 'A',
+            data: trendsData,
+            borderColor: 'black',
+            borderWidth: 1,
+            fill: false
+          }, {
+            label: 'Temperatuur',
+            yAxisID: 'B',
+            data: this.props.selectOptions ? averages : weatherData,
+            borderColor: 'white',
+            borderWidth: 1,
+            fill: false,
+          }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            elements: {
+              point: {
+                radius: 1
+              }
+            },
+          legend: {
+            labels: {
+                fontColor: 'white',
+                fontSize: 9
+            }
+        },
+          title: {
+            display: true,
+            text: `Online zoekvolume voor ${this.props.input}`,
+            fontColor: 'white',
+            fontSize: 14
+          },
+          scales: { 
+            xAxes: [{  
+                             
+              ticks: {                    
+                  fontColor: "white",
+                  fontSize: 9,   
+              }
+          }],
+            yAxes: 
+            [{
+              id: 'A', 
+              type: 'linear',
+              position: 'left',                              
+              font: 'Arial',
+              scaleLabel: {
+                display: true,
+                labelString: 'Zoekvolume',
+                fontColor: 'black',
+                fontSize: 11
+              },  
+              ticks: {                   
+                fontColor: "black",
+                fontSize: 9,                   
+                max: 100,
+                min: 0 },         
+              }, 
+              {
+              id: 'B',
+              type: 'linear',
+              position: 'right',
+              scaleLabel: {
+                display: true,
+                labelString: 'Temperatuur',
+                fontColor: 'white',
+                fontSize: 11
+              },
+              gridLines: {
+                display: false,
+              },
+              
+              ticks: {
+                max: 30,
+                min: -10,
+                fontColor: "white",
+                fontSize: 9,
+              },                                   
+            }]                
+          }
+        }
+      });
+
+    }
+    
+       } }).catch( err => {
+          window.alert(err);
         });    
     }
     }
@@ -212,7 +318,7 @@ import './chart.css';
                     resolve(xhr.responseText);
                 } 
                 else{
-                  reject('failed request');
+                  reject('De server reageert niet');
                 }
               }
               
@@ -229,7 +335,7 @@ import './chart.css';
               resolve(xhr.responseText);
           } 
           else{
-            reject('failed request');
+            reject('De server reageert niet');
           }
         }
           xhr.open('GET', `http://localhost:9000/testAPI/weer/${knmiStartDate}/${knmiEndDate}/?url=https://www.daggegevens.knmi.nl/klimatologie/daggegevens/?stns=260`, true);
@@ -237,7 +343,11 @@ import './chart.css';
         });
 
         Promise.all([theFirstPromise, theSecondPromise]).then((values) => {
-
+          if(values[0] === '{"default":{"timelineData":[],"averages":[]}}') {
+            window.alert('De zoekterm heeft te weinig zoekvolume. Probeer iets anders');
+            this.props.chartReset();
+          }
+          else {
          
 
           // 90 dagen
@@ -288,7 +398,7 @@ import './chart.css';
             this.reactChart.data.datasets[0].data = trendsData;
             this.reactChart.data.datasets[1].data = this.props.selectOptions ? averages : weatherData;
             this.reactChart.update(); 
-        }); 
+        }}); 
           }
         }
 

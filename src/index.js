@@ -32,6 +32,7 @@ class Stateful extends React.Component {
     this.onKeyUp = this.onKeyUp.bind(this);
     this.chartClick = this.chartClick.bind(this);
     this.jaarOfMaanden = this.jaarOfMaanden.bind(this);
+    this.chartReset = this.chartReset.bind(this);
   }
 
   onClickHow() {
@@ -44,34 +45,71 @@ class Stateful extends React.Component {
     this.setState({clickHowToGo: true});
   }
   onKeyUp(event) {
+    const regex = /[a-z \s]+/ig;
     if( this.state.chart === false) {
     if (event.keyCode === 13) {
-
-      this.setState({chart: true});
-      const invoer = event.target.value; 
+      
+      
+      if(this.state.jaarOfMaandenSelect !== null && event.target.value) {
+        
+        if(regex.test(event.target.value)){
+          this.setState({chart: true});
+        const invoer = event.target.value; 
       this.setState({input: invoer});
       event.target.value = '';
+        }
+        else{
+          alert('Vul alleen letters en spaties in');
+          event.target.value = '';
+        }
       
+    }
+    else {
+      alert('Selecteer een periode én voer een zoekterm in');
+    }
       
     }
     }
     else {
 
       if (event.keyCode === 13) {
+        if(this.state.jaarOfMaandenSelect !== null && event.target.value) {
+          if(regex.test(event.target.value)){
         this.setState({chartUpdate: this.state.chartUpdate + 1});
         const invoer = event.target.value;
         this.setState({input: invoer});
         event.target.value = ''; 
+          }
+          else{
+            alert('Vul alleen letters en spaties in');
+            event.target.value = '';
+          }
+      }
+      else {
+        alert('Selecteer een periode én voer een zoekterm in');
+      }
     }
   }
   }
   chartClick() {
+    const regex = /[a-z \s]+/ig;
     if( this.state.chart === false) {
+      if(this.state.jaarOfMaandenSelect !== null && document.querySelector('input').value) {
+        if(regex.test(document.querySelector('input').value)){
         this.setState({chart: true});
         const invoer = document.querySelector('input').value;
         this.setState({input: invoer});
         //Zodra het element op de DOM is ingeladen kan je het oppakken met javascript
         document.querySelector('input').value = '';
+        }
+        else{
+          alert('Vul alleen letters en spaties in');
+          document.querySelector('input').value = '';
+        }
+      }
+      else {
+        alert('Selecteer een periode én voer een zoekterm in');
+      }
       }
       else {
           this.setState({chartUpdate: this.state.chartUpdate + 1});
@@ -133,6 +171,10 @@ class Stateful extends React.Component {
       this.setState({dates: [googleStartDate, knmiStartDate, googleEndDate, knmiEndDate]});
     }
   }
+
+  chartReset() {
+    this.setState({chart: false});
+  }
   
 
   render(){
@@ -141,7 +183,7 @@ class Stateful extends React.Component {
     {this.state.clickHow || this.state.clickGo ? null : <Introduction onClickHow={this.onClickHow} onClickGo={this.onClickGo}/>}
     {this.state.clickHow && this.state.clickHowToGo === false ? <HowItWorks onClickHowToGo={this.onClickHowToGo}/> : null}
     {this.state.clickGo || this.state.clickHowToGo ? <Product jaarOfMaanden={this.jaarOfMaanden} chartClick={this.chartClick} input={this.state.input} keyUpHandler={this.onKeyUp}/> : null}
-    {this.state.chart ? <ChartComponent dates={this.state.dates} selectOptions={this.state.jaarOfMaandenSelect} chartUpdate={this.state.chartUpdate} input={this.state.input} /> : null}
+    {this.state.chart ? <ChartComponent chartReset={this.chartReset} dates={this.state.dates} selectOptions={this.state.jaarOfMaandenSelect} chartUpdate={this.state.chartUpdate} input={this.state.input} /> : null}
     </div>)
   }
 }

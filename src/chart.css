@@ -2,10 +2,7 @@
     height: 1em;
 }
 
-
-
 .grafiek {
-    height: 30em;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -13,8 +10,8 @@
 }
 
 .grafiek > div {
-    width: 60em;
-    height: 30em;
+
+    position: relative;
 }
 
 #myChart {
@@ -22,14 +19,47 @@
     border-radius: 15px;
     padding: 1em;
     box-sizing: border-box;
+    padding-bottom: initial;
 }
-/* huidige media omzetten naar min 1640px */
+
+@media only screen and (min-width: 250px) {
+  .grafiek > div {
+    width: 17em;
+    height: 15em;
+  }
+  .grafiek {
+    height: 18em;
+    margin-top: 0px;
+  }
+}
+
+@media only screen and (min-width: 375px) {
+  .grafiek > div {
+    width: 20em;
+    height: 20em;
+  }
+  .grafiek {
+    height: 20em;
+    margin-top: 2em;
+  }
+}
+
 @media only screen and (min-width: 768px) {
     .grafiek > div {
       width: 42em;
+      height: 30em;
     }
     .grafiek {
       margin-top: 3em;
+      height: 30em;
     }
+  }
 
+  @media only screen and (min-width: 1640px) {
+    .grafiek > div {
+      width: 60em;
+    }
+    .grafiek {
+      margin-top: initial;
+    }
   }
