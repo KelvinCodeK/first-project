@@ -112,10 +112,15 @@ class Stateful extends React.Component {
       }
       }
       else {
+        if(this.state.jaarOfMaandenSelect !== null && document.querySelector('input').value) {
           this.setState({chartUpdate: this.state.chartUpdate + 1});
           const invoer = document.querySelector('input').value;
           this.setState({input: invoer});
           document.querySelector('input').value = '';
+        }
+        else {
+          alert('Selecteer een periode én voer een zoekterm in');
+        }
     }
   }
 
@@ -173,8 +178,9 @@ class Stateful extends React.Component {
   }
 
   chartReset() {
-    this.setState({chart: false});
+    this.setState({chart: false, chartUpdate: 0});
   }
+  
   
 
   render(){
