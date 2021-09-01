@@ -24,7 +24,8 @@ class Stateful extends React.Component {
       chart: false,
       chartUpdate: 0,
       jaarOfMaandenSelect: null,
-      dates: []
+      dates: [],
+      isLoading: false
     }
     this.onClickHow = this.onClickHow.bind(this);
     this.onClickGo = this.onClickGo.bind(this);
@@ -33,6 +34,7 @@ class Stateful extends React.Component {
     this.chartClick = this.chartClick.bind(this);
     this.jaarOfMaanden = this.jaarOfMaanden.bind(this);
     this.chartReset = this.chartReset.bind(this);
+    this.isLoading = this.isLoading.bind(this);
   }
 
   onClickHow() {
@@ -180,6 +182,12 @@ class Stateful extends React.Component {
   chartReset() {
     this.setState({chart: false, chartUpdate: 0});
   }
+
+  isLoading() {
+ 
+        !this.state.isLoading ? this.setState({isLoading: true}) : this.setState({isLoading: false});
+   
+    }
   
   
 
@@ -189,7 +197,8 @@ class Stateful extends React.Component {
     {this.state.clickHow || this.state.clickGo ? null : <Introduction onClickHow={this.onClickHow} onClickGo={this.onClickGo}/>}
     {this.state.clickHow && this.state.clickHowToGo === false ? <HowItWorks onClickHowToGo={this.onClickHowToGo}/> : null}
     {this.state.clickGo || this.state.clickHowToGo ? <Product jaarOfMaanden={this.jaarOfMaanden} chartClick={this.chartClick} input={this.state.input} keyUpHandler={this.onKeyUp}/> : null}
-    {this.state.chart ? <ChartComponent chartReset={this.chartReset} dates={this.state.dates} selectOptions={this.state.jaarOfMaandenSelect} chartUpdate={this.state.chartUpdate} input={this.state.input} /> : null}
+    {this.state.isLoading ? <p style={{position: 'absolute', left:'50vw', zIndex: '1', textShadow: '2px 2px black'}}>Laden...</p> : null}
+    {this.state.chart ? <ChartComponent isLoading={this.isLoading} chartReset={this.chartReset} dates={this.state.dates} selectOptions={this.state.jaarOfMaandenSelect} chartUpdate={this.state.chartUpdate} input={this.state.input} /> : null}
     </div>)
   }
 }

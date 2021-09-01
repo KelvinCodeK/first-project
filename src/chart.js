@@ -27,6 +27,7 @@ import './chart.css';
                 //onload, ik stuur alleen een 200 terug vanaf de proxy server.
                 xhr.onload = () => {
                   if(xhr.status === 200) {
+                    this.props.isLoading();  
                     resolve(xhr.responseText);
                 } 
                 else{
@@ -34,7 +35,8 @@ import './chart.css';
                 }
               }
               
-              xhr.send();   
+              xhr.send(); 
+              this.props.isLoading();  
                 
         });
 
@@ -315,6 +317,7 @@ import './chart.css';
                 //onload, ik stuur alleen een 200 terug vanaf de proxy server.
                 xhr.onload = () => {
                   if(xhr.status === 200) {
+                    this.props.isLoading();  
                     resolve(xhr.responseText);
                 } 
                 else{
@@ -322,7 +325,8 @@ import './chart.css';
                 }
               }
               
-              xhr.send();   
+              xhr.send(); 
+              this.props.isLoading();    
                 
         });
 
