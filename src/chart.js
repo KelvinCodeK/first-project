@@ -16,6 +16,7 @@ import './chart.css';
     if (this.props.chartUpdate === 0) {
 
       // GOOGLE TRENDS EN KNMI BIJ INTRO HREFS VAN MAKEN NAAR DE SITES
+      // network error afhandelen als het netwerk niet live staat. er wordt geen status terug gestuurd. Misschien met een settimeout die checked of iets is gevuld na 5 secs en anders een alert geeft.
 
         const theFirstPromise = new Promise((resolve, reject) => {
               const zoekwoord = this.props.input;
@@ -30,6 +31,7 @@ import './chart.css';
                     this.props.isLoading();  
                     resolve(xhr.responseText);
                 } 
+               
                 else{
                   reject('De server reageert niet');
                 }
@@ -54,15 +56,17 @@ import './chart.css';
         }
           xhr.open('GET', `http://localhost:9000/testAPI/weer/${knmiStartDate}/${knmiEndDate}/?url=https://www.daggegevens.knmi.nl/klimatologie/daggegevens/?stns=260`, true);
           xhr.send();
+          console.log('err');
         });
 
         Promise.all([theFirstPromise, theSecondPromise]).then((values) => {
-         if(values[0] === '{"default":{"timelineData":[],"averages":[]}}') {
+         
+        
+          if(values[0] === '{"default":{"timelineData":[],"averages":[]}}') {
            window.alert('De zoekterm heeft te weinig zoekvolume. Probeer iets anders');
            this.props.chartReset();
          }
          else {
-
           // 90 dagen
           // KNMI data
           const knmiData = values[1];
@@ -81,9 +85,10 @@ import './chart.css';
           if(this.props.selectOptions === true) {
             for (let i = 0; weatherDataJaar.length > 0; i++) {
               arrSplice.push(weatherDataJaar.splice(0, 7));
+              
               averages.push(Math.floor(arrSplice[i].reduce((a, b) => {
               return a + b;
-            })/7));
+            })/arrSplice[i].length));
             
             }
           }
@@ -298,9 +303,7 @@ import './chart.css';
 
     }
     
-       } }).catch( err => {
-          window.alert(err);
-        });    
+       } })   
     }
     }
 
@@ -374,7 +377,7 @@ import './chart.css';
               arrSplice.push(weatherDataJaar.splice(0, 7));
               averages.push(Math.floor(arrSplice[i].reduce((a, b) => {
               return a + b;
-            })/7));
+            })/arrSplice[i].length));
             
             }
           }
@@ -402,7 +405,7 @@ import './chart.css';
             this.reactChart.data.datasets[0].data = trendsData;
             this.reactChart.data.datasets[1].data = this.props.selectOptions ? averages : weatherData;
             this.reactChart.update(); 
-        }}); 
+        }}) 
           }
         }
 
