@@ -28,10 +28,23 @@ code {
   body {
     border-width: 1em;
   }
+  
+  
 }
 
 @media only screen and (min-width: 768px) {
   body {
     border-width: 1.5em;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  body {
+    border-width: 1.5em;
+  }
+  .loading{
+    
+     left:'48vw';
+    
   }
 }

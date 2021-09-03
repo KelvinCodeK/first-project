@@ -15,34 +15,20 @@
   li {
     padding: 5px;
       position: relative;
-  }
-  
-
-  li:first-child {
-    animation-name: ul-appear;
-    animation-timing-function: ease-in;
-    animation-duration: 1.5s;
+      animation-name: ul-appear;
+      animation-timing-function: ease-in;
+      animation-duration: 1.5s;
     animation-fill-mode: forwards;
     opacity: 0;
-    
+    font-size: 4vw;
   }
 
   li:nth-child(2) {
-    animation-name: ul-appear;
-    animation-timing-function: ease-in;
-    animation-duration: 1.5s;
     animation-delay: 1.5s;
-    animation-fill-mode: forwards;
-    opacity: 0;
   }
 
   li:last-child {
-    animation-name: ul-appear;
-    animation-timing-function:ease-in;
-    animation-duration: 1.5s;
     animation-delay: 3s;
-    animation-fill-mode: forwards;
-    opacity: 0;
   }
 
   @keyframes ul-appear {
@@ -75,6 +61,15 @@
     }
     
   }
+  @media only screen and (min-width: 500px) {
+    p {
+      font-size: 3vw;
+    }
+    li {
+      font-size: 3vw;
+    }
+    
+  }
 
   @media only screen and (min-width: 768px) {
     p {
@@ -83,12 +78,19 @@
     li {
       font-size: 2.5vw;
     }
-    .howItWorks > p {
-      padding: initial;
-    }
+    
   }
 
-  @media only screen and (min-width: 1400px) {
+  @media only screen and (min-width: 1100px) {
+    p {
+      font-size: 2vw;
+    }
+    li {
+      font-size: 2vw;
+  }
+  }
+
+  @media only screen and (min-width: 1700px) {
     p {
       font-size: 1.3vw;
     }

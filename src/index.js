@@ -7,11 +7,10 @@ import HowItWorks from './howItWorks';
 import Product from './product.js'
 import ChartComponent from './chart.js'
 
-// houdt de standaard structuur aan. Als dingen gebeuren zet je pas je de state aan en en stuur je de nieuwe state door met props
-// conditionele opdrachten zijn belangrijk ? :
-// debug de state door in Components weergave naar de stateful component te gaan
+
 //verwijder alle onnodige uitleg uit de documenten in de app
-// state logica kan in elkaar gaan overlopen. Stappen doorlopen om de juiste logica te vinden.
+// media query styling nog wat uitgebreider, kijk overloop als je screen verkleind.
+
 
 class Stateful extends React.Component {
   constructor(props) {
@@ -50,7 +49,7 @@ class Stateful extends React.Component {
     const regex = /[a-z \s]+/ig;
     if( this.state.chart === false) {
     if (event.keyCode === 13) {
-      setTimeout(() => {
+      const timeOut = setTimeout(() => {
         if(this.state.isLoading === true) {
           alert('De server reageert helaas niet. Dit zal zo spoedig mogelijk worden opgelost');
         }
@@ -63,15 +62,18 @@ class Stateful extends React.Component {
         const invoer = event.target.value; 
       this.setState({input: invoer});
       event.target.value = '';
+      clearTimeout(timeOut);
         }
         else{
           alert('Vul alleen letters en spaties in');
           event.target.value = '';
+          clearTimeout(timeOut);
         }
       
     }
     else {
       alert('Selecteer een periode én voer een zoekterm in');
+      clearTimeout(timeOut);
     }
       
     }
@@ -79,7 +81,7 @@ class Stateful extends React.Component {
     else {
 
       if (event.keyCode === 13) {
-        setTimeout(() => {
+        const timeOut = setTimeout(() => {
           if(this.state.isLoading === true) {
             alert('De server reageert helaas niet. Dit zal zo spoedig mogelijk worden opgelost');
           }
@@ -90,21 +92,24 @@ class Stateful extends React.Component {
         const invoer = event.target.value;
         this.setState({input: invoer});
         event.target.value = ''; 
+        clearTimeout(timeOut);
           }
           else{
             alert('Vul alleen letters en spaties in');
             event.target.value = '';
+            clearTimeout(timeOut);
           }
       }
       else {
         alert('Selecteer een periode én voer een zoekterm in');
+        clearTimeout(timeOut);
       }
     }
   }
   }
   chartClick() {
     const regex = /[a-z \s]+/ig;
-    setTimeout(() => {
+    const timeOut = setTimeout(() => {
       if(this.state.isLoading === true) {
         alert('De server reageert helaas niet. Dit zal zo spoedig mogelijk worden opgelost');
       }
@@ -121,10 +126,12 @@ class Stateful extends React.Component {
         else{
           alert('Vul alleen letters en spaties in');
           document.querySelector('input').value = '';
+          clearTimeout(timeOut);
         }
       }
       else {
         alert('Selecteer een periode én voer een zoekterm in');
+        clearTimeout(timeOut);
       }
       }
       else {
@@ -210,8 +217,9 @@ class Stateful extends React.Component {
     <div>
     {this.state.clickHow || this.state.clickGo ? null : <Introduction onClickHow={this.onClickHow} onClickGo={this.onClickGo}/>}
     {this.state.clickHow && this.state.clickHowToGo === false ? <HowItWorks onClickHowToGo={this.onClickHowToGo}/> : null}
+    
     {this.state.clickGo || this.state.clickHowToGo ? <Product jaarOfMaanden={this.jaarOfMaanden} chartClick={this.chartClick} input={this.state.input} keyUpHandler={this.onKeyUp}/> : null}
-    {this.state.isLoading ? <p style={{position: 'absolute', left:'45vw', zIndex: '1', textShadow: '2px 2px black'}}>Laden...</p> : null}
+    <div style={{width: '100%', height: '2em'}}>{this.state.isLoading ? <p style={{textShadow: '2px 2px black', margin: '0px'}}>Laden...</p> : null}</div>
     {this.state.chart ? <ChartComponent isLoading={this.isLoading} chartReset={this.chartReset} dates={this.state.dates} selectOptions={this.state.jaarOfMaandenSelect} chartUpdate={this.state.chartUpdate} input={this.state.input} /> : null}
     </div>)
   }

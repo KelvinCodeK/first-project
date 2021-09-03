@@ -417,9 +417,7 @@ import './chart.css';
                     <canvas id="myChart" style={{display: 'none'}}></canvas>
                     </div>
                 </section>
-                <section className="analyse">
-                    <p></p>
-                </section>
+
             </div>
             )
         }
