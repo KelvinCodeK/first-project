@@ -1,10 +1,7 @@
 import React from 'react';
 import './product.css';
 
-
-
 export default class Product extends React.Component {
-
     render() {
         return (
             <div>
@@ -13,9 +10,7 @@ export default class Product extends React.Component {
                 </header>
                 <main>
                     <section className="zoekVak">
-                    
                         <p>Kies een periode en vul het product óf de productcategorie in waarover jij meer te weten wil komen</p>
-                        
                         <div className="search">
                         <select onChange={this.props.jaarOfMaanden}>
                             <option>Periode</option>

@@ -9,18 +9,14 @@
   color: white;
 }
 
-
-
 header p {
   margin-top: 1em;
   margin-bottom: 2em;
 }
 
-
 .button:hover {
   background-position: 1px;
 }
-
 
 @keyframes loadBright {
   0% {background-position: initial;}
@@ -31,17 +27,18 @@ header p {
 .buttons {
   display: flex;
   flex-direction: row;
-  width: 40rem;
   justify-content: space-evenly;
+  width: 19rem;
+  margin-top: 1em;
 }
 
 .button {
-  width: 14rem;
-  height: 5rem;
+  height: 3.5rem;
+  width: 7rem;
   background: linear-gradient(0deg, var(--linearColors));
   transition: background-position 0.6s ease-in;
   background-size: 1px 95px;  
-  font-size: 1.3em; 
+  font-size: 0.8em;
   font-weight: bold;
   text-shadow: 2px 2px black;
   color: white;
@@ -54,18 +51,7 @@ header p {
   cursor: pointer;
 }
 
-@media only screen and (min-width: 250px) {
-  .buttons {
-    width: 19rem;
-    margin-top: 1em;
-  }
 
-  .button {
-    height: 3.5rem;
-    font-size: 0.8em;
-    width: 7rem;
-  }
-}
 
 
 @media only screen and (min-width: 375px) {
@@ -106,18 +92,18 @@ header p {
   }
 }
 
-  @media only screen and (min-width: 1700px) {
-    h1 {
+@media only screen and (min-width: 1700px) {
+  h1 {
       font-size: 3vw;
-    }
-    .buttons {
+  }
+  .buttons {
       width: 40rem;
       margin-top: intial;
-    }
+  }
   
-    .button {
+  .button {
       height: 5rem;
       font-size: 1.3em;
       width: 14rem;
-    }
   }
+}

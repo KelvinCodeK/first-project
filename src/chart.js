@@ -12,63 +12,47 @@ import './chart.css';
     }
 
     componentDidMount() {
-      
     if (this.props.chartUpdate === 0) {
-
       // GOOGLE TRENDS EN KNMI BIJ INTRO HREFS VAN MAKEN NAAR DE SITES
-      // network error afhandelen als het netwerk niet live staat. er wordt geen status terug gestuurd. Misschien met een settimeout die checked of iets is gevuld na 5 secs en anders een alert geeft.
-
         const theFirstPromise = new Promise((resolve, reject) => {
-              const zoekwoord = this.props.input;
-              const googleStartDate = this.props.dates[0];
-              const googleEndDate = this.props.dates[2];
-          
-                var xhr = new XMLHttpRequest();
-                xhr.open('GET', `http://localhost:9000/testAPI/trends/${zoekwoord}/${googleStartDate}/${googleEndDate}`, true);
-                //onload, ik stuur alleen een 200 terug vanaf de proxy server.
-                xhr.onload = () => {
-                  if(xhr.status === 200) {
-                    this.props.isLoading();  
-                    resolve(xhr.responseText);
-                } 
-               
-                else{
-                  reject('De server reageert niet');
-                }
-              }
-              
-              xhr.send(); 
-              this.props.isLoading();  
-                
+          const zoekwoord = this.props.input;         
+          const googleStartDate = this.props.dates[0];          
+          const googleEndDate = this.props.dates[2];          
+          var xhr = new XMLHttpRequest();          
+          xhr.open('GET', `http://localhost:9000/testAPI/trends/${zoekwoord}/${googleStartDate}/${googleEndDate}`, true);          
+          xhr.onerror = () => {          
+            alert('De server reageert niet. Dit zal zo snel mogelijk worden opgelost!')          
+          }            
+          xhr.onload = () => {          
+            if(xhr.status === 200) {          
+              this.props.isLoading();           
+              resolve(xhr.responseText);         
+            }       
+          }         
+          xhr.send();           
+          this.props.isLoading();              
         });
 
-        const theSecondPromise = new Promise((resolve, reject) => {
+       const theSecondPromise = new Promise((resolve, reject) => {
           const knmiStartDate = this.props.dates[1];
           const knmiEndDate = this.props.dates[3];
           var xhr = new XMLHttpRequest();
+
           xhr.onload = () => {
             if(xhr.status === 200) {
               resolve(xhr.responseText);
-          } 
-          else{
-            reject('De server reageert niet');
-          }
+          }  
         }
           xhr.open('GET', `http://localhost:9000/testAPI/weer/${knmiStartDate}/${knmiEndDate}/?url=https://www.daggegevens.knmi.nl/klimatologie/daggegevens/?stns=260`, true);
           xhr.send();
-          console.log('err');
         });
 
         Promise.all([theFirstPromise, theSecondPromise]).then((values) => {
-         
-        
           if(values[0] === '{"default":{"timelineData":[],"averages":[]}}') {
            window.alert('De zoekterm heeft te weinig zoekvolume. Probeer iets anders');
            this.props.chartReset();
          }
          else {
-          // 90 dagen
-          // KNMI data
           const knmiData = values[1];
           const knmiParsed = JSON.parse(knmiData);
           const weatherData = [];
@@ -77,25 +61,18 @@ import './chart.css';
             weatherData.push(Number(weather) / 10);
           }
 
-         // jaar
           const weatherDataJaar = weatherData.slice(0, weatherData.length);
-          console.log(weatherDataJaar);
           var arrSplice = [];
           var averages = [];
           if(this.props.selectOptions === true) {
             for (let i = 0; weatherDataJaar.length > 0; i++) {
               arrSplice.push(weatherDataJaar.splice(0, 7));
-              
               averages.push(Math.floor(arrSplice[i].reduce((a, b) => {
               return a + b;
             })/arrSplice[i].length));
-            
             }
           }
           
-
-          
-          // Google data
           const googleData = values[0];
           const googleParsed = JSON.parse(googleData);
           const googleDataArray = googleParsed.default.timelineData;
@@ -105,23 +82,16 @@ import './chart.css';
             timeData.push(timeFormat);
           }
           
-
           const trendsData = [];
           for(let i = 0; i < googleDataArray.length; i++) {
             let trends = Number(googleDataArray[i].value);
             trendsData.push(trends);
           }
           
-          
-
     document.querySelector('canvas').style.display = 'initial';
-
     const screenWidth = window.screen.width;
-
     const Chart = window.Chart;
-
     if(screenWidth >= 768) {
-
       this.reactChart = new Chart("myChart", {
         type: 'line',
         data: {
@@ -205,7 +175,6 @@ import './chart.css';
           }
         }
       });
-
     }
 
     if(screenWidth < 768) {
@@ -251,8 +220,7 @@ import './chart.css';
             fontSize: 14
           },
           scales: { 
-            xAxes: [{  
-                             
+            xAxes: [{               
               ticks: {                    
                   fontColor: "white",
                   fontSize: 9,   
@@ -300,21 +268,17 @@ import './chart.css';
           }
         }
       });
-
     }
-    
-       } })   
-    }
-    }
+  }})   
+  }
+  }
 
     componentDidUpdate(prevProps) {
-  
           if (prevProps.chartUpdate !== this.props.chartUpdate) {
             const theFirstPromise = new Promise((resolve, reject) => {
               const zoekwoord = this.props.input;
               const googleStartDate = this.props.dates[0];
               const googleEndDate = this.props.dates[2];
-          
                 var xhr = new XMLHttpRequest();
                 xhr.open('GET', `http://localhost:9000/testAPI/trends/${zoekwoord}/${googleStartDate}/${googleEndDate}`, true);
                 //onload, ik stuur alleen een 200 terug vanaf de proxy server.
@@ -322,15 +286,10 @@ import './chart.css';
                   if(xhr.status === 200) {
                     this.props.isLoading();  
                     resolve(xhr.responseText);
-                } 
-                else{
-                  reject('De server reageert niet');
-                }
+                }  
               }
-              
               xhr.send(); 
-              this.props.isLoading();    
-                
+              this.props.isLoading();     
         });
 
         const theSecondPromise = new Promise((resolve, reject) => {
@@ -341,9 +300,6 @@ import './chart.css';
             if(xhr.status === 200) {
               resolve(xhr.responseText);
           } 
-          else{
-            reject('De server reageert niet');
-          }
         }
           xhr.open('GET', `http://localhost:9000/testAPI/weer/${knmiStartDate}/${knmiEndDate}/?url=https://www.daggegevens.knmi.nl/klimatologie/daggegevens/?stns=260`, true);
           xhr.send();
@@ -355,10 +311,6 @@ import './chart.css';
             this.props.chartReset();
           }
           else {
-         
-
-          // 90 dagen
-          // KNMI data
           const knmiData = values[1];
           const knmiParsed = JSON.parse(knmiData);
           const weatherData = [];
@@ -367,9 +319,7 @@ import './chart.css';
             weatherData.push(Number(weather) / 10);
           }
 
-         // jaar
           const weatherDataJaar = weatherData.slice(0, weatherData.length);
-          console.log(weatherDataJaar);
           var arrSplice = [];
           var averages = [];
           if(this.props.selectOptions === true) {
@@ -378,13 +328,9 @@ import './chart.css';
               averages.push(Math.floor(arrSplice[i].reduce((a, b) => {
               return a + b;
             })/arrSplice[i].length));
-            
             }
           }
-          console.log(averages);
 
-          
-          // Google data
           const googleData = values[0];
           const googleParsed = JSON.parse(googleData);
           const googleDataArray = googleParsed.default.timelineData;
@@ -393,7 +339,6 @@ import './chart.css';
             let timeFormat = googleDataArray[i].formattedTime;
             timeData.push(timeFormat);
           }
-
 
           const trendsData = [];
           for(let i = 0; i < googleDataArray.length; i++) {
@@ -421,6 +366,5 @@ import './chart.css';
             </div>
             )
         }
-
    }
     

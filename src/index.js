@@ -9,8 +9,6 @@ import ChartComponent from './chart.js'
 
 
 //verwijder alle onnodige uitleg uit de documenten in de app
-// media query styling nog wat uitgebreider, kijk overloop als je screen verkleind.
-
 
 class Stateful extends React.Component {
   constructor(props) {
@@ -49,72 +47,57 @@ class Stateful extends React.Component {
     const regex = /[a-z \s]+/ig;
     if( this.state.chart === false) {
     if (event.keyCode === 13) {
-      const timeOut = setTimeout(() => {
-        if(this.state.isLoading === true) {
-          alert('De server reageert helaas niet. Dit zal zo spoedig mogelijk worden opgelost');
-        }
-      }, 5000);
+      
       
       if(this.state.jaarOfMaandenSelect !== null && event.target.value) {
         
         if(regex.test(event.target.value)){
           this.setState({chart: true});
-        const invoer = event.target.value; 
-      this.setState({input: invoer});
-      event.target.value = '';
-      clearTimeout(timeOut);
+          const invoer = event.target.value; 
+          this.setState({input: invoer});
+          event.target.value = '';
         }
         else{
           alert('Vul alleen letters en spaties in');
           event.target.value = '';
-          clearTimeout(timeOut);
         }
-      
     }
     else {
       alert('Selecteer een periode én voer een zoekterm in');
-      clearTimeout(timeOut);
-    }
-      
-    }
-    }
+    } 
+  }
+  }
     else {
 
       if (event.keyCode === 13) {
-        const timeOut = setTimeout(() => {
-          if(this.state.isLoading === true) {
-            alert('De server reageert helaas niet. Dit zal zo spoedig mogelijk worden opgelost');
-          }
-        }, 5000);
+        
         if(this.state.jaarOfMaandenSelect !== null && event.target.value) {
-          if(regex.test(event.target.value)){
+        if(regex.test(event.target.value)){
         this.setState({chartUpdate: this.state.chartUpdate + 1});
         const invoer = event.target.value;
         this.setState({input: invoer});
         event.target.value = ''; 
-        clearTimeout(timeOut);
+        
           }
           else{
             alert('Vul alleen letters en spaties in');
             event.target.value = '';
-            clearTimeout(timeOut);
+            
           }
       }
       else {
         alert('Selecteer een periode én voer een zoekterm in');
-        clearTimeout(timeOut);
+        
       }
     }
   }
   }
+
   chartClick() {
     const regex = /[a-z \s]+/ig;
-    const timeOut = setTimeout(() => {
-      if(this.state.isLoading === true) {
-        alert('De server reageert helaas niet. Dit zal zo spoedig mogelijk worden opgelost');
-      }
-    }, 5000);
+    
     if( this.state.chart === false) {
+    
       if(this.state.jaarOfMaandenSelect !== null && document.querySelector('input').value) {
         if(regex.test(document.querySelector('input').value)){
         this.setState({chart: true});
@@ -126,12 +109,12 @@ class Stateful extends React.Component {
         else{
           alert('Vul alleen letters en spaties in');
           document.querySelector('input').value = '';
-          clearTimeout(timeOut);
+          
         }
       }
       else {
         alert('Selecteer een periode én voer een zoekterm in');
-        clearTimeout(timeOut);
+        
       }
       }
       else {
@@ -175,11 +158,8 @@ class Stateful extends React.Component {
               break;
           }
         }
-
         const googleStartDate = dateStart.toISOString().split('T')[0];
-        console.log(googleStartDate);
         const knmiStartDate = googleStartDate.replace(/-/g, '');
-        
         var dateEnd = new Date();
         dateEnd.setDate(dateEnd.getDate() - 4);
         const googleEndDate = dateEnd.toISOString().split('T')[0];
@@ -205,21 +185,16 @@ class Stateful extends React.Component {
   }
 
   isLoading() {
- 
-        !this.state.isLoading ? this.setState({isLoading: true}) : this.setState({isLoading: false});
-   
-    }
-  
-  
+    !this.state.isLoading ? this.setState({isLoading: true}) : this.setState({isLoading: false});
+  }
 
   render(){
     return (
     <div>
     {this.state.clickHow || this.state.clickGo ? null : <Introduction onClickHow={this.onClickHow} onClickGo={this.onClickGo}/>}
     {this.state.clickHow && this.state.clickHowToGo === false ? <HowItWorks onClickHowToGo={this.onClickHowToGo}/> : null}
-    
     {this.state.clickGo || this.state.clickHowToGo ? <Product jaarOfMaanden={this.jaarOfMaanden} chartClick={this.chartClick} input={this.state.input} keyUpHandler={this.onKeyUp}/> : null}
-    <div style={{width: '100%', height: '2em'}}>{this.state.isLoading ? <p style={{textShadow: '2px 2px black', margin: '0px'}}>Laden...</p> : null}</div>
+    <div style={{width: '100%', height: '2em'}}>{this.state.isLoading ? <p style={{textShadow: '2px 2px black', margin: '0px', zIndex: '1'}}>Laden...</p> : null}</div>
     {this.state.chart ? <ChartComponent isLoading={this.isLoading} chartReset={this.chartReset} dates={this.state.dates} selectOptions={this.state.jaarOfMaandenSelect} chartUpdate={this.state.chartUpdate} input={this.state.input} /> : null}
     </div>)
   }
