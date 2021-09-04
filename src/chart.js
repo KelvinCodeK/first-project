@@ -13,7 +13,6 @@ import './chart.css';
 
     componentDidMount() {
     if (this.props.chartUpdate === 0) {
-      // GOOGLE TRENDS EN KNMI BIJ INTRO HREFS VAN MAKEN NAAR DE SITES
         const theFirstPromise = new Promise((resolve, reject) => {
           const zoekwoord = this.props.input;         
           const googleStartDate = this.props.dates[0];          
@@ -88,190 +87,190 @@ import './chart.css';
             trendsData.push(trends);
           }
           
-    document.querySelector('canvas').style.display = 'initial';
-    const screenWidth = window.screen.width;
-    const Chart = window.Chart;
-    if(screenWidth >= 768) {
-      this.reactChart = new Chart("myChart", {
-        type: 'line',
-        data: {
-          labels: timeData,
-          datasets: [{
-            label: 'Zoekvolume (0% - 100%)',
-            yAxisID: 'A',
-            data: trendsData,
-            borderColor: 'black',
-            borderWidth: 3,
-            fill: false,
-          }, {
-            label: 'Temperatuur',
-            yAxisID: 'B',
-            data: this.props.selectOptions ? averages : weatherData,
-            borderColor: 'white',
-            borderWidth: 3,
-            fill: false,
-          }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-          legend: {
-            labels: {
+        document.querySelector('canvas').style.display = 'initial';
+        const screenWidth = window.screen.width;
+        const Chart = window.Chart;
+        if(screenWidth >= 768) {
+          this.reactChart = new Chart("myChart", {
+            type: 'line',
+            data: {
+              labels: timeData,
+              datasets: [{
+                label: this.props.Language === 'dutch' ? 'Zoekvolume (0% - 100%)' : 'Search volume (0% - 100%)',
+                yAxisID: 'A',
+                data: trendsData,
+                borderColor: 'black',
+                borderWidth: 3,
+                fill: false,
+              }, {
+                label: this.props.Language === 'dutch' ? 'Temperatuur' : 'Temperature',
+                yAxisID: 'B',
+                data: this.props.selectOptions ? averages : weatherData,
+                borderColor: 'white',
+                borderWidth: 3,
+                fill: false,
+              }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+              legend: {
+                labels: {
+                    fontColor: 'white',
+                    fontSize: 14
+                }
+            },
+              title: {
+                display: true,
+                text: this.props.Language === 'dutch' ? `Online zoekvolume voor ${this.props.input}` : `Online search volume for ${this.props.input}`,
+                fontColor: 'white',
+                fontSize: 25
+              },
+              scales: { 
+                xAxes: [{                 
+                  ticks: {                    
+                      fontColor: "white",
+                      fontSize: 14,   
+                  }
+              }],
+                yAxes: 
+                [{
+                  id: 'A', 
+                  type: 'linear',
+                  position: 'left',                              
+                  font: 'Arial',
+                  scaleLabel: {
+                    display: true,
+                    labelString: this.props.Language === 'dutch' ? 'Zoekvolume' : 'Search volume',
+                    fontColor: 'black',
+                    fontSize: 18
+                  },  
+                  ticks: {                   
+                    fontColor: "black",
+                    fontSize: 13,                   
+                    max: 100,
+                    min: 0 },         
+                  }, 
+                  {
+                  id: 'B',
+                  type: 'linear',
+                  position: 'right',
+                  scaleLabel: {
+                    display: true,
+                    labelString: this.props.Language === 'dutch' ? 'Temperatuur' : 'Temperature',
+                    fontColor: 'white',
+                    fontSize: 18
+                  },
+                  gridLines: {
+                    display: false,
+                  },
+                  ticks: {
+                    max: 30,
+                    min: -10,
+                    fontColor: "white",
+                    fontSize: 13,
+                  },                                   
+                }]                
+              }
+            }
+          });
+        }
+
+        if(screenWidth < 768) {
+          this.reactChart = new Chart("myChart", {
+            type: 'line',
+            data: {
+              labels: timeData,
+              
+              datasets: [{
+                label: this.props.Language === 'dutch' ? 'Zoekvolume (0% - 100%)' : 'Search volume (0% - 100%)',
+                yAxisID: 'A',
+                data: trendsData,
+                borderColor: 'black',
+                borderWidth: 1,
+                fill: false
+              }, {
+                label: this.props.Language === 'dutch' ? 'Temperatuur' : 'Temperature',
+                yAxisID: 'B',
+                data: this.props.selectOptions ? averages : weatherData,
+                borderColor: 'white',
+                borderWidth: 1,
+                fill: false,
+              }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                elements: {
+                  point: {
+                    radius: 1
+                  }
+                },
+              legend: {
+                labels: {
+                    fontColor: 'white',
+                    fontSize: 9
+                }
+            },
+              title: {
+                display: true,
+                text: this.props.Language === 'dutch' ? `Online zoekvolume voor ${this.props.input}` : `Online search volume for ${this.props.input}`,
                 fontColor: 'white',
                 fontSize: 14
+              },
+              scales: { 
+                xAxes: [{               
+                  ticks: {                    
+                      fontColor: "white",
+                      fontSize: 9,   
+                  }
+              }],
+                yAxes: 
+                [{
+                  id: 'A', 
+                  type: 'linear',
+                  position: 'left',                              
+                  font: 'Arial',
+                  scaleLabel: {
+                    display: true,
+                    labelString: this.props.Language === 'dutch' ? 'Zoekvolume' : 'Search volume',
+                    fontColor: 'black',
+                    fontSize: 11
+                  },  
+                  ticks: {                   
+                    fontColor: "black",
+                    fontSize: 9,                   
+                    max: 100,
+                    min: 0 },         
+                  }, 
+                  {
+                  id: 'B',
+                  type: 'linear',
+                  position: 'right',
+                  scaleLabel: {
+                    display: true,
+                    labelString: this.props.Language === 'dutch' ? 'Temperatuur' : 'Temperature',
+                    fontColor: 'white',
+                    fontSize: 11
+                  },
+                  gridLines: {
+                    display: false,
+                  },
+                  
+                  ticks: {
+                    max: 30,
+                    min: -10,
+                    fontColor: "white",
+                    fontSize: 9,
+                  },                                   
+                }]                
+              }
             }
-        },
-          title: {
-            display: true,
-            text: `Online zoekvolume voor ${this.props.input}`,
-            fontColor: 'white',
-            fontSize: 25
-          },
-          scales: { 
-            xAxes: [{                 
-              ticks: {                    
-                  fontColor: "white",
-                  fontSize: 14,   
-              }
-          }],
-            yAxes: 
-            [{
-              id: 'A', 
-              type: 'linear',
-              position: 'left',                              
-              font: 'Arial',
-              scaleLabel: {
-                display: true,
-                labelString: 'Zoekvolume',
-                fontColor: 'black',
-                fontSize: 18
-              },  
-              ticks: {                   
-                fontColor: "black",
-                fontSize: 13,                   
-                max: 100,
-                min: 0 },         
-              }, 
-              {
-              id: 'B',
-              type: 'linear',
-              position: 'right',
-              scaleLabel: {
-                display: true,
-                labelString: 'Temperatuur',
-                fontColor: 'white',
-                fontSize: 18
-              },
-              gridLines: {
-                display: false,
-              },
-              ticks: {
-                max: 30,
-                min: -10,
-                fontColor: "white",
-                fontSize: 13,
-              },                                   
-            }]                
-          }
+          });
         }
-      });
-    }
-
-    if(screenWidth < 768) {
-      this.reactChart = new Chart("myChart", {
-        type: 'line',
-        data: {
-          labels: timeData,
-          
-          datasets: [{
-            label: 'Zoekvolume (0% - 100%)',
-            yAxisID: 'A',
-            data: trendsData,
-            borderColor: 'black',
-            borderWidth: 1,
-            fill: false
-          }, {
-            label: 'Temperatuur',
-            yAxisID: 'B',
-            data: this.props.selectOptions ? averages : weatherData,
-            borderColor: 'white',
-            borderWidth: 1,
-            fill: false,
-          }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            elements: {
-              point: {
-                radius: 1
-              }
-            },
-          legend: {
-            labels: {
-                fontColor: 'white',
-                fontSize: 9
-            }
-        },
-          title: {
-            display: true,
-            text: `Online zoekvolume voor ${this.props.input}`,
-            fontColor: 'white',
-            fontSize: 14
-          },
-          scales: { 
-            xAxes: [{               
-              ticks: {                    
-                  fontColor: "white",
-                  fontSize: 9,   
-              }
-          }],
-            yAxes: 
-            [{
-              id: 'A', 
-              type: 'linear',
-              position: 'left',                              
-              font: 'Arial',
-              scaleLabel: {
-                display: true,
-                labelString: 'Zoekvolume',
-                fontColor: 'black',
-                fontSize: 11
-              },  
-              ticks: {                   
-                fontColor: "black",
-                fontSize: 9,                   
-                max: 100,
-                min: 0 },         
-              }, 
-              {
-              id: 'B',
-              type: 'linear',
-              position: 'right',
-              scaleLabel: {
-                display: true,
-                labelString: 'Temperatuur',
-                fontColor: 'white',
-                fontSize: 11
-              },
-              gridLines: {
-                display: false,
-              },
-              
-              ticks: {
-                max: 30,
-                min: -10,
-                fontColor: "white",
-                fontSize: 9,
-              },                                   
-            }]                
-          }
-        }
-      });
-    }
-  }})   
-  }
-  }
+      }})   
+      }
+      }
 
     componentDidUpdate(prevProps) {
           if (prevProps.chartUpdate !== this.props.chartUpdate) {
@@ -362,7 +361,6 @@ import './chart.css';
                     <canvas id="myChart" style={{display: 'none'}}></canvas>
                     </div>
                 </section>
-
             </div>
             )
         }

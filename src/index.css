@@ -13,6 +13,20 @@ body {
   border-image: linear-gradient(210deg, var(--linearColors));
   border-image-slice: 1;
   border-width: 1em;
+  position: relative;
+}
+
+.language{ 
+  position: absolute;
+  right: 2px;
+  top: 3px;
+  font-size: 3vw;
+  background-color: #ba78bc;
+  color: white;
+  cursor: pointer;
+  padding: 3px;
+  font-weight: bold;
+  border: 1px solid white;
 }
 
 code {
@@ -36,5 +50,14 @@ code {
   }
   .loading{
      left:'48vw';
+  }
+  .language {
+    font-size: 2vw;
+  }
+}
+
+@media only screen and (min-width: 1500px) {
+  .language {
+    font-size: 1.3vw;
   }
 }

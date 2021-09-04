@@ -7,7 +7,7 @@ import HowItWorks from './howItWorks';
 import Product from './product.js'
 import ChartComponent from './chart.js'
 
-
+// Eng / Dutch functionaliteit toevoegen. State in index die je doorstuurt naar alle componenten. In de componenten met ternary operator de tekst inladen o.b.v de prop
 //verwijder alle onnodige uitleg uit de documenten in de app
 
 class Stateful extends React.Component {
@@ -22,7 +22,8 @@ class Stateful extends React.Component {
       chartUpdate: 0,
       jaarOfMaandenSelect: null,
       dates: [],
-      isLoading: false
+      isLoading: false,
+      language: 'dutch'
     }
     this.onClickHow = this.onClickHow.bind(this);
     this.onClickGo = this.onClickGo.bind(this);
@@ -32,6 +33,7 @@ class Stateful extends React.Component {
     this.jaarOfMaanden = this.jaarOfMaanden.bind(this);
     this.chartReset = this.chartReset.bind(this);
     this.isLoading = this.isLoading.bind(this);
+    this.language = this.language.bind(this);
   }
 
   onClickHow() {
@@ -188,14 +190,19 @@ class Stateful extends React.Component {
     !this.state.isLoading ? this.setState({isLoading: true}) : this.setState({isLoading: false});
   }
 
+  language() {
+    this.state.language === 'dutch' ? this.setState({language: 'english'}) : this.setState({language: 'dutch'});
+  }
+
   render(){
     return (
     <div>
-    {this.state.clickHow || this.state.clickGo ? null : <Introduction onClickHow={this.onClickHow} onClickGo={this.onClickGo}/>}
-    {this.state.clickHow && this.state.clickHowToGo === false ? <HowItWorks onClickHowToGo={this.onClickHowToGo}/> : null}
-    {this.state.clickGo || this.state.clickHowToGo ? <Product jaarOfMaanden={this.jaarOfMaanden} chartClick={this.chartClick} input={this.state.input} keyUpHandler={this.onKeyUp}/> : null}
+    <button className="language" onClick={this.language} >NL / ENG</button>
+    {this.state.clickHow || this.state.clickGo ? null : <Introduction Language={this.state.language} onClickHow={this.onClickHow} onClickGo={this.onClickGo}/>}
+    {this.state.clickHow && this.state.clickHowToGo === false ? <HowItWorks Language={this.state.language} onClickHowToGo={this.onClickHowToGo}/> : null}
+    {this.state.clickGo || this.state.clickHowToGo ? <Product Language={this.state.language} jaarOfMaanden={this.jaarOfMaanden} chartClick={this.chartClick} input={this.state.input} keyUpHandler={this.onKeyUp}/> : null}
     <div style={{width: '100%', height: '2em'}}>{this.state.isLoading ? <p style={{textShadow: '2px 2px black', margin: '0px', zIndex: '1'}}>Laden...</p> : null}</div>
-    {this.state.chart ? <ChartComponent isLoading={this.isLoading} chartReset={this.chartReset} dates={this.state.dates} selectOptions={this.state.jaarOfMaandenSelect} chartUpdate={this.state.chartUpdate} input={this.state.input} /> : null}
+    {this.state.chart ? <ChartComponent Language={this.state.language} isLoading={this.isLoading} chartReset={this.chartReset} dates={this.state.dates} selectOptions={this.state.jaarOfMaandenSelect} chartUpdate={this.state.chartUpdate} input={this.state.input} /> : null}
     </div>)
   }
 }
