@@ -55,6 +55,7 @@ class Stateful extends React.Component {
         
         if(regex.test(event.target.value)){
           this.setState({chart: true});
+          document.querySelector('.language').style.display = 'none';
           const invoer = event.target.value; 
           this.setState({input: invoer});
           event.target.value = '';
@@ -103,6 +104,7 @@ class Stateful extends React.Component {
       if(this.state.jaarOfMaandenSelect !== null && document.querySelector('input').value) {
         if(regex.test(document.querySelector('input').value)){
         this.setState({chart: true});
+        document.querySelector('.language').style.display = 'none';
         const invoer = document.querySelector('input').value;
         this.setState({input: invoer});
         //Zodra het element op de DOM is ingeladen kan je het oppakken met javascript
@@ -201,7 +203,7 @@ class Stateful extends React.Component {
     {this.state.clickHow || this.state.clickGo ? null : <Introduction Language={this.state.language} onClickHow={this.onClickHow} onClickGo={this.onClickGo}/>}
     {this.state.clickHow && this.state.clickHowToGo === false ? <HowItWorks Language={this.state.language} onClickHowToGo={this.onClickHowToGo}/> : null}
     {this.state.clickGo || this.state.clickHowToGo ? <Product Language={this.state.language} jaarOfMaanden={this.jaarOfMaanden} chartClick={this.chartClick} input={this.state.input} keyUpHandler={this.onKeyUp}/> : null}
-    <div style={{width: '100%', height: '2em'}}>{this.state.isLoading ? <p style={{textShadow: '2px 2px black', margin: '0px', zIndex: '1'}}>Laden...</p> : null}</div>
+    <div style={{width: '100%', height: '2em'}}>{this.state.isLoading ? <p style={{textShadow: '2px 2px black', margin: '0px', zIndex: '1'}}>{this.state.language === 'dutch' ? 'Laden...' : 'Loading...'}</p> : null}</div>
     {this.state.chart ? <ChartComponent Language={this.state.language} isLoading={this.isLoading} chartReset={this.chartReset} dates={this.state.dates} selectOptions={this.state.jaarOfMaandenSelect} chartUpdate={this.state.chartUpdate} input={this.state.input} /> : null}
     </div>)
   }

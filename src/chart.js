@@ -78,7 +78,24 @@ import './chart.css';
           const timeData = [];
           for(let i = 0; i < googleDataArray.length; i++) {
             let timeFormat = googleDataArray[i].formattedTime;
-            timeData.push(timeFormat);
+            if(this.props.Language === 'dutch') {
+              const timeRegexMay = /May/g;
+              const timeRegexOct = /Oct/g;
+              if(timeRegexMay.test(timeFormat)){
+                let dutchTimeFormat1 = timeFormat.replace('May', 'Mei');
+                timeData.push(dutchTimeFormat1);
+              }
+              else if(timeRegexOct.test(timeFormat)){
+                let dutchTimeFormat2 = timeFormat.replace('Oct', 'Okt');
+                timeData.push(dutchTimeFormat2);
+              }
+              else {
+                timeData.push(timeFormat);
+              } 
+            }
+            else {
+              timeData.push(timeFormat);
+            }
           }
           
           const trendsData = [];
@@ -336,7 +353,24 @@ import './chart.css';
           const timeData = [];
           for(let i = 0; i < googleDataArray.length; i++) {
             let timeFormat = googleDataArray[i].formattedTime;
-            timeData.push(timeFormat);
+            if(this.props.Language === 'dutch') {
+              const timeRegexMay = /May/g;
+              const timeRegexOct = /Oct/g;
+              if(timeRegexMay.test(timeFormat)){
+                let dutchTimeFormat1 = timeFormat.replace('May', 'Mei');
+                timeData.push(dutchTimeFormat1);
+              }
+              else if(timeRegexOct.test(timeFormat)){
+                let dutchTimeFormat2 = timeFormat.replace('Oct', 'Okt');
+                timeData.push(dutchTimeFormat2);
+              }
+              else {
+                timeData.push(timeFormat);
+              } 
+            }
+            else {
+              timeData.push(timeFormat);
+            }
           }
 
           const trendsData = [];
