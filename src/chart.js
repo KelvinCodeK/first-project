@@ -139,7 +139,7 @@ import './chart.css';
             },
               title: {
                 display: true,
-                text: this.props.Language === 'dutch' ? `Online zoekvolume voor ${this.props.input}` : `Online search volume for ${this.props.input}`,
+                text: this.props.Language === 'dutch' ? [`Online zoekvolume voor ${this.props.input}`, 'Yo'] : `Online search volume for ${this.props.input}`,
                 fontColor: 'white',
                 fontSize: 25
               },
@@ -226,14 +226,16 @@ import './chart.css';
               legend: {
                 labels: {
                     fontColor: 'white',
-                    fontSize: 9
+                    fontSize: 9,
+                    boxWidth: 20
                 }
             },
               title: {
                 display: true,
-                text: this.props.Language === 'dutch' ? `Online zoekvolume voor ${this.props.input}` : `Online search volume for ${this.props.input}`,
+                text: this.props.Language === 'dutch' ? [`Zoekterm: ${this.props.input}`, `Periode: ${this.props.dates[0]} - ${this.props.dates[2]}`] : `Online search volume for ${this.props.input}`,
                 fontColor: 'white',
-                fontSize: 14
+                fontSize: 11,
+                padding: 1
               },
               scales: { 
                 xAxes: [{               
