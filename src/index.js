@@ -61,12 +61,12 @@ class Stateful extends React.Component {
           event.target.value = '';
         }
         else{
-          alert('Vul alleen letters en spaties in');
+          alert(this.state.language === 'dutch' ? 'Vul alleen letters en spaties in' : 'Only use letters or spaces in your search query');
           event.target.value = '';
         }
     }
     else {
-      alert('Selecteer een periode én voer een zoekterm in');
+      alert(this.state.language === 'dutch' ? 'Selecteer een periode én voer een zoekterm in' : 'Please select a date range and enter a search term');
     } 
   }
   }
@@ -83,13 +83,13 @@ class Stateful extends React.Component {
         
           }
           else{
-            alert('Vul alleen letters en spaties in');
+            alert(this.state.language === 'dutch' ? 'Vul alleen letters en spaties in' : 'Only use letters or spaces in your search query');
             event.target.value = '';
             
           }
       }
       else {
-        alert('Selecteer een periode én voer een zoekterm in');
+        alert(this.state.language === 'dutch' ? 'Selecteer een periode én voer een zoekterm in' : 'Please select a date range and enter a search term');
         
       }
     }
@@ -111,13 +111,13 @@ class Stateful extends React.Component {
         document.querySelector('input').value = '';
         }
         else{
-          alert('Vul alleen letters en spaties in');
+          alert(this.state.language === 'dutch' ? 'Vul alleen letters en spaties in' : 'Only use letters or spaces in your search query');
           document.querySelector('input').value = '';
           
         }
       }
       else {
-        alert('Selecteer een periode én voer een zoekterm in');
+        alert(this.state.language === 'dutch' ? 'Selecteer een periode én voer een zoekterm in' : 'Please select a date range and enter a search term');
         
       }
       }
@@ -129,7 +129,7 @@ class Stateful extends React.Component {
           document.querySelector('input').value = '';
         }
         else {
-          alert('Selecteer een periode én voer een zoekterm in');
+          alert(this.state.language === 'dutch' ? 'Selecteer een periode én voer een zoekterm in' : 'Please select a date range and enter a search term');
         }
     }
   }

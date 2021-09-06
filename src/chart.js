@@ -2,7 +2,8 @@ import React from 'react';
 import './chart.css';
 
    export default class ChartComponent extends React.Component {
-
+// Voor de dates deze gebruiken i.p.v de ISO string: var x = new Date('2020-06-09').toLocaleString().split(' ')[0]; En die ook inzetten voor de date range resultaten.
+// linker en rechter grafiek labels wat kleiner voor mobiel, om meer ruimte te creeëren
     constructor(props) {
       super(props);
       this.state = {
@@ -20,7 +21,7 @@ import './chart.css';
           var xhr = new XMLHttpRequest();          
           xhr.open('GET', `/api/trends/${zoekwoord}/${googleStartDate}/${googleEndDate}`, true);          
           xhr.onerror = () => {          
-            alert('De server reageert niet. Dit zal zo snel mogelijk worden opgelost!')          
+            alert(this.props.Language === 'dutch' ? 'De server reageert niet. Dit zal zo snel mogelijk worden opgelost!' : 'The server is not responding, this will be looked into shortly!')          
           }            
           xhr.onload = () => {          
             if(xhr.status === 200) {          
@@ -48,7 +49,7 @@ import './chart.css';
 
         Promise.all([theFirstPromise, theSecondPromise]).then((values) => {
           if(values[0] === '{"default":{"timelineData":[],"averages":[]}}') {
-           window.alert('De zoekterm heeft te weinig zoekvolume. Probeer iets anders');
+           window.alert(this.props.Language === 'dutch' ? 'De zoekterm heeft te weinig zoekvolume. Probeer iets anders' : 'The search term lacks search volume, please try something different');
            this.props.chartReset();
          }
          else {
@@ -107,6 +108,8 @@ import './chart.css';
         document.querySelector('canvas').style.display = 'initial';
         const screenWidth = window.screen.width;
         const Chart = window.Chart;
+        const startDateGraph = this.props.dates[0].replace(/-0/, '-');
+        const endDateGraph = this.props.dates[2].replace(/-0/, '-');
         if(screenWidth >= 768) {
           this.reactChart = new Chart("myChart", {
             type: 'line',
@@ -139,9 +142,9 @@ import './chart.css';
             },
               title: {
                 display: true,
-                text: this.props.Language === 'dutch' ? `Online zoekvolume voor ${this.props.input}` : `Online search volume for ${this.props.input}`,
+                text: this.props.Language === 'dutch' ? [`Zoekterm: ${this.props.input}`, `Periode: ${startDateGraph} / ${endDateGraph}`] : [`Search term: ${this.props.input}`, `Date range: ${startDateGraph} / ${endDateGraph}`],
                 fontColor: 'white',
-                fontSize: 25
+                fontSize: 20
               },
               scales: { 
                 xAxes: [{                 
@@ -230,12 +233,13 @@ import './chart.css';
                     boxWidth: 20
                 }
             },
-              title: {
-                display: true,
-                text: this.props.Language === 'dutch' ? `Online zoekvolume voor ${this.props.input}` : `Online search volume for ${this.props.input}`,
-                fontColor: 'white',
-                fontSize: 14
-              },
+            title: {
+              display: true,
+              text: this.props.Language === 'dutch' ? [`Zoekterm: ${this.props.input}`, `Periode: ${startDateGraph} / ${endDateGraph}`] : [`Search term: ${this.props.input}`, `Date range: ${startDateGraph} / ${endDateGraph}`],
+              fontColor: 'white',
+              fontSize: 11,
+              padding: 1
+            },
               scales: { 
                 xAxes: [{               
                   ticks: {                    
@@ -379,7 +383,9 @@ import './chart.css';
             let trends = Number(googleDataArray[i].value);
             trendsData.push(trends);
           }
-          this.reactChart.options.title.text = `Online zoekvolume voor ${this.props.input}`; 
+          const startDateGraph = this.props.dates[0].replace(/-0/, '-');
+          const endDateGraph = this.props.dates[2].replace(/-0/, '-');
+          this.reactChart.options.title.text = this.props.Language === 'dutch' ? [`Zoekterm: ${this.props.input}`, `Periode: ${startDateGraph} / ${endDateGraph}`] : [`Search term: ${this.props.input}`, `Date range: ${startDateGraph} / ${endDateGraph}`]; 
             this.reactChart.data.labels = timeData;
             this.reactChart.data.datasets[0].data = trendsData;
             this.reactChart.data.datasets[1].data = this.props.selectOptions ? averages : weatherData;
