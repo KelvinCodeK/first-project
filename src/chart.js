@@ -18,7 +18,7 @@ import './chart.css';
           const googleStartDate = this.props.dates[0];          
           const googleEndDate = this.props.dates[2];          
           var xhr = new XMLHttpRequest();          
-          xhr.open('GET', `http://localhost:9000/testAPI/trends/${zoekwoord}/${googleStartDate}/${googleEndDate}`, true);          
+          xhr.open('GET', `/api/trends/${zoekwoord}/${googleStartDate}/${googleEndDate}`, true);          
           xhr.onerror = () => {          
             alert('De server reageert niet. Dit zal zo snel mogelijk worden opgelost!')          
           }            
@@ -42,7 +42,7 @@ import './chart.css';
               resolve(xhr.responseText);
           }  
         }
-          xhr.open('GET', `http://localhost:9000/testAPI/weer/${knmiStartDate}/${knmiEndDate}/?url=https://www.daggegevens.knmi.nl/klimatologie/daggegevens/?stns=260`, true);
+          xhr.open('GET', `/api/weer/${knmiStartDate}/${knmiEndDate}/?url=https://www.daggegevens.knmi.nl/klimatologie/daggegevens/?stns=260`, true);
           xhr.send();
         });
 
@@ -226,7 +226,8 @@ import './chart.css';
               legend: {
                 labels: {
                     fontColor: 'white',
-                    fontSize: 9
+                    fontSize: 9,
+                    boxWidth: 20
                 }
             },
               title: {
@@ -296,7 +297,7 @@ import './chart.css';
               const googleStartDate = this.props.dates[0];
               const googleEndDate = this.props.dates[2];
                 var xhr = new XMLHttpRequest();
-                xhr.open('GET', `http://localhost:9000/testAPI/trends/${zoekwoord}/${googleStartDate}/${googleEndDate}`, true);
+                xhr.open('GET', `/api/trends/${zoekwoord}/${googleStartDate}/${googleEndDate}`, true);
                 //onload, ik stuur alleen een 200 terug vanaf de proxy server.
                 xhr.onload = () => {
                   if(xhr.status === 200) {
@@ -317,7 +318,7 @@ import './chart.css';
               resolve(xhr.responseText);
           } 
         }
-          xhr.open('GET', `http://localhost:9000/testAPI/weer/${knmiStartDate}/${knmiEndDate}/?url=https://www.daggegevens.knmi.nl/klimatologie/daggegevens/?stns=260`, true);
+          xhr.open('GET', `/api/weer/${knmiStartDate}/${knmiEndDate}/?url=https://www.daggegevens.knmi.nl/klimatologie/daggegevens/?stns=260`, true);
           xhr.send();
         });
 
