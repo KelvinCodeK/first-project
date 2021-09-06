@@ -123,10 +123,16 @@ class Stateful extends React.Component {
       }
       else {
         if(this.state.jaarOfMaandenSelect !== null && document.querySelector('input').value) {
+          if(regex.test(document.querySelector('input').value)){
           this.setState({chartUpdate: this.state.chartUpdate + 1});
           const invoer = document.querySelector('input').value;
           this.setState({input: invoer});
           document.querySelector('input').value = '';
+          }
+          else{
+            alert(this.state.language === 'dutch' ? 'Vul alleen letters en spaties in' : 'Only use letters or spaces in your search query');
+            document.querySelector('input').value = '';
+          }
         }
         else {
           alert(this.state.language === 'dutch' ? 'Selecteer een periode én voer een zoekterm in' : 'Please select a date range and enter a search term');
