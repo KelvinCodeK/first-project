@@ -241,7 +241,7 @@ import './chart.css';
                 xAxes: [{               
                   ticks: {                    
                       fontColor: "white",
-                      fontSize: 9,   
+                      fontSize: 6,   
                   }
               }],
                 yAxes: 
@@ -254,7 +254,8 @@ import './chart.css';
                     display: true,
                     labelString: this.props.Language === 'dutch' ? 'Zoekvolume' : 'Search volume',
                     fontColor: 'black',
-                    fontSize: 11
+                    fontSize: 10
+                    
                   },  
                   ticks: {                   
                     fontColor: "black",
@@ -270,7 +271,7 @@ import './chart.css';
                     display: true,
                     labelString: this.props.Language === 'dutch' ? 'Temperatuur' : 'Temperature',
                     fontColor: 'white',
-                    fontSize: 11
+                    fontSize: 10
                   },
                   gridLines: {
                     display: false,
