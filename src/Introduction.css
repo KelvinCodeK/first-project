@@ -28,7 +28,7 @@ header p {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  width: 19rem;
+  width: 100%;
   margin-top: 1em;
 }
 
@@ -51,12 +51,9 @@ header p {
   cursor: pointer;
 }
 
-
-
-
 @media only screen and (min-width: 375px) {
   .buttons {
-    width: 21rem;
+    width: 100%;
   }
   .button {
     height: 4rem;
