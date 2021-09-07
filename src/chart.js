@@ -108,8 +108,8 @@ import './chart.css';
         document.querySelector('canvas').style.display = 'initial';
         const screenWidth = window.screen.width;
         const Chart = window.Chart;
-        const startDateGraph = this.props.dates[0].replace(/-0/, '-');
-        const endDateGraph = this.props.dates[2].replace(/-0/, '-');
+        const startDateGraph = new Date(this.props.dates[0]).toLocaleString().split(' ')[0];
+        const endDateGraph = new Date(this.props.dates[2]).toLocaleString().split(' ')[0];
         if(screenWidth >= 768) {
           this.reactChart = new Chart("myChart", {
             type: 'line',
@@ -383,8 +383,8 @@ import './chart.css';
             let trends = Number(googleDataArray[i].value);
             trendsData.push(trends);
           }
-          const startDateGraph = this.props.dates[0].replace(/-0/, '-');
-          const endDateGraph = this.props.dates[2].replace(/-0/, '-');
+          const startDateGraph = new Date(this.props.dates[0]).toLocaleString().split(' ')[0];;
+          const endDateGraph = new Date(this.props.dates[2]).toLocaleString().split(' ')[0];;
           this.reactChart.options.title.text = this.props.Language === 'dutch' ? [`Zoekterm: ${this.props.input}`, `Periode: ${startDateGraph} / ${endDateGraph}`] : [`Search term: ${this.props.input}`, `Date range: ${startDateGraph} / ${endDateGraph}`]; 
             this.reactChart.data.labels = timeData;
             this.reactChart.data.datasets[0].data = trendsData;
