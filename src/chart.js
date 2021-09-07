@@ -3,7 +3,6 @@ import './chart.css';
 
    export default class ChartComponent extends React.Component {
 // Voor de dates deze gebruiken i.p.v de ISO string: var x = new Date('2020-06-09').toLocaleString().split(' ')[0]; En die ook inzetten voor de date range resultaten.
-// linker en rechter grafiek labels wat kleiner voor mobiel, om meer ruimte te creeëren
 // verwijder ook onnodige modules uit cpanel file manager. Er staat een andere file in met alle modules. Welke zijn nodig?
     constructor(props) {
       super(props);

@@ -7,9 +7,6 @@ import HowItWorks from './howItWorks';
 import Product from './product.js'
 import ChartComponent from './chart.js'
 
-// Eng / Dutch functionaliteit toevoegen. State in index die je doorstuurt naar alle componenten. In de componenten met ternary operator de tekst inladen o.b.v de prop
-//verwijder alle onnodige uitleg uit de documenten in de app
-
 class Stateful extends React.Component {
   constructor(props) {
     super(props);

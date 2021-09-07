@@ -1,8 +1,6 @@
 import './Introduction.css';
 import React from 'react';
 
-// Maak de intro niet noodzakelijk om doorheen te gaan.
-
 export default class Introduction extends React.Component {
 
   render() {

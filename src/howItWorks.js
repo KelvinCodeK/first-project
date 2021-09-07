@@ -3,8 +3,6 @@ import './howItWorks.css';
 
 export default class HowItWorks extends React.Component {
     render() {
-
-        
         return (
             <div className="howItWorks">
                 <h1>{this.props.Language === 'dutch' ? 'Hoe het werkt' : 'How it works'}</h1>
