@@ -1,28 +1,25 @@
 main, header {
-    display:flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
 select {
-
     margin-bottom: 2em;
-        margin-right: 0px;
-        padding: 6px;
-
+    margin-right: 0px;
+    padding: 6px;
     outline: none;
     cursor: pointer;
     color: #28b7c4;
     border: 0;
-  border-bottom: 2px solid currentcolor; 
-  font-weight: bold;
-  background-color: #282c34;
+    border-bottom: 2px solid currentcolor; 
+    font-weight: bold;
+    background-color: #282c34;
 }
 
 select > option {
     background-color: white;
-    
 }
 
 select > option:nth-child(1) {
@@ -63,6 +60,7 @@ select > option:nth-child(1) {
     background-color: white;
     cursor: pointer;
 }
+
 p {
     text-align: center;
     margin-left: 1em;
@@ -80,13 +78,7 @@ input {
     outline: none;
 }
  
-
   @media only screen and (min-width: 375px) {
-    select {
-        margin-bottom: 2em;
-        margin-right: 0px;
-        padding: 6px;
-    }
     .inputVak {
         width: 20em;
     }

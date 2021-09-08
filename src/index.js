@@ -11,7 +11,9 @@ class Stateful extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      intro: true,
       clickHow: false,
+      extraHow: false,
       clickGo: false,
       clickHowToGo: false,
       input: '',
@@ -34,23 +36,35 @@ class Stateful extends React.Component {
   }
 
   onClickHow() {
+    if(this.state.extraHow) {
+      this.setState({clickGo: false});
+      this.setState({clickHowToGo: false});
+      this.setState({extraHow: false});
+    }
+    this.setState({intro: false});
     this.setState({clickHow: true});
   }
+
   onClickGo() {
+    this.setState({intro: false});
     this.setState({clickGo: true});
+    this.setState({extraHow: true});
   }
+
   onClickHowToGo() {
+    this.setState({clickHow: false});
     this.setState({clickHowToGo: true});
+    this.setState({extraHow: true});
   }
+
   onKeyUp(event) {
     const regex = /[a-z \s]+/ig;
     if( this.state.chart === false) {
     if (event.keyCode === 13) {
-      
-      
+      this.setState({extraHow: false});
       if(this.state.jaarOfMaandenSelect !== null && event.target.value) {
-        
         if(regex.test(event.target.value)){
+          this.setState({extraHow: false});
           this.setState({chart: true});
           document.querySelector('.language').style.display = 'none';
           const invoer = event.target.value; 
@@ -58,35 +72,39 @@ class Stateful extends React.Component {
           event.target.value = '';
         }
         else{
-          alert(this.state.language === 'dutch' ? 'Vul alleen letters en spaties in' : 'Only use letters or spaces in your search query');
+          alert(this.state.language === 'dutch'
+           ? 'Vul alleen letters en spaties in'
+            : 'Only use letters or spaces in your search query');
           event.target.value = '';
         }
     }
     else {
-      alert(this.state.language === 'dutch' ? 'Selecteer een periode én voer een zoekterm in' : 'Please select a date range and enter a search term');
+      alert(this.state.language === 'dutch'
+       ? 'Selecteer een periode én voer een zoekterm in'
+        : 'Please select a date range and enter a search term');
     } 
   }
   }
     else {
-
       if (event.keyCode === 13) {
-        
         if(this.state.jaarOfMaandenSelect !== null && event.target.value) {
         if(regex.test(event.target.value)){
         this.setState({chartUpdate: this.state.chartUpdate + 1});
         const invoer = event.target.value;
         this.setState({input: invoer});
         event.target.value = ''; 
-        
           }
           else{
-            alert(this.state.language === 'dutch' ? 'Vul alleen letters en spaties in' : 'Only use letters or spaces in your search query');
+            alert(this.state.language === 'dutch'
+             ? 'Vul alleen letters en spaties in'
+              : 'Only use letters or spaces in your search query');
             event.target.value = '';
-            
           }
       }
       else {
-        alert(this.state.language === 'dutch' ? 'Selecteer een periode én voer een zoekterm in' : 'Please select a date range and enter a search term');
+        alert(this.state.language === 'dutch'
+         ? 'Selecteer een periode én voer een zoekterm in'
+          : 'Please select a date range and enter a search term');
         
       }
     }
@@ -95,11 +113,10 @@ class Stateful extends React.Component {
 
   chartClick() {
     const regex = /[a-z \s]+/ig;
-    
     if( this.state.chart === false) {
-    
       if(this.state.jaarOfMaandenSelect !== null && document.querySelector('input').value) {
         if(regex.test(document.querySelector('input').value)){
+        this.setState({extraHow: false});
         this.setState({chart: true});
         document.querySelector('.language').style.display = 'none';
         const invoer = document.querySelector('input').value;
@@ -108,16 +125,18 @@ class Stateful extends React.Component {
         document.querySelector('input').value = '';
         }
         else{
-          alert(this.state.language === 'dutch' ? 'Vul alleen letters en spaties in' : 'Only use letters or spaces in your search query');
-          document.querySelector('input').value = '';
-          
+          alert(this.state.language === 'dutch'
+           ? 'Vul alleen letters en spaties in'
+            : 'Only use letters or spaces in your search query');
+          document.querySelector('input').value = ''; 
         }
       }
       else {
-        alert(this.state.language === 'dutch' ? 'Selecteer een periode én voer een zoekterm in' : 'Please select a date range and enter a search term');
-        
+        alert(this.state.language === 'dutch'
+         ? 'Selecteer een periode én voer een zoekterm in'
+          : 'Please select a date range and enter a search term');
       }
-      }
+    }
       else {
         if(this.state.jaarOfMaandenSelect !== null && document.querySelector('input').value) {
           if(regex.test(document.querySelector('input').value)){
@@ -127,12 +146,16 @@ class Stateful extends React.Component {
           document.querySelector('input').value = '';
           }
           else{
-            alert(this.state.language === 'dutch' ? 'Vul alleen letters en spaties in' : 'Only use letters or spaces in your search query');
+            alert(this.state.language === 'dutch'
+             ? 'Vul alleen letters en spaties in'
+              : 'Only use letters or spaces in your search query');
             document.querySelector('input').value = '';
           }
         }
         else {
-          alert(this.state.language === 'dutch' ? 'Selecteer een periode én voer een zoekterm in' : 'Please select a date range and enter a search term');
+          alert(this.state.language === 'dutch'
+           ? 'Selecteer een periode én voer een zoekterm in'
+            : 'Please select a date range and enter a search term');
         }
     }
   }
@@ -196,18 +219,35 @@ class Stateful extends React.Component {
   }
 
   language() {
-    this.state.language === 'dutch' ? this.setState({language: 'english'}) : this.setState({language: 'dutch'});
+    this.state.language === 'dutch'
+     ? this.setState({language: 'english'})
+      : this.setState({language: 'dutch'});
   }
 
   render(){
     return (
     <div>
     <button className="language" onClick={this.language} >NL / ENG</button>
-    {this.state.clickHow || this.state.clickGo ? null : <Introduction Language={this.state.language} onClickHow={this.onClickHow} onClickGo={this.onClickGo}/>}
-    {this.state.clickHow && this.state.clickHowToGo === false ? <HowItWorks Language={this.state.language} onClickHowToGo={this.onClickHowToGo}/> : null}
-    {this.state.clickGo || this.state.clickHowToGo ? <Product Language={this.state.language} jaarOfMaanden={this.jaarOfMaanden} chartClick={this.chartClick} input={this.state.input} keyUpHandler={this.onKeyUp}/> : null}
-    <div style={{width: '100%', height: '2em'}}>{this.state.isLoading ? <p style={{textShadow: '2px 2px black', margin: '0px', zIndex: '1'}}>{this.state.language === 'dutch' ? 'Laden...' : 'Loading...'}</p> : null}</div>
-    {this.state.chart ? <ChartComponent Language={this.state.language} isLoading={this.isLoading} chartReset={this.chartReset} dates={this.state.dates} selectOptions={this.state.jaarOfMaandenSelect} chartUpdate={this.state.chartUpdate} input={this.state.input} /> : null}
+    {this.state.intro ? 
+     <Introduction Language={this.state.language} onClickHow={this.onClickHow} onClickGo={this.onClickGo}/>
+      : null}
+    {this.state.clickHow ?
+     <HowItWorks Language={this.state.language} onClickHowToGo={this.onClickHowToGo}/>
+      : null}
+    {this.state.clickGo || this.state.clickHowToGo
+     ? <Product Language={this.state.language} jaarOfMaanden={this.jaarOfMaanden} chartClick={this.chartClick} input={this.state.input} keyUpHandler={this.onKeyUp}/>
+      : null}
+    <div style={{width: '100%', height: '2em'}}>{this.state.isLoading
+     ? <p style={{textShadow: '2px 2px black', margin: '0px', zIndex: '1'}}>{this.state.language === 'dutch' ? 'Laden...' : 'Loading...'}</p>
+      : null}</div>
+    {this.state.extraHow
+     ? <div style={{height: '10em', display: 'flex', justifyContent: 'center', alignItems: 'center'}}><button className="button" onClick={this.onClickHow}>{this.state.language === 'dutch'
+      ? 'hoe werkt het?'
+       : 'How it works'}</button></div>
+        : null}
+    {this.state.chart
+     ? <ChartComponent Language={this.state.language} isLoading={this.isLoading} chartReset={this.chartReset} dates={this.state.dates} selectOptions={this.state.jaarOfMaandenSelect} chartUpdate={this.state.chartUpdate} input={this.state.input} />
+      : null}
     </div>)
   }
 }

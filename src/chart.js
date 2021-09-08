@@ -2,8 +2,6 @@ import React from 'react';
 import './chart.css';
 
    export default class ChartComponent extends React.Component {
-// Voor de dates deze gebruiken i.p.v de ISO string: var x = new Date('2020-06-09').toLocaleString().split(' ')[0]; En die ook inzetten voor de date range resultaten.
-// verwijder ook onnodige modules uit cpanel file manager. Er staat een andere file in met alle modules. Welke zijn nodig?
     constructor(props) {
       super(props);
       this.state = {
@@ -21,7 +19,9 @@ import './chart.css';
           var xhr = new XMLHttpRequest();          
           xhr.open('GET', `/api/trends/${zoekwoord}/${googleStartDate}/${googleEndDate}`, true);          
           xhr.onerror = () => {          
-            alert(this.props.Language === 'dutch' ? 'De server reageert niet. Dit zal zo snel mogelijk worden opgelost!' : 'The server is not responding, this will be looked into shortly!')          
+            alert(this.props.Language === 'dutch'
+             ? 'De server reageert niet. Dit zal zo snel mogelijk worden opgelost!'
+              : 'The server is not responding, this will be looked into shortly!')          
           }            
           xhr.onload = () => {          
             if(xhr.status === 200) {          
@@ -49,7 +49,9 @@ import './chart.css';
 
         Promise.all([theFirstPromise, theSecondPromise]).then((values) => {
           if(values[0] === '{"default":{"timelineData":[],"averages":[]}}') {
-           window.alert(this.props.Language === 'dutch' ? 'De zoekterm heeft te weinig zoekvolume. Probeer iets anders' : 'The search term lacks search volume, please try something different');
+           window.alert(this.props.Language === 'dutch'
+            ? 'De zoekterm heeft te weinig zoekvolume. Probeer iets anders'
+             : 'The search term lacks search volume, please try something different');
            this.props.chartReset();
          }
          else {
@@ -116,14 +118,18 @@ import './chart.css';
             data: {
               labels: timeData,
               datasets: [{
-                label: this.props.Language === 'dutch' ? 'Zoekvolume (0% - 100%)' : 'Search volume (0% - 100%)',
+                label: this.props.Language === 'dutch'
+                 ? 'Zoekvolume (0% - 100%)'
+                  : 'Search volume (0% - 100%)',
                 yAxisID: 'A',
                 data: trendsData,
                 borderColor: 'black',
                 borderWidth: 3,
                 fill: false,
               }, {
-                label: this.props.Language === 'dutch' ? 'Temperatuur' : 'Temperature',
+                label: this.props.Language === 'dutch'
+                 ? 'Temperatuur'
+                  : 'Temperature',
                 yAxisID: 'B',
                 data: this.props.selectOptions ? averages : weatherData,
                 borderColor: 'white',
@@ -142,7 +148,9 @@ import './chart.css';
             },
               title: {
                 display: true,
-                text: this.props.Language === 'dutch' ? [`Zoekterm: ${this.props.input}`, `Periode: ${startDateGraph} / ${endDateGraph}`] : [`Search term: ${this.props.input}`, `Date range: ${startDateGraph} / ${endDateGraph}`],
+                text: this.props.Language === 'dutch'
+                 ? [`Zoekterm: ${this.props.input}`, `Periode: ${startDateGraph} / ${endDateGraph}`]
+                  : [`Search term: ${this.props.input}`, `Date range: ${startDateGraph} / ${endDateGraph}`],
                 fontColor: 'white',
                 fontSize: 20
               },
@@ -161,7 +169,9 @@ import './chart.css';
                   font: 'Arial',
                   scaleLabel: {
                     display: true,
-                    labelString: this.props.Language === 'dutch' ? 'Zoekvolume' : 'Search volume',
+                    labelString: this.props.Language === 'dutch'
+                     ? 'Zoekvolume'
+                      : 'Search volume',
                     fontColor: 'black',
                     fontSize: 18
                   },  
@@ -177,7 +187,9 @@ import './chart.css';
                   position: 'right',
                   scaleLabel: {
                     display: true,
-                    labelString: this.props.Language === 'dutch' ? 'Temperatuur' : 'Temperature',
+                    labelString: this.props.Language === 'dutch'
+                     ? 'Temperatuur'
+                      : 'Temperature',
                     fontColor: 'white',
                     fontSize: 18
                   },
@@ -203,14 +215,18 @@ import './chart.css';
               labels: timeData,
               
               datasets: [{
-                label: this.props.Language === 'dutch' ? 'Zoekvolume (0% - 100%)' : 'Search volume (0% - 100%)',
+                label: this.props.Language === 'dutch' ?
+                 'Zoekvolume (0% - 100%)'
+                  : 'Search volume (0% - 100%)',
                 yAxisID: 'A',
                 data: trendsData,
                 borderColor: 'black',
                 borderWidth: 1,
                 fill: false
               }, {
-                label: this.props.Language === 'dutch' ? 'Temperatuur' : 'Temperature',
+                label: this.props.Language === 'dutch'
+                 ? 'Temperatuur'
+                  : 'Temperature',
                 yAxisID: 'B',
                 data: this.props.selectOptions ? averages : weatherData,
                 borderColor: 'white',
@@ -235,7 +251,9 @@ import './chart.css';
             },
             title: {
               display: true,
-              text: this.props.Language === 'dutch' ? [`Zoekterm: ${this.props.input}`, `Periode: ${startDateGraph} / ${endDateGraph}`] : [`Search term: ${this.props.input}`, `Date range: ${startDateGraph} / ${endDateGraph}`],
+              text: this.props.Language === 'dutch'
+               ? [`Zoekterm: ${this.props.input}`, `Periode: ${startDateGraph} / ${endDateGraph}`]
+                : [`Search term: ${this.props.input}`, `Date range: ${startDateGraph} / ${endDateGraph}`],
               fontColor: 'white',
               fontSize: 11,
               padding: 1
@@ -255,7 +273,9 @@ import './chart.css';
                   font: 'Arial',
                   scaleLabel: {
                     display: true,
-                    labelString: this.props.Language === 'dutch' ? 'Zoekvolume' : 'Search volume',
+                    labelString: this.props.Language === 'dutch'
+                     ? 'Zoekvolume'
+                      : 'Search volume',
                     fontColor: 'black',
                     fontSize: 11
                   },  
@@ -271,14 +291,15 @@ import './chart.css';
                   position: 'right',
                   scaleLabel: {
                     display: true,
-                    labelString: this.props.Language === 'dutch' ? 'Temperatuur' : 'Temperature',
+                    labelString: this.props.Language === 'dutch'
+                     ? 'Temperatuur'
+                      : 'Temperature',
                     fontColor: 'white',
                     fontSize: 11
                   },
                   gridLines: {
                     display: false,
                   },
-                  
                   ticks: {
                     max: 30,
                     min: -10,
@@ -328,7 +349,9 @@ import './chart.css';
 
         Promise.all([theFirstPromise, theSecondPromise]).then((values) => {
           if(values[0] === '{"default":{"timelineData":[],"averages":[]}}') {
-            window.alert('De zoekterm heeft te weinig zoekvolume. Probeer iets anders');
+            window.alert(this.props.Language === 'dutch'
+            ? 'De zoekterm heeft te weinig zoekvolume. Probeer iets anders'
+             : 'The search term lacks search volume, please try something different');
             this.props.chartReset();
           }
           else {
@@ -385,7 +408,9 @@ import './chart.css';
           }
           const startDateGraph = new Date(this.props.dates[0]).toLocaleString().split(' ')[0];;
           const endDateGraph = new Date(this.props.dates[2]).toLocaleString().split(' ')[0];;
-          this.reactChart.options.title.text = this.props.Language === 'dutch' ? [`Zoekterm: ${this.props.input}`, `Periode: ${startDateGraph} / ${endDateGraph}`] : [`Search term: ${this.props.input}`, `Date range: ${startDateGraph} / ${endDateGraph}`]; 
+          this.reactChart.options.title.text = this.props.Language === 'dutch'
+           ? [`Zoekterm: ${this.props.input}`, `Periode: ${startDateGraph} / ${endDateGraph}`]
+            : [`Search term: ${this.props.input}`, `Date range: ${startDateGraph} / ${endDateGraph}`]; 
             this.reactChart.data.labels = timeData;
             this.reactChart.data.datasets[0].data = trendsData;
             this.reactChart.data.datasets[1].data = this.props.selectOptions ? averages : weatherData;
