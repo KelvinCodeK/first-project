@@ -14,7 +14,9 @@ class Stateful extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      intro: true,
       clickHow: false,
+      extraHow: false,
       clickGo: false,
       clickHowToGo: false,
       input: '',
@@ -37,19 +39,25 @@ class Stateful extends React.Component {
   }
 
   onClickHow() {
+    this.setState({intro: false});
     this.setState({clickHow: true});
   }
   onClickGo() {
+    this.setState({intro: false});
     this.setState({clickGo: true});
+    this.setState({extraHow: true});
   }
   onClickHowToGo() {
+    this.setState({clickHow: false});
     this.setState({clickHowToGo: true});
+    this.setState({extraHow: true});
   }
+
   onKeyUp(event) {
     const regex = /[a-z \s]+/ig;
     if( this.state.chart === false) {
     if (event.keyCode === 13) {
-      
+      this.setState({extraHow: false});
       
       if(this.state.jaarOfMaandenSelect !== null && event.target.value) {
         
@@ -71,7 +79,7 @@ class Stateful extends React.Component {
   }
   }
     else {
-
+      this.setState({extraHow: false});
       if (event.keyCode === 13) {
         
         if(this.state.jaarOfMaandenSelect !== null && event.target.value) {
@@ -100,7 +108,7 @@ class Stateful extends React.Component {
     const regex = /[a-z \s]+/ig;
     
     if( this.state.chart === false) {
-    
+      this.setState({extraHow: false});
       if(this.state.jaarOfMaandenSelect !== null && document.querySelector('input').value) {
         if(regex.test(document.querySelector('input').value)){
         this.setState({chart: true});
@@ -122,6 +130,7 @@ class Stateful extends React.Component {
       }
       }
       else {
+        this.setState({extraHow: false});
         if(this.state.jaarOfMaandenSelect !== null && document.querySelector('input').value) {
           this.setState({chartUpdate: this.state.chartUpdate + 1});
           const invoer = document.querySelector('input').value;
@@ -200,10 +209,11 @@ class Stateful extends React.Component {
     return (
     <div>
     <button className="language" onClick={this.language} >NL / ENG</button>
-    {this.state.clickHow || this.state.clickGo ? null : <Introduction Language={this.state.language} onClickHow={this.onClickHow} onClickGo={this.onClickGo}/>}
-    {this.state.clickHow && this.state.clickHowToGo === false ? <HowItWorks Language={this.state.language} onClickHowToGo={this.onClickHowToGo}/> : null}
+    {this.state.intro ? <Introduction Language={this.state.language} onClickHow={this.onClickHow} onClickGo={this.onClickGo}/> : null }
+    {this.state.clickHow ? <HowItWorks Language={this.state.language} onClickHowToGo={this.onClickHowToGo}/> : null}
     {this.state.clickGo || this.state.clickHowToGo ? <Product Language={this.state.language} jaarOfMaanden={this.jaarOfMaanden} chartClick={this.chartClick} input={this.state.input} keyUpHandler={this.onKeyUp}/> : null}
     <div style={{width: '100%', height: '2em'}}>{this.state.isLoading ? <p style={{textShadow: '2px 2px black', margin: '0px', zIndex: '1'}}>{this.state.language === 'dutch' ? 'Laden...' : 'Loading...'}</p> : null}</div>
+    {this.state.extraHow ? <div style={{height: '10em', display: 'flex', justifyContent: 'center', alignItems: 'center'}}><button className="button" onClick={this.onClickHow}>{this.state.language === 'dutch' ? 'hoe werkt het?' : 'How it works'}</button></div> : null}
     {this.state.chart ? <ChartComponent Language={this.state.language} isLoading={this.isLoading} chartReset={this.chartReset} dates={this.state.dates} selectOptions={this.state.jaarOfMaandenSelect} chartUpdate={this.state.chartUpdate} input={this.state.input} /> : null}
     </div>)
   }
