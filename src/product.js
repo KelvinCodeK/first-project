@@ -4,14 +4,16 @@ import './product.css';
 export default class Product extends React.Component {
     render() {
         return (
-            <div>
+            <div className="product">
                 <header>
                     <h1>Weather To Sell</h1>
+                    {/* p verzet naar header */}
+                    <p>{this.props.Language === 'dutch' ? 'Kies een periode en vul het product óf de productcategorie in, waarover jij meer te weten wil komen.'
+                        : 'Please note that the search data is based on The Netherlands. You will get the best results by using Dutch search terms.'}</p>
                 </header>
                 <main>
                     <section className="zoekVak">
-                        <p>{this.props.Language === 'dutch' ? 'Kies een periode en vul het product óf de productcategorie in, waarover jij meer te weten wil komen.'
-                        : 'Please note that the search data is based on The Netherlands. You will get the best results by using Dutch search terms.'}</p>
+                        
                         <div className="search">
                         <select onChange={this.props.jaarOfMaanden}>
                             <option>{this.props.Language === 'dutch' ? 'Periode' : 'Date range'}</option>

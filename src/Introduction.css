@@ -1,5 +1,5 @@
 /* Maak gebruik van media queries. Zonder is onmogelijk om op elk scherm goed uit te komen.*/ 
-
+/* changed > van de nieuwe omringende div .welcome maken */
 .welcome {
   margin-top: 10vh;
   display: flex;
@@ -7,12 +7,29 @@
   align-items: center;
   justify-content: center;
   color: white;
+
+}
+/* changed > .buttons buiten de header zetten */
+.welcome > header {
+ margin-bottom: calc(50px + 7vmin);
+}
+/* new */
+h1 {
+  font-size: calc(12px + 6vmin);
+  text-align: center;
+}
+/* new */
+p {
+  font-size: calc(10px + 1.5vmin);
+  text-align: center;
+    margin-left: 1em;
+    margin-right: 1em;
 }
 
-header p {
+/* header p {
   margin-top: 1em;
   margin-bottom: 2em;
-}
+} */
 
 .button:hover {
   background-position: 1px;
@@ -28,17 +45,18 @@ header p {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  width: 19rem;
-  margin-top: 1em;
+  /* changed */
+  width: calc(50px + 70vmin);
+  /* margin-top: 1em; */
 }
 
 .button {
-  height: 3.5rem;
-  width: 7rem;
+  height: calc(25px + 7vmin);
+  width: calc(40px + 18vmin);
+  font-size: calc(5px + 2vmin);
   background: linear-gradient(0deg, var(--linearColors));
   transition: background-position 0.6s ease-in;
   background-size: 1px 95px;  
-  font-size: 0.8em;
   font-weight: bold;
   text-shadow: 2px 2px black;
   color: white;
@@ -55,55 +73,55 @@ header p {
 
 
 @media only screen and (min-width: 375px) {
-  .buttons {
+  /* .buttons {
     width: 21rem;
-  }
-  .button {
+  } */
+  /* .button {
     height: 4rem;
     font-size: 1em;
     width: 8rem;
-  }
+  } */
 }
 
-@media only screen and (min-width: 500px) {
+/* @media only screen and (min-width: 500px) {
   h1 {
     font-size: 6vw;
   }
-}
+} */
 
 @media only screen and (min-width: 768px) {
-  h1 {
+  /* h1 {
     font-size: 6vw;
-  }
-  .buttons {
+  } */
+  /* .buttons {
     width: 40rem;
     margin-top: intial;
-  }
+  } */
 
-  .button {
+  /* .button {
     height: 5rem;
     font-size: 1.3em;
     width: 14rem;
-  }
+  } */
 }
 @media only screen and (min-width: 1100px) {
-  h1 {
+  /* h1 {
     font-size: 4.5vw;
-  }
+  } */
 }
 
 @media only screen and (min-width: 1700px) {
-  h1 {
+  /* h1 {
       font-size: 3vw;
-  }
-  .buttons {
+  } */
+  /* .buttons {
       width: 40rem;
       margin-top: intial;
-  }
+  } */
   
-  .button {
+  /* .button {
       height: 5rem;
       font-size: 1.3em;
       width: 14rem;
-  }
+  } */
 }
