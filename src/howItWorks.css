@@ -21,7 +21,7 @@ ul {
 }
 
   li {
-    padding: 9px;
+    padding: 5px;
     position: relative;
     animation-name: ul-appear;
     animation-timing-function: ease-in;
