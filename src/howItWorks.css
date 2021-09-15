@@ -6,14 +6,6 @@
     flex-direction: column;
 }
 
-.howItWorks > p {
-  padding: 0.5em;
-}
-
-p {
-  font-size: 4vw;
-}
-
 a {
   text-decoration: none;
   color: white;
@@ -23,7 +15,7 @@ a {
 ul {
     list-style: none;
     margin-top: 2em;
-    margin-bottom: 4em;
+    margin-bottom: calc(20px + 15vmin);
 }
 
   li {
@@ -34,7 +26,7 @@ ul {
     animation-duration: 1.5s;
     animation-fill-mode: forwards;
     opacity: 0;
-    font-size: 4vw;
+    font-size: calc(7px + 1.5vmin);
   }
 
   li:nth-child(2) {
@@ -59,45 +51,9 @@ ul {
     position: absolute;
     left: -18px;
     top: 12px;
-    height: 7px;
-    width: 7px;
+    height: 6px;
+    width: 6px;
     border: 3px solid #94f9aa;
     border-width: 4px 4px 0 0;
     transform: rotate(45deg);
-  }
-
-  @media only screen and (min-width: 500px) {
-    p {
-      font-size: 3vw;
-    }
-    li {
-      font-size: 3vw;
-    }
-  }
-
-  @media only screen and (min-width: 768px) {
-    li {
-      font-size: 2.5vw;
-    }
-  }
-
-  @media only screen and (min-width: 1100px) {
-    p {
-      font-size: 2vw;
-    }
-    li {
-      font-size: 2vw;
-    }
-  }
-
-  @media only screen and (min-width: 1700px) {
-    p {
-      font-size: 1.3vw;
-    }
-    li {
-      font-size: 1.1vw;
-    }
-    .howItWorks > p {
-      padding: initial;
-      }
   }

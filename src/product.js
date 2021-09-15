@@ -4,7 +4,7 @@ import './product.css';
 export default class Product extends React.Component {
     render() {
         return (
-            <div>
+            <div className="product">
                 <header>
                     <h1>Weather To Sell</h1>
                 </header>
