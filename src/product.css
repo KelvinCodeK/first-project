@@ -94,4 +94,7 @@ input {
         margin-right: 2em;
         width: 45%;
     }
+    .zoekVak {
+        height: 3em;
+    }
   }
