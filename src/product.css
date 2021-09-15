@@ -6,7 +6,8 @@
 }
 
 select {
-
+    /* new */
+    width: 100%;
     margin-bottom: 2em;
         /* margin-right: 0px; */
         padding: 6px;
@@ -33,11 +34,12 @@ select > option:nth-child(1) {
 }
 
 .zoekVak {
-    height: 6em;
+    /* newest */
+    height: 7em;
     display: flex;
-    justify-content: center;
+    /* justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: column; */
     margin-top: 1em;
     /* new */
     margin-bottom: calc(10px + 1vmin);
@@ -46,12 +48,15 @@ select > option:nth-child(1) {
 .search {
     display:flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: calc(115px + 27vmin);
 }
 
 .inputVak {
     position: relative;
-    height: 3em;
-    /* changed */
+    height: 2.5em;
+    /* new */
     width: 100%;
 }
 
@@ -80,13 +85,15 @@ input {
     position: absolute;
     left: 0px;
     width: 80%;
-    height: 75%;
+    height: 100%;
     border: 5px ridge #28b7c4;
     padding: 1px;
     border-right: none;
     outline: none;
     /* new */
     font-size: calc(10px + 1vmin);
+    box-sizing: border-box;
+    border-right: none;
 }
  
 
@@ -110,14 +117,16 @@ input {
   @media only screen and (min-width: 768px) {
     .search {
         flex-direction: row;
+        width: calc(50px + 52vmin)
     }
 /* new */
     .inputVak {
-        width: 19em;
+        width: 65%
     }
     select {
         margin-bottom: 0px;
         margin-right: 2em;
+        width: 45%;
         /* padding: 9px; */
     }
     /* .zoekVak {

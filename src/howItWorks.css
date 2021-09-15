@@ -61,8 +61,8 @@ ul {
     left: -18px;
     top: 12px;
     /* changed */
-    height: 6px;
-    width: 6px;
+    height: calc(2px + 0.5vmin);
+    width: calc(2px + 0.5vmin);
 
     border: 3px solid #94f9aa;
     border-width: 4px 4px 0 0;
