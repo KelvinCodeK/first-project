@@ -44,7 +44,7 @@ select > option:nth-child(1) {
 
 .inputVak {
     position: relative;
-    height: 2.5em;
+    height: calc(30px + 2.5vmin);
     width: 100%;
 }
 
