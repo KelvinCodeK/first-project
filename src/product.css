@@ -24,6 +24,7 @@ select {
 
 select > option {
     background-color: white;
+    font-size: calc(10px + 1vmin);
     
 }
 
@@ -32,12 +33,14 @@ select > option:nth-child(1) {
 }
 
 .zoekVak {
-    height: 10em;
+    height: 6em;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-bottom: 1em;
+    margin-top: 1em;
+    /* new */
+    margin-bottom: calc(10px + 1vmin);
 }
 
 .search {
@@ -98,11 +101,11 @@ input {
     } */
   }
 
-  @media (min-width: 400px) and (min-height: 700px) and (max-width: 500px) and (max-height: 800px){
+  /* @media (min-width: 400px) and (min-height: 700px) and (max-width: 500px) and (max-height: 800px){
     main {
         margin-bottom: 1em;
     }  
-  }
+  } */
 
   @media only screen and (min-width: 768px) {
     .search {
@@ -117,7 +120,7 @@ input {
         margin-right: 2em;
         /* padding: 9px; */
     }
-    .zoekVak {
+    /* .zoekVak {
         margin-bottom: 4em;
-    }
+    } */
   }
