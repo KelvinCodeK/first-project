@@ -54,7 +54,7 @@ select > option:nth-child(1) {
     height: 100%;
     width: 20%;
     border: 5px ridge #28b7c4;
-    background: #f0f0f0 url('./images/loupe.png');
+    background: #f0f0f0 url('./images/loupe-2.png');
     background-position: center;
     background-repeat: no-repeat;
     border-left: none;
@@ -96,5 +96,12 @@ input {
     }
     .zoekVak {
         height: 3em;
+    }
+
+    .inputVak > button {
+        background: #f0f0f0 url('./images/loupe.png');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: white;
     }
   }
