@@ -15,11 +15,11 @@ import './chart.css';
   chartInladen() {
 
     const theFirstPromise = new Promise((resolve, reject) => {
-              
+      const zoekwoord = this.props.input; 
       const googleStartDate = this.props.dates[0];
       const googleEndDate = this.props.dates[2];
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', `http://localhost:9000/testAPI/trends/${this.zoekwoord}/${googleStartDate}/${googleEndDate}`, true);
+        xhr.open('GET', `http://localhost:9000/testAPI/trends/${zoekwoord}/${googleStartDate}/${googleEndDate}`, true);
         //onload, ik stuur alleen een 200 terug vanaf de proxy server.
         xhr.onload = () => {
           if(xhr.status === 200) {
@@ -107,14 +107,14 @@ Promise.all([theFirstPromise, theSecondPromise]).then((values) => {
   }
 
     componentDidMount() {
-      this.zoekwoord = this.props.input; 
+      
     if (this.props.chartUpdate === 0) {
         const theFirstPromise = new Promise((resolve, reject) => {
-                  
+           const zoekwoord = this.props.input;         
           const googleStartDate = this.props.dates[0];          
           const googleEndDate = this.props.dates[2];          
           var xhr = new XMLHttpRequest();          
-          xhr.open('GET', `http://localhost:9000/testAPI/trends/${this.zoekwoord}/${googleStartDate}/${googleEndDate}`, true);          
+          xhr.open('GET', `http://localhost:9000/testAPI/trends/${zoekwoord}/${googleStartDate}/${googleEndDate}`, true);          
           xhr.onerror = () => {          
             alert('De server reageert niet. Dit zal zo snel mogelijk worden opgelost!')          
           }            
