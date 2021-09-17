@@ -13,6 +13,9 @@ body {
   border-image: linear-gradient(210deg, var(--linearColors));
   border-image-slice: 1;
   position: relative;
+  background-image: url('./images/weather.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .language{ 

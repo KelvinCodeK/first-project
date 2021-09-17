@@ -13,10 +13,9 @@ select {
     outline: none;
     cursor: pointer;
     color: #28b7c4;
-    border: 0;
-    border-bottom: 2px solid currentcolor; 
+    border: 3px ridge #28b7c4;
     font-weight: bold;
-    background-color: #282c34;
+    background-color: #0058b6;
 }
 
 select > option {
