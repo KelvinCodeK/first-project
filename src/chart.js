@@ -11,13 +11,13 @@ import './chart.css';
     }
 
     componentDidMount() {
+    this.zoekwoord = this.props.input;
     if (this.props.chartUpdate === 0) {
-        const theFirstPromise = new Promise((resolve, reject) => {
-          const zoekwoord = this.props.input;         
+        const theFirstPromise = new Promise((resolve, reject) => {     
           const googleStartDate = this.props.dates[0];          
           const googleEndDate = this.props.dates[2];          
           var xhr = new XMLHttpRequest();          
-          xhr.open('GET', `/api/trends/${zoekwoord}/${googleStartDate}/${googleEndDate}`, true);          
+          xhr.open('GET', `/api/trends/${this.zoekwoord}/${googleStartDate}/${googleEndDate}`, true);          
           xhr.onerror = () => {          
             alert(this.props.Language === 'dutch'
              ? 'De server reageert niet. Dit zal zo snel mogelijk worden opgelost!'
@@ -112,7 +112,6 @@ import './chart.css';
         const Chart = window.Chart;
         const startDateGraph = new Date(this.props.dates[0]).toLocaleString().split(' ')[0];
         const endDateGraph = new Date(this.props.dates[2]).toLocaleString().split(' ')[0];
-        if(screenWidth >= 768) {
           this.reactChart = new Chart("myChart", {
             type: 'line',
             data: {
@@ -124,104 +123,9 @@ import './chart.css';
                 yAxisID: 'A',
                 data: trendsData,
                 borderColor: 'black',
-                borderWidth: 3,
-                fill: false,
-              }, {
-                label: this.props.Language === 'dutch'
-                 ? 'Temperatuur'
-                  : 'Temperature',
-                yAxisID: 'B',
-                data: this.props.selectOptions ? averages : weatherData,
-                borderColor: 'white',
-                borderWidth: 3,
-                fill: false,
-              }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-              legend: {
-                labels: {
-                    fontColor: 'white',
-                    fontSize: 14
-                }
-            },
-              title: {
-                display: true,
-                text: this.props.Language === 'dutch'
-                 ? [`Zoekterm: ${this.props.input}`, `Periode: ${startDateGraph} / ${endDateGraph}`]
-                  : [`Search term: ${this.props.input}`, `Date range: ${startDateGraph} / ${endDateGraph}`],
-                fontColor: 'white',
-                fontSize: 20
-              },
-              scales: { 
-                xAxes: [{                 
-                  ticks: {                    
-                      fontColor: "white",
-                      fontSize: 12,   
-                  }
-              }],
-                yAxes: 
-                [{
-                  id: 'A', 
-                  type: 'linear',
-                  position: 'left',                              
-                  font: 'Arial',
-                  scaleLabel: {
-                    display: true,
-                    labelString: this.props.Language === 'dutch'
-                     ? 'Zoekvolume'
-                      : 'Search volume',
-                    fontColor: 'black',
-                    fontSize: 18
-                  },  
-                  ticks: {                   
-                    fontColor: "black",
-                    fontSize: 13,                   
-                    max: 100,
-                    min: 0 },         
-                  }, 
-                  {
-                  id: 'B',
-                  type: 'linear',
-                  position: 'right',
-                  scaleLabel: {
-                    display: true,
-                    labelString: this.props.Language === 'dutch'
-                     ? 'Temperatuur'
-                      : 'Temperature',
-                    fontColor: 'white',
-                    fontSize: 18
-                  },
-                  gridLines: {
-                    display: false,
-                  },
-                  ticks: {
-                    max: 30,
-                    min: -10,
-                    fontColor: "white",
-                    fontSize: 13,
-                  },                                   
-                }]                
-              }
-            }
-          });
-        }
-
-        if(screenWidth < 768) {
-          this.reactChart = new Chart("myChart", {
-            type: 'line',
-            data: {
-              labels: timeData,
-              
-              datasets: [{
-                label: this.props.Language === 'dutch' ?
-                 'Zoekvolume (0% - 100%)'
-                  : 'Search volume (0% - 100%)',
-                yAxisID: 'A',
-                data: trendsData,
-                borderColor: 'black',
-                borderWidth: 1,
+                borderWidth: screenWidth >= 768
+                 ? 3
+                  : 1,
                 fill: false
               }, {
                 label: this.props.Language === 'dutch'
@@ -230,39 +134,51 @@ import './chart.css';
                 yAxisID: 'B',
                 data: this.props.selectOptions ? averages : weatherData,
                 borderColor: 'white',
-                borderWidth: 1,
-                fill: false,
+                borderWidth: screenWidth >= 768
+                 ? 3
+                  : 1,
+                fill: false
               }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                elements: {
-                  point: {
-                    radius: 1
-                  }
-                },
+                elements: screenWidth >= 768 
+                ? {} 
+                 : {point: {
+                  radius: 1
+                }},
               legend: {
                 labels: {
                     fontColor: 'white',
-                    fontSize: 9,
-                    boxWidth: 20
+                    fontSize: screenWidth >= 768 
+                    ? 14
+                     : 9,
+                    boxWidth: screenWidth >= 768 
+                     ? 30
+                      : 20
                 }
             },
-            title: {
-              display: true,
-              text: this.props.Language === 'dutch'
-               ? [`Zoekterm: ${this.props.input}`, `Periode: ${startDateGraph} / ${endDateGraph}`]
-                : [`Search term: ${this.props.input}`, `Date range: ${startDateGraph} / ${endDateGraph}`],
-              fontColor: 'white',
-              fontSize: 11,
-              padding: 1
-            },
+              title: {
+                display: true,
+                text: this.props.Language === 'dutch'
+                 ? [`Zoekterm: ${this.props.input}`, `Periode: ${startDateGraph} / ${endDateGraph}`]
+                  : [`Search term: ${this.props.input}`, `Date range: ${startDateGraph} / ${endDateGraph}`],
+                fontColor: 'white',
+                fontSize: screenWidth >= 768
+                 ? 20
+                  : 11,
+                padding: screenWidth >= 768
+                 ? 1
+                  : 0
+              },
               scales: { 
-                xAxes: [{               
+                xAxes: [{                 
                   ticks: {                    
                       fontColor: "white",
-                      fontSize: 6,   
+                      fontSize: screenWidth >= 768
+                       ? 12
+                        : 6  
                   }
               }],
                 yAxes: 
@@ -277,11 +193,15 @@ import './chart.css';
                      ? 'Zoekvolume'
                       : 'Search volume',
                     fontColor: 'black',
-                    fontSize: 11
+                    fontSize: screenWidth >= 768
+                     ? 18
+                      : 11
                   },  
                   ticks: {                   
                     fontColor: "black",
-                    fontSize: 9,                   
+                    fontSize: screenWidth >= 768
+                     ? 13
+                      : 9,                   
                     max: 100,
                     min: 0 },         
                   }, 
@@ -295,22 +215,25 @@ import './chart.css';
                      ? 'Temperatuur'
                       : 'Temperature',
                     fontColor: 'white',
-                    fontSize: 11
+                    fontSize: screenWidth >= 768
+                     ? 18
+                      : 11
                   },
                   gridLines: {
-                    display: false,
+                    display: false
                   },
                   ticks: {
                     max: 30,
                     min: -10,
                     fontColor: "white",
-                    fontSize: 9,
+                    fontSize: screenWidth >= 768
+                     ? 13
+                      : 9
                   },                                   
                 }]                
               }
             }
           });
-        }
       }})   
       }
       }
@@ -318,11 +241,10 @@ import './chart.css';
     componentDidUpdate(prevProps) {
           if (prevProps.chartUpdate !== this.props.chartUpdate) {
             const theFirstPromise = new Promise((resolve, reject) => {
-              const zoekwoord = this.props.input;
               const googleStartDate = this.props.dates[0];
               const googleEndDate = this.props.dates[2];
                 var xhr = new XMLHttpRequest();
-                xhr.open('GET', `/api/trends/${zoekwoord}/${googleStartDate}/${googleEndDate}`, true);
+                xhr.open('GET', `/api/trends/${this.zoekwoord}/${googleStartDate}/${googleEndDate}`, true);
                 //onload, ik stuur alleen een 200 terug vanaf de proxy server.
                 xhr.onload = () => {
                   if(xhr.status === 200) {
@@ -431,4 +353,3 @@ import './chart.css';
             )
         }
    }
-    
