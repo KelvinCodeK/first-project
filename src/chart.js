@@ -146,7 +146,7 @@ import './chart.css';
                 elements:
                   {point: {
                   radius:  screenWidth >= 768
-                  ? 3
+                  ? 2
                    : 1
                   }},
               legend: {
