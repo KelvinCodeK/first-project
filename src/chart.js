@@ -124,7 +124,7 @@ import './chart.css';
                 data: trendsData,
                 borderColor: 'black',
                 borderWidth: screenWidth >= 768
-                 ? 3
+                 ? 2
                   : 1,
                 fill: false
               }, {
@@ -135,7 +135,7 @@ import './chart.css';
                 data: this.props.selectOptions ? averages : weatherData,
                 borderColor: 'white',
                 borderWidth: screenWidth >= 768
-                 ? 3
+                 ? 2
                   : 1,
                 fill: false
               }]

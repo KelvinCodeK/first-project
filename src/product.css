@@ -84,7 +84,7 @@ input {
   @media only screen and (min-width: 768px) {
     .search {
         flex-direction: row;
-        width: calc(50px + 52vmin)
+        width: calc(50px + 60vmin);
     }
     .inputVak {
         width: 65%;
@@ -92,7 +92,7 @@ input {
     select {
         margin-bottom: 0px;
         margin-right: 2em;
-        width: 45%;
+        width: 65%;
     }
     .zoekVak {
         height: 3em;
