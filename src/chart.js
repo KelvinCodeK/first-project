@@ -11,14 +11,110 @@ import './chart.css';
       }
     }
 
+
+  chartInladen() {
+
+    const theFirstPromise = new Promise((resolve, reject) => {
+              
+      const googleStartDate = this.props.dates[0];
+      const googleEndDate = this.props.dates[2];
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', `http://localhost:9000/testAPI/trends/${this.zoekwoord}/${googleStartDate}/${googleEndDate}`, true);
+        //onload, ik stuur alleen een 200 terug vanaf de proxy server.
+        xhr.onload = () => {
+          if(xhr.status === 200) {
+            this.props.isLoading();  
+            resolve(xhr.responseText);
+        }  
+      }
+      xhr.send(); 
+      this.props.isLoading();     
+});
+
+const theSecondPromise = new Promise((resolve, reject) => {
+  const knmiStartDate = this.props.dates[1];
+  const knmiEndDate = this.props.dates[3];
+  var xhr = new XMLHttpRequest();
+  xhr.onload = () => {
+    if(xhr.status === 200) {
+      resolve(xhr.responseText);
+  } 
+}
+  xhr.open('GET', `http://localhost:9000/testAPI/weer/${knmiStartDate}/${knmiEndDate}/?url=https://www.daggegevens.knmi.nl/klimatologie/daggegevens/?stns=260`, true);
+  xhr.send();
+});
+
+Promise.all([theFirstPromise, theSecondPromise]).then((values) => {
+  if(values[0] === '{"default":{"timelineData":[],"averages":[]}}') {
+    window.alert('De zoekterm heeft te weinig zoekvolume. Probeer iets anders');
+    this.props.chartReset();
+  }
+  else {
+  const knmiData = values[1];
+  const knmiParsed = JSON.parse(knmiData);
+  this.weatherData = [];
+  for(let i = 0; i < knmiParsed.length; i++) {
+    let weather = knmiParsed[i].TG;
+    this.weatherData.push(Number(weather) / 10);
+  }
+
+  const weatherDataJaar = this.weatherData.slice(0, this.weatherData.length);
+  var arrSplice = [];
+  this.averages = [];
+  if(this.props.selectOptions === true) {
+    for (let i = 0; weatherDataJaar.length > 0; i++) {
+      arrSplice.push(weatherDataJaar.splice(0, 7));
+      this.averages.push(Math.floor(arrSplice[i].reduce((a, b) => {
+      return a + b;
+    })/arrSplice[i].length));
+    }
+  }
+
+  const googleData = values[0];
+  const googleParsed = JSON.parse(googleData);
+  const googleDataArray = googleParsed.default.timelineData;
+  this.timeData = [];
+  for(let i = 0; i < googleDataArray.length; i++) {
+    let timeFormat = googleDataArray[i].formattedTime;
+    if(this.props.Language === 'dutch') {
+      const timeRegexMay = /May/g;
+      const timeRegexOct = /Oct/g;
+      if(timeRegexMay.test(timeFormat)){
+        let dutchTimeFormat1 = timeFormat.replace('May', 'Mei');
+        this.timeData.push(dutchTimeFormat1);
+      }
+      else if(timeRegexOct.test(timeFormat)){
+        let dutchTimeFormat2 = timeFormat.replace('Oct', 'Okt');
+        this.timeData.push(dutchTimeFormat2);
+      }
+      else {
+        this.timeData.push(timeFormat);
+      } 
+    }
+    else {
+      this.timeData.push(timeFormat);
+    }
+  }
+
+  this.trendsData = [];
+  for(let i = 0; i < googleDataArray.length; i++) {
+    let trends = Number(googleDataArray[i].value);
+    this.trendsData.push(trends);
+  }
+  
+}}) 
+    
+  }
+
     componentDidMount() {
+      this.zoekwoord = this.props.input; 
     if (this.props.chartUpdate === 0) {
         const theFirstPromise = new Promise((resolve, reject) => {
-          const zoekwoord = this.props.input;         
+                  
           const googleStartDate = this.props.dates[0];          
           const googleEndDate = this.props.dates[2];          
           var xhr = new XMLHttpRequest();          
-          xhr.open('GET', `http://localhost:9000/testAPI/trends/${zoekwoord}/${googleStartDate}/${googleEndDate}`, true);          
+          xhr.open('GET', `http://localhost:9000/testAPI/trends/${this.zoekwoord}/${googleStartDate}/${googleEndDate}`, true);          
           xhr.onerror = () => {          
             alert('De server reageert niet. Dit zal zo snel mogelijk worden opgelost!')          
           }            
@@ -294,99 +390,13 @@ import './chart.css';
 
     componentDidUpdate(prevProps) {
           if (prevProps.chartUpdate !== this.props.chartUpdate) {
-            const theFirstPromise = new Promise((resolve, reject) => {
-              const zoekwoord = this.props.input;
-              const googleStartDate = this.props.dates[0];
-              const googleEndDate = this.props.dates[2];
-                var xhr = new XMLHttpRequest();
-                xhr.open('GET', `http://localhost:9000/testAPI/trends/${zoekwoord}/${googleStartDate}/${googleEndDate}`, true);
-                //onload, ik stuur alleen een 200 terug vanaf de proxy server.
-                xhr.onload = () => {
-                  if(xhr.status === 200) {
-                    this.props.isLoading();  
-                    resolve(xhr.responseText);
-                }  
-              }
-              xhr.send(); 
-              this.props.isLoading();     
-        });
-
-        const theSecondPromise = new Promise((resolve, reject) => {
-          const knmiStartDate = this.props.dates[1];
-          const knmiEndDate = this.props.dates[3];
-          var xhr = new XMLHttpRequest();
-          xhr.onload = () => {
-            if(xhr.status === 200) {
-              resolve(xhr.responseText);
-          } 
-        }
-          xhr.open('GET', `http://localhost:9000/testAPI/weer/${knmiStartDate}/${knmiEndDate}/?url=https://www.daggegevens.knmi.nl/klimatologie/daggegevens/?stns=260`, true);
-          xhr.send();
-        });
-
-        Promise.all([theFirstPromise, theSecondPromise]).then((values) => {
-          if(values[0] === '{"default":{"timelineData":[],"averages":[]}}') {
-            window.alert('De zoekterm heeft te weinig zoekvolume. Probeer iets anders');
-            this.props.chartReset();
-          }
-          else {
-          const knmiData = values[1];
-          const knmiParsed = JSON.parse(knmiData);
-          const weatherData = [];
-          for(let i = 0; i < knmiParsed.length; i++) {
-            let weather = knmiParsed[i].TG;
-            weatherData.push(Number(weather) / 10);
-          }
-
-          const weatherDataJaar = weatherData.slice(0, weatherData.length);
-          var arrSplice = [];
-          var averages = [];
-          if(this.props.selectOptions === true) {
-            for (let i = 0; weatherDataJaar.length > 0; i++) {
-              arrSplice.push(weatherDataJaar.splice(0, 7));
-              averages.push(Math.floor(arrSplice[i].reduce((a, b) => {
-              return a + b;
-            })/arrSplice[i].length));
-            }
-          }
-
-          const googleData = values[0];
-          const googleParsed = JSON.parse(googleData);
-          const googleDataArray = googleParsed.default.timelineData;
-          const timeData = [];
-          for(let i = 0; i < googleDataArray.length; i++) {
-            let timeFormat = googleDataArray[i].formattedTime;
-            if(this.props.Language === 'dutch') {
-              const timeRegexMay = /May/g;
-              const timeRegexOct = /Oct/g;
-              if(timeRegexMay.test(timeFormat)){
-                let dutchTimeFormat1 = timeFormat.replace('May', 'Mei');
-                timeData.push(dutchTimeFormat1);
-              }
-              else if(timeRegexOct.test(timeFormat)){
-                let dutchTimeFormat2 = timeFormat.replace('Oct', 'Okt');
-                timeData.push(dutchTimeFormat2);
-              }
-              else {
-                timeData.push(timeFormat);
-              } 
-            }
-            else {
-              timeData.push(timeFormat);
-            }
-          }
-
-          const trendsData = [];
-          for(let i = 0; i < googleDataArray.length; i++) {
-            let trends = Number(googleDataArray[i].value);
-            trendsData.push(trends);
-          }
-          this.reactChart.options.title.text = `Online zoekvolume voor ${this.props.input}`; 
-            this.reactChart.data.labels = timeData;
-            this.reactChart.data.datasets[0].data = trendsData;
-            this.reactChart.data.datasets[1].data = this.props.selectOptions ? averages : weatherData;
+            this.chartInladen();
+            this.reactChart.options.title.text = `Online zoekvolume voor ${this.props.input}`; 
+            this.reactChart.data.labels = this.timeData;
+            this.reactChart.data.datasets[0].data = this.trendsData;
+            this.reactChart.data.datasets[1].data = this.props.selectOptions ? this.averages : this.weatherData;
             this.reactChart.update(); 
-        }}) 
+            console.log(this.timeData);
           }
         }
 
