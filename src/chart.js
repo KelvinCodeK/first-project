@@ -143,11 +143,12 @@ import './chart.css';
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                elements: screenWidth >= 768 
-                ? {} 
-                 : {point: {
-                  radius: 1
-                }},
+                elements:
+                  {point: {
+                  radius:  screenWidth >= 768
+                  ? 3
+                   : 1
+                  }},
               legend: {
                 labels: {
                     fontColor: 'white',
