@@ -17,4 +17,5 @@
     padding: 1em;
     box-sizing: border-box;
     padding-bottom: initial;
+    border: 3px solid black;
 }
