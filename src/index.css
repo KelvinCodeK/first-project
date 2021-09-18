@@ -35,7 +35,7 @@ body {
 .menu {
   display: flex;
   font-size: calc(5px + 1.5vmin);
-  padding: calc(2px + 0.5vmin);
+  padding: calc(3px + 0.5vmin);
   margin-right: 0.5em;
   background-color: #ba78bc;
   color: white;
@@ -64,7 +64,7 @@ nav {
 }
 
 .menuOpt {
-  font-size: calc(5px + 1.2vmin);
+  font-size: calc(6px + 1.2vmin);
   padding: 5px;
   cursor: pointer;
   transition: color 0.25s ease;
