@@ -83,6 +83,8 @@ input {
     box-sizing: border-box;
     border-radius: 0px;
     -webkit-border-radius: 0px;
+    box-shadow: none;
+    -webkit-box-shadow: none;
 }
  
   @media only screen and (min-width: 375px) {
