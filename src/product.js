@@ -6,7 +6,7 @@ export default class Product extends React.Component {
         return (
             <div className="product">
                 <header>
-                    <h1>Weather To Sell</h1>
+                    <h1 className="hMarge">Weather To Sell</h1>
                     <p>{this.props.Language === 'dutch'
                          ? 'Kies een periode en vul het product óf de productcategorie in, waarover jij meer te weten wil komen.'
                           : 'Please note that the search data is based on The Netherlands. You will get the best results by using Dutch search terms.'}</p>

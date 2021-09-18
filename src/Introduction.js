@@ -21,6 +21,9 @@ export default class Introduction extends React.Component {
        ? 'aan de slag!'
         : 'try it out!'}</button>
       </section>
+      {this.props.Language === 'dutch' ? 
+                <p className="credit"> Foto: <a href="https://www.flickr.com/photos/garyullah/">Gary Campbell-Hall</a></p> 
+                : <p className="credit"> Photo: <a href="https://www.flickr.com/photos/garyullah/">Gary Campbell-Hall</a></p>}
     </div>
   );}
 }

@@ -12,7 +12,7 @@ a {
   text-decoration: underline;
 }
 
-ul {
+.ulHow {
     list-style: none;
     margin-top: 2em;
     margin-bottom: calc(20px + 15vmin);
@@ -20,7 +20,7 @@ ul {
     margin-left: 1.5em;
 }
 
-  li {
+  .liHow {
     padding: 5px;
     position: relative;
     animation-name: ul-appear;
@@ -31,11 +31,11 @@ ul {
     font-size: calc(7px + 1.5vmin);
   }
 
-  li:nth-child(2) {
+  .liHow:nth-child(2) {
     animation-delay: 1.5s;
   }
 
-  li:last-child {
+  .liHow:last-child {
     animation-delay: 3s;
   }
 
@@ -48,7 +48,7 @@ ul {
     }
   }
   
-  li::before {
+  .liHow::before {
     content: "";
     position: absolute;
     left: -18px;

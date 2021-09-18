@@ -18,7 +18,8 @@ body {
   background-size: cover;
 }
 
-.language{ 
+.language{
+  display: flex; 
   position: absolute;
   right: calc(1px + 0.5vmin);
   top: calc(1px + 0.5vmin);
@@ -27,11 +28,64 @@ body {
   color: white;
   cursor: pointer;
   padding: 3px;
-  font-weight: bold;
   border: 1px solid white;
   text-shadow: 1px 1px 1px black;
 }
 
+.menu {
+  display: flex;
+  font-size: calc(5px + 1.5vmin);
+  padding: calc(2px + 0.5vmin);
+  margin-right: 0.5em;
+  background-color: #ba78bc;
+  color: white;
+  cursor: pointer;
+  border: 1px solid white;
+  text-shadow: 1px 1px 1px black;
+}
+
+.ulMenu {
+  display:flex;
+  flex-direction: row;
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  background-color: rgba(0,0,0,0);
+  border-bottom: 1px solid white;
+  border-left: 1px solid white;
+  border-radius: 5%;
+}
+
+nav {
+  display: flex;
+  left: calc(1px + 0.5vmin);
+  top: calc(1px + 0.5vmin);
+  position: absolute;
+}
+
+.menuOpt {
+  font-size: calc(5px + 1.2vmin);
+  padding: 5px;
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+.menuOpt:hover {
+  color: #28b7c4;
+}
+
 :root {
   --linearColors: #28b7c4 0%, #1e7edf 25%, #8655b8 50%, #ad30ad 75%, #e619e6 100%;
+}
+
+@media only screen and (min-width: 768px) {
+  .menu {
+    margin-bottom: 0.6em;
+  }
+  .ulMenu {
+    flex-direction: column;
+  }
+  nav {
+    flex-direction: column;
+  }
 }

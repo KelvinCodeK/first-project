@@ -59,3 +59,13 @@ p {
   animation-timing-function: ease-out;
   cursor: pointer;
 }
+
+.credit {
+  font-size: calc(5px + 1.1vmin);
+  position: absolute;
+  bottom: 1em;
+  text-shadow: 1px 1px black;
+  font-style: italic;
+  opacity: 0.8;
+  right: 0.1em;
+}

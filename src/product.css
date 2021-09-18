@@ -5,6 +5,11 @@
     justify-content: center;
 }
 
+
+.hMarge{
+    margin-top: 1.2em;
+  }
+
 select {
     width: 100%;
     margin-bottom: 2em;
@@ -16,11 +21,12 @@ select {
     text-shadow: 1px 1px black;
     border: 3px ridge #28b7c4;
     font-weight: bold;
-    background-color: #0058b6;
+    background-color: rgba(0,0,0,0);
 }
 
 select > option {
     background-color: white;
+    color: #28b7c4;
 }
 
 select > option:nth-child(1) {
@@ -82,6 +88,10 @@ input {
   }
 
   @media only screen and (min-width: 768px) {
+    .hMarge{
+        margin-top: 0.67em;
+    }
+
     .search {
         flex-direction: row;
         width: calc(50px + 60vmin);
