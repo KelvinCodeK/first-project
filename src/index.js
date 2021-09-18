@@ -40,16 +40,19 @@ class Stateful extends React.Component {
   onClickHow() {
     this.setState({intro: false});
     this.setState({clickHow: true});
+    document.querySelector('body').style.backgroundBlendMode = 'overlay';
   }
 
   onClickGo() {
     this.setState({intro: false});
     this.setState({clickGo: true});
+    document.querySelector('body').style.backgroundBlendMode = 'overlay';
   }
 
   onClickHowToGo() {
     this.setState({clickHow: false});
     this.setState({clickHowToGo: true});
+    document.querySelector('body').style.backgroundBlendMode = 'overlay';
   }
 
   onKeyUp(event) {
@@ -228,6 +231,7 @@ class Stateful extends React.Component {
          clickHowToGo: false,
           chart: false});
     document.querySelector('.ulMenu').style.visibility = 'hidden';
+    document.querySelector('body').style.backgroundBlendMode = 'normal';
   }
 
   menuUitleg() {
@@ -237,6 +241,7 @@ class Stateful extends React.Component {
         clickHowToGo: false,
          chart: false});
     document.querySelector('.ulMenu').style.visibility = 'hidden';
+    document.querySelector('body').style.backgroundBlendMode = 'overlay';
   }
 
   menuZoeken() {
@@ -246,6 +251,7 @@ class Stateful extends React.Component {
         clickHowToGo: false,
          chart: false});
     document.querySelector('.ulMenu').style.visibility = 'hidden';
+    document.querySelector('body').style.backgroundBlendMode = 'overlay';
   }
 
   render(){
