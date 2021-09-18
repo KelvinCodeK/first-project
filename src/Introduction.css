@@ -49,10 +49,10 @@ p {
   background-size: 1px 110px; 
   font-size: calc(5px + 2vmin);
   font-weight: bold;
-  text-shadow: 2px 2px black;
+  text-shadow: 1px 1px black;
   color: white;
   border-radius: 15px;
-  box-shadow: 3px 3px 6px black;
+  box-shadow: 3px 3px 4px black;
   border: 1px solid white;
   animation-name: loadBright;
   animation-duration: 1.8s;

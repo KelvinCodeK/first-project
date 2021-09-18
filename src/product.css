@@ -8,7 +8,7 @@
 select {
     width: 100%;
     margin-bottom: 2em;
-    padding: 8px;
+    padding: 6px;
     font-size: calc(10px + 1vmin);
     outline: none;
     cursor: pointer;
@@ -28,7 +28,7 @@ select > option:nth-child(1) {
 }
 
 .zoekVak {
-    height: 8em;
+    height: 7em;
     display: flex;
     margin-top: 1em;
     margin-bottom: calc(10px + 1vmin);
