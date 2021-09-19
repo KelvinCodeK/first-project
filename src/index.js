@@ -70,7 +70,7 @@ class Stateful extends React.Component {
         else{
           alert(this.state.language === 'dutch'
            ? 'Vul alleen letters en spaties in'
-            : 'Only use letters or spaces in your search query');
+            : 'Please only use letters or spaces in your search query');
           event.target.value = '';
         }
     }
@@ -93,7 +93,7 @@ class Stateful extends React.Component {
           else{
             alert(this.state.language === 'dutch'
              ? 'Vul alleen letters en spaties in'
-              : 'Only use letters or spaces in your search query');
+              : 'Please only use letters or spaces in your search query');
             event.target.value = '';
           }
       }
@@ -122,7 +122,7 @@ class Stateful extends React.Component {
         else{
           alert(this.state.language === 'dutch'
            ? 'Vul alleen letters en spaties in'
-            : 'Only use letters or spaces in your search query');
+            : 'Please only use letters or spaces in your search query');
           document.querySelector('input').value = ''; 
         }
       }
@@ -143,7 +143,7 @@ class Stateful extends React.Component {
           else{
             alert(this.state.language === 'dutch'
              ? 'Vul alleen letters en spaties in'
-              : 'Only use letters or spaces in your search query');
+              : 'Please only use letters or spaces in your search query');
             document.querySelector('input').value = '';
           }
         }
