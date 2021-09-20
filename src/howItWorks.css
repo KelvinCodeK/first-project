@@ -16,12 +16,15 @@ a {
     list-style: none;
     margin-top: 2em;
     margin-bottom: calc(20px + 15vmin);
-    margin-right: 1.5em;
-    margin-left: 1.5em;
+    margin-right: 2em;
+    margin-left: 2em;
 }
 
   .liHow {
-    padding: 5px;
+    margin: 0px;
+    display: flex;
+    align-items: center;
+    padding: 0px;
     position: relative;
     animation-name: ul-appear;
     animation-timing-function: ease-in;
@@ -29,6 +32,7 @@ a {
     animation-fill-mode: forwards;
     opacity: 0;
     font-size: calc(7px + 1.5vmin);
+    padding: 5px;
   }
 
   .liHow:nth-child(2) {
@@ -52,7 +56,6 @@ a {
     content: "";
     position: absolute;
     left: -18px;
-    top: 12px;
     height: calc(2px + 0.5vmin);
     width: calc(2px + 0.5vmin);
     border: 3px solid #94f9aa;
