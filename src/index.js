@@ -275,7 +275,7 @@ class Stateful extends React.Component {
       {this.state.clickGo || this.state.clickHowToGo
       ? <Product Language={this.state.language} jaarOfMaanden={this.jaarOfMaanden} chartClick={this.chartClick} input={this.state.input} keyUpHandler={this.onKeyUp}/>
         : null}
-      <div style={{width: '100%', height: '2em'}}>{this.state.isLoading
+      <div style={{width: '100%', height: '2em', position: 'absolute', top: '60vh'}}>{this.state.isLoading
       ? <p style={{textShadow: '2px 2px black', margin: '0px', zIndex: '1'}}>{this.state.language === 'dutch' ? 'Laden...' : 'Loading...'}</p>
         : null}</div>
       {this.state.chart
