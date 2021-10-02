@@ -256,7 +256,7 @@ class Stateful extends React.Component {
 
   render(){
     return (
-    <div>
+    <div className="indexDiv">
       <nav>
         <button className="menu" onClick={this.menu}>menu</button>
         <ul style={{visibility: 'hidden'}} className="ulMenu">
