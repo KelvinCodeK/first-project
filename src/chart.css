@@ -21,7 +21,7 @@
     border: 3px solid black;
 }
 
-@media only screen and(mind-height: 1000px) {
+@media only screen and(min-height: 1000px) {
 .grafiek {
     margin-top: calc(20px + 7vmin);
 }
