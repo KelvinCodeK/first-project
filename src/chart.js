@@ -167,7 +167,7 @@ import './chart.css';
                   : [`Search term: ${this.props.input}`, `Date range: ${startDateGraph} / ${endDateGraph}`],
                 fontColor: 'white',
                 fontSize: screenWidth >= 520
-                 ? 16
+                 ? 18
                   : 11,
                 padding: screenWidth >= 520
                  ? 1

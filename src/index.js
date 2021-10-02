@@ -229,7 +229,9 @@ class Stateful extends React.Component {
        clickHow: false,
         clickGo: false,
          clickHowToGo: false,
-          chart: false});
+          chart: false,
+            chartUpdate: 0,
+              jaarOfMaandenSelect: null});
     document.querySelector('.ulMenu').style.visibility = 'hidden';
     document.querySelector('body').style.backgroundBlendMode = 'normal';
   }
@@ -239,7 +241,9 @@ class Stateful extends React.Component {
       clickHow: true,
        clickGo: false,
         clickHowToGo: false,
-         chart: false});
+         chart: false,
+          chartUpdate: 0,
+            jaarOfMaandenSelect: null});
     document.querySelector('.ulMenu').style.visibility = 'hidden';
     document.querySelector('body').style.backgroundBlendMode = 'overlay';
   }
@@ -249,7 +253,9 @@ class Stateful extends React.Component {
       clickHow: false,
        clickGo: true,
         clickHowToGo: false,
-         chart: false});
+         chart: false,
+          chartUpdate: 0,
+            jaarOfMaandenSelect: null});
     document.querySelector('.ulMenu').style.visibility = 'hidden';
     document.querySelector('body').style.backgroundBlendMode = 'overlay';
   }
