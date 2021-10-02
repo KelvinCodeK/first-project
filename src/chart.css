@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 58vh;
+    height: 48vh;
 }
 
 .grafiek > div {
@@ -19,4 +19,10 @@
     box-sizing: border-box;
     padding-bottom: initial;
     border: 3px solid black;
+}
+
+@media only screen and(min-width: 768) {
+    .grafiek {
+        height: 58vh;
+    }
 }
