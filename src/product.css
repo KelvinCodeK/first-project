@@ -98,7 +98,7 @@ input {
 
     .search {
         flex-direction: row;
-        width: calc(50px + 60vmin);
+        width: calc(50px + 71vmin);
     }
     .inputVak {
         width: 65%;

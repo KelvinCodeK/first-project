@@ -19,23 +19,25 @@ body {
 }
 
 .language{
-  display: flex; 
   position: absolute;
+  transition: all 0.1s ease;
   right: calc(1px + 0.5vmin);
   top: calc(1px + 0.5vmin);
-  font-size: calc(5px + 1.5vmin);
+  font-size: calc(5px + 0.8vmin);
+  height: calc(23px + 1vmin);
+  width: calc(33px + 5vmin);
   background-color: #ba78bc;
   color: white;
   cursor: pointer;
-  padding: 3px;
   border: 1px solid white;
   text-shadow: 1px 1px 1px black;
 }
 
 .menu {
-  display: flex;
-  font-size: calc(5px + 1.5vmin);
-  padding: calc(3px + 0.5vmin);
+  transition: all 0.1s ease;
+  font-size: calc(5px + 2vmin);
+    height: calc(20px + 3vmin);
+    width: calc(30px + 6vmin);
   margin-right: 0.5em;
   background-color: #ba78bc;
   color: white;
@@ -47,13 +49,12 @@ body {
 .ulMenu {
   display:flex;
   flex-direction: row;
+  align-items: center;
   list-style: none;
   padding: 0px;
   margin: 0px;
   background-color: rgba(0,0,0,0);
-  border-bottom: 1px solid white;
-  border-left: 1px solid white;
-  border-radius: 5%;
+  border-left: 2px solid white;
 }
 
 nav {
@@ -64,7 +65,7 @@ nav {
 }
 
 .menuOpt {
-  font-size: calc(6px + 1.2vmin);
+  font-size: calc(6px + 1.5vmin);
   padding: 5px;
   cursor: pointer;
   transition: color 0.25s ease;

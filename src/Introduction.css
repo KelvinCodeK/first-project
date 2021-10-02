@@ -24,10 +24,6 @@ p {
   margin-right: 1em;
 }
 
-.button:hover {
-  background-position: 1px;
-}
-
 @keyframes loadBright {
   0% {background-position: initial;}
   50% {background-position: 1px;}
@@ -42,16 +38,16 @@ p {
 }
 
 .button {
-  height: calc(25px + 7vmin);
-  width: calc(40px + 18vmin);
+  height: calc(25px + 5vmin);
+  width: calc(45px + 11vmin);
   background: linear-gradient(0deg, var(--linearColors));
-  transition: background-position 0.6s ease-in;
+  transition: all 0.1s ease;
   background-size: 1px 110px; 
-  font-size: calc(5px + 2vmin);
+  font-size: calc(6px + 1.3vmin);
   font-weight: bold;
   text-shadow: 1px 1px black;
   color: white;
-  border-radius: 15px;
+  border-radius: 10px;
   box-shadow: 3px 3px 4px black;
   border: 1px solid white;
   animation-name: loadBright;
@@ -59,6 +55,11 @@ p {
   animation-timing-function: ease-out;
   cursor: pointer;
 }
+
+.button:hover, .menu:hover, .language:hover {
+  border: 3px solid #d8d5d5;
+}
+
 
 .credit {
   font-size: calc(5px + 1.1vmin);

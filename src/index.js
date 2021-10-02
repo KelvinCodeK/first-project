@@ -261,7 +261,7 @@ class Stateful extends React.Component {
         <button className="menu" onClick={this.menu}>menu</button>
         <ul style={{visibility: 'hidden'}} className="ulMenu">
           <li onClick={this.menuHome} className="menuOpt">home</li>
-          <li onClick={this.menuUitleg} className="menuOpt">{this.state.language === 'dutch' ? 'uitleg' : 'explained'}</li>
+          <li onClick={this.menuUitleg} className="menuOpt">{this.state.language === 'dutch' ? 'uitleg' : 'method'}</li>
           <li onClick={this.menuZoeken} className="menuOpt">{this.state.language === 'dutch' ? 'zoeken' : 'search'}</li>
         </ul>
       </nav>
