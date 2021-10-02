@@ -19,14 +19,10 @@ body {
 }
 
 .finalContainer {
-  height: 100%;
+  height: 98vh;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-}
-
-.indexDiv {
-  height: 100%;
 }
 
 .language{
@@ -88,10 +84,6 @@ nav {
 
 :root {
   --linearColors: #28b7c4 0%, #1e7edf 25%, #8655b8 50%, #ad30ad 75%, #e619e6 100%;
-}
-
-#root {
-  height: 100%;
 }
 
 @media only screen and (min-width: 768px) {
