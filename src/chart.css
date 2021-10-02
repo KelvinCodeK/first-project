@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 17em;
+    height: 28em;
 }
 
 .grafiek > div {
@@ -23,6 +23,12 @@
 
 @media only screen and (min-width: 768px) {
     .grafiek {
-        height: 33.5em;
+        height: 36em;
     }
+}
+
+@media only screen and (min-height: 1000px) {
+.grafiek {
+    height: 44em;
+}
 }
