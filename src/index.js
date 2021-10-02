@@ -273,7 +273,7 @@ class Stateful extends React.Component {
       <HowItWorks Language={this.state.language} onClickHowToGo={this.onClickHowToGo}/>
         : null}
       {this.state.clickGo || this.state.clickHowToGo
-      ? <Product Language={this.state.language} jaarOfMaanden={this.jaarOfMaanden} chartClick={this.chartClick} input={this.state.input} keyUpHandler={this.onKeyUp}/>
+      ? <Product isLoading={this.state.isLoading} Language={this.state.language} jaarOfMaanden={this.jaarOfMaanden} chartClick={this.chartClick} input={this.state.input} keyUpHandler={this.onKeyUp}/>
         : null}
       {this.state.chart
       ? <ChartComponent Language={this.state.language} isLoading={this.isLoading} chartReset={this.chartReset} dates={this.state.dates} selectOptions={this.state.jaarOfMaandenSelect} chartUpdate={this.state.chartUpdate} input={this.state.input} />
