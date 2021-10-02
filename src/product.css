@@ -38,8 +38,6 @@ select > option:nth-child(1) {
 .zoekVak {
     height: 7em;
     display: flex;
-    margin-top: 1em;
-    margin-bottom: calc(10px + 1vmin);
 }
 
 .search {

@@ -123,7 +123,7 @@ import './chart.css';
                 yAxisID: 'A',
                 data: trendsData,
                 borderColor: 'black',
-                borderWidth: screenWidth >= 768
+                borderWidth: screenWidth >= 520
                  ? 2
                   : 1,
                 fill: false
@@ -134,7 +134,7 @@ import './chart.css';
                 yAxisID: 'B',
                 data: this.props.selectOptions ? averages : weatherData,
                 borderColor: 'white',
-                borderWidth: screenWidth >= 768
+                borderWidth: screenWidth >= 520
                  ? 2
                   : 1,
                 fill: false
@@ -145,17 +145,17 @@ import './chart.css';
                 maintainAspectRatio: false,
                 elements:
                   {point: {
-                  radius:  screenWidth >= 768
+                  radius:  screenWidth >= 520
                   ? 2
                    : 1
                   }},
               legend: {
                 labels: {
                     fontColor: 'white',
-                    fontSize: screenWidth >= 768 
+                    fontSize: screenWidth >= 520 
                     ? 14
                      : 9,
-                    boxWidth: screenWidth >= 768 
+                    boxWidth: screenWidth >= 520 
                      ? 30
                       : 20
                 }
@@ -166,10 +166,10 @@ import './chart.css';
                  ? [`Zoekterm: ${this.props.input}`, `Periode: ${startDateGraph} / ${endDateGraph}`]
                   : [`Search term: ${this.props.input}`, `Date range: ${startDateGraph} / ${endDateGraph}`],
                 fontColor: 'white',
-                fontSize: screenWidth >= 768
-                 ? 20
+                fontSize: screenWidth >= 520
+                 ? 16
                   : 11,
-                padding: screenWidth >= 768
+                padding: screenWidth >= 520
                  ? 1
                   : 0
               },
@@ -177,7 +177,7 @@ import './chart.css';
                 xAxes: [{                 
                   ticks: {                    
                       fontColor: "white",
-                      fontSize: screenWidth >= 768
+                      fontSize: screenWidth >= 520
                        ? 12
                         : 6  
                   }
@@ -194,13 +194,13 @@ import './chart.css';
                      ? 'Zoekvolume'
                       : 'Search volume',
                     fontColor: 'black',
-                    fontSize: screenWidth >= 768
+                    fontSize: screenWidth >= 520
                      ? 18
                       : 11
                   },  
                   ticks: {                   
                     fontColor: "black",
-                    fontSize: screenWidth >= 768
+                    fontSize: screenWidth >= 520
                      ? 13
                       : 9,                   
                     max: 100,
@@ -216,7 +216,7 @@ import './chart.css';
                      ? 'Temperatuur'
                       : 'Temperature',
                     fontColor: 'white',
-                    fontSize: screenWidth >= 768
+                    fontSize: screenWidth >= 520
                      ? 18
                       : 11
                   },
@@ -227,7 +227,7 @@ import './chart.css';
                     max: 30,
                     min: -10,
                     fontColor: "white",
-                    fontSize: screenWidth >= 768
+                    fontSize: screenWidth >= 520
                      ? 13
                       : 9
                   },                                   
