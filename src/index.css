@@ -18,13 +18,6 @@ body {
   background-size: cover;
 }
 
-.finalContainer {
-  height: 98vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
-
 .language{
   position: absolute;
   transition: all 0.1s ease;
