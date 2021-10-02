@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 28em;
+    height: calc(100vh / 2);
 }
 
 .grafiek > div {
@@ -19,16 +19,4 @@
     box-sizing: border-box;
     padding-bottom: initial;
     border: 3px solid black;
-}
-
-@media only screen and (min-width: 768px) {
-    .grafiek {
-        height: 36em;
-    }
-}
-
-@media only screen and (min-height: 1000px) {
-.grafiek {
-    height: 44em;
-}
 }
