@@ -33,10 +33,10 @@ export default class Product extends React.Component {
                         </div>
                         </div>
                     </section>
-                    <div style={{width: '100%', height: '2em', position: 'absolute', top: '60vh', zIndex: '1'}}>{this.props.isLoading
-                     ? <p style={{textShadow: '2px 2px black', margin: '0px'}}>
+                    {this.props.isLoading
+                     ? <p style={{textShadow: '2px 2px black', margin: '0px', position: 'absolute', top: '60vh', zIndex: '1', padding: '5px', borderRadius: '5px', border: '1px solid white', backgroundColor: '#505056'}}>
                          {this.props.Language === 'dutch' ? 'Laden...' : 'Loading...'}</p>
-                      : null}</div>
+                      : null}
                 </main>
             </div>
         )
