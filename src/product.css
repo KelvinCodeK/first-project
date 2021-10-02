@@ -89,7 +89,7 @@ input {
  
   @media only screen and (min-width: 375px) {
     select {
-        margin-bottom: 2em;
+        margin-bottom: 1em;
     }
   }
 
