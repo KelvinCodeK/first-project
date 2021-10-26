@@ -31,6 +31,8 @@ import './chart.css';
       this.props.isLoading();     
 });
 
+
+
 const theSecondPromise = new Promise((resolve, reject) => {
   const knmiStartDate = this.props.dates[1];
   const knmiEndDate = this.props.dates[3];
@@ -45,12 +47,14 @@ const theSecondPromise = new Promise((resolve, reject) => {
 });
 
 Promise.all([theFirstPromise, theSecondPromise]).then((values) => {
+  console.log(values);
   if(values[0] === '{"default":{"timelineData":[],"averages":[]}}') {
     window.alert('De zoekterm heeft te weinig zoekvolume. Probeer iets anders');
     this.props.chartReset();
   }
   else {
   const knmiData = values[1];
+  console.log(knmiData)
   const knmiParsed = JSON.parse(knmiData);
   this.weatherData = [];
   for(let i = 0; i < knmiParsed.length; i++) {
@@ -71,6 +75,7 @@ Promise.all([theFirstPromise, theSecondPromise]).then((values) => {
   }
 
   const googleData = values[0];
+  console.log(googleData);
   const googleParsed = JSON.parse(googleData);
   const googleDataArray = googleParsed.default.timelineData;
   this.timeData = [];
@@ -144,12 +149,18 @@ Promise.all([theFirstPromise, theSecondPromise]).then((values) => {
 
         Promise.all([theFirstPromise, theSecondPromise]).then((values) => {
           if(values[0] === '{"default":{"timelineData":[],"averages":[]}}') {
+            console.log(values[1]);
            window.alert('De zoekterm heeft te weinig zoekvolume. Probeer iets anders');
            this.props.chartReset();
          }
+         else if(values[1].charAt(0) === '<') {
+          window.alert('Helaas ligt de server van de KNMI er momenteel uit. Hier wordt aan gewerkt.');
+         }
+
          else {
           const knmiData = values[1];
           const knmiParsed = JSON.parse(knmiData);
+          
           const weatherData = [];
           for(let i = 0; i < knmiParsed.length; i++) {
             let weather = knmiParsed[i].TG;
@@ -170,6 +181,7 @@ Promise.all([theFirstPromise, theSecondPromise]).then((values) => {
           
           const googleData = values[0];
           const googleParsed = JSON.parse(googleData);
+          console.log(googleParsed);
           const googleDataArray = googleParsed.default.timelineData;
           const timeData = [];
           for(let i = 0; i < googleDataArray.length; i++) {
